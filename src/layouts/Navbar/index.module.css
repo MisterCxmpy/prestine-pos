@@ -1,1 +1,113 @@
-/*# sourceMappingURL=index.module.css.map */
+.sidebar {
+  min-height: 100vh;
+  width: 250px;
+  padding: 6px 14px;
+  z-index: 99;
+  background: var(--background);
+  transition: var(--transition);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.sidebar::before {
+  top: 2.5%;
+  right: 0;
+  border-right: 2px solid var(--secondary);
+  transition: 0.5s all;
+}
+.sidebar::before {
+  display: block;
+  content: "";
+  width: 40px;
+  height: 95%;
+  position: absolute;
+  pointer-events: none;
+}
+
+.sidebar.closed {
+  width: 70px;
+}
+.sidebar.closed .link {
+  opacity: 0;
+}
+.sidebar.closed .logo-name {
+  display: none;
+}
+
+.logo-details {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.logo-name {
+  color: var(--text);
+  transition: var(--transition);
+  font-size: 24px;
+  height: 60px;
+  line-height: 60px;
+  min-width: 40px;
+}
+
+.hamburger {
+  margin-left: auto;
+  font-size: 22px;
+  cursor: pointer;
+  height: 60px;
+  line-height: 60px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.nav-item {
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.nav-item > a {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  background-color: var(--background);
+  position: relative;
+  transition: var(--transition);
+  z-index: 12;
+}
+.nav-item > a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  background-color: white;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  transform-origin: left;
+  z-index: -2;
+}
+.nav-item > a:hover::after {
+  transform: scaleX(1);
+}
+.nav-item > a:hover > .link, .nav-item > a:hover > svg {
+  color: black;
+  transition: var(--transition);
+}
+.nav-item > a > svg {
+  height: 60px;
+  line-height: 60px;
+  min-width: 40px;
+  font-size: 22px;
+  text-align: center;
+  padding: 0 5px;
+}
+
+.link {
+  color: var(--text);
+  font: 16px;
+  white-space: nowrap;
+  pointer-events: auto;
+  transition: var(--transition);
+  padding: 10px 5px;
+}/*# sourceMappingURL=index.module.css.map */

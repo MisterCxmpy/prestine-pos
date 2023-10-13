@@ -1,5 +1,17 @@
 #main {
-  margin: 0 auto;
+  position: relative;
+  background: var(--background);
+  min-height: 100vh;
+  top: 0;
+  left: 250px;
+  width: calc(100% - 250px);
+  transition: var(--transition);
+  z-index: w;
+}
+
+.closed {
+  left: 70px !important;
+  width: calc(100% - 70px) !important;
 }
 
 @media (max-width: 1080px) {
