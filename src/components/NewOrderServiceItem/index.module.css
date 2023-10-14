@@ -1,4 +1,13 @@
 .service-item {
-  background: purple;
+  background: var(--primary);
   height: 150px;
+  border-radius: var(--border-radius);
+}
+
+.service {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }/*# sourceMappingURL=index.module.css.map */

@@ -41,6 +41,10 @@ export const CheckoutProvider = ({ children }) => {
     setCheckout(updatedCheckout);
   };
 
+  const removeAll = () => {
+    setCheckout([])
+  }
+
   useEffect(() => {
     const newTotal = checkout.reduce((acc, item) => {
       return acc + item.price * item.quantity;
@@ -49,7 +53,7 @@ export const CheckoutProvider = ({ children }) => {
   }, [checkout]);
 
   return (
-    <CheckoutContext.Provider value={{ checkout, addToCheckout, removeFromCheckout, removeAllOfType, total }}>
+    <CheckoutContext.Provider value={{ checkout, addToCheckout, removeFromCheckout, removeAllOfType, removeAll, total }}>
       {children}
     </CheckoutContext.Provider>
   );

@@ -70,10 +70,14 @@
     position: absolute;
     pointer-events: none;
   }
+
+  > svg {
+    cursor: pointer;
+  }
 }
 
 .receipt-final {
-  height: 140px;
+  height: 160px;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
@@ -82,6 +86,7 @@
   padding: 10px 20px;
   background: var(--background);
   position: relative;
+  gap: 5px;
   z-index: 10;
 
   &::before {
@@ -104,7 +109,7 @@
 .receipt-list {
   flex: 1;
   overflow: auto;
-  max-height: 650px; 
+  max-height: 630px; 
   padding: 20px 0;
 
   &::-webkit-scrollbar{
@@ -116,6 +121,27 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.receipt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+  margin-top: 10px  ;
+}
+
+.receipt-btn {
+  padding: 10px 20px;
+  background: var(--primary);
+  font-size: 18px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    background: #070f15;
+    cursor: no-drop;
+  }
 }
 
 @media (max-width: 1024px) {

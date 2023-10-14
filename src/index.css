@@ -37,6 +37,11 @@ a {
   color: inherit;
 }
 
+p, h1, h2, h3, h4 {
+  cursor: default;
+  user-select: none;
+}
+
 a:focus {
   outline: none;
 }
