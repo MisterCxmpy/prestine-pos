@@ -28,6 +28,8 @@
   --primary: #1b3b55;
   --secondary: #0b1823;
   --accent: #3c83be;
+
+  --navy-shadow: rgba(2,12,27,0.7);
 }
 
 a {

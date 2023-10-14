@@ -7,27 +7,10 @@
   width: calc(100% - 250px);
   transition: var(--transition);
   z-index: w;
+  padding: 25px;
 }
 
 .closed {
   left: 70px !important;
   width: calc(100% - 70px) !important;
-}
-
-@media (max-width: 1080px) {
-  #main {
-    padding: 0px 100px;
-  }
-}
-
-@media (max-width: 768px) {
-  #main {
-    padding: 0px 50px;
-  }
-}
-
-@media (max-width: 480px) {
-  #main {
-    padding: 0px 25px;
-  }
 }
