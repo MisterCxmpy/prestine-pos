@@ -41,6 +41,10 @@ a:focus {
   outline: none;
 }
 
+li {
+  list-style: none;
+}
+
 button:focus {
   outline: none;
 }

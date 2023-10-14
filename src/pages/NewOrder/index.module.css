@@ -18,15 +18,6 @@
   gap: 10px;
 }
 
-.service-item, .receipt-item {
-  list-style: none;
-}
-
-.service {
-  background: purple;
-  height: 150px;
-}
-
 .receipts {
   height: 100%;
   display: flex;
@@ -78,15 +69,15 @@
 }
 
 .receipt-final {
-  height: 70px;
+  height: 140px;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   padding: 10px 20px;
   background: var(--background);
   position: relative;
-  justify-content: space-between;
   z-index: 10;
 }
 .receipt-final::before {
@@ -107,18 +98,17 @@
 .receipt-list {
   flex: 1;
   overflow: auto;
-  max-height: 720px;
+  max-height: 650px;
   padding: 20px 0;
 }
 .receipt-list::-webkit-scrollbar {
   display: none;
 }
 
-.receipt-item {
-  background: red;
-  width: 100%;
-  height: 65px;
-  margin-bottom: 20px;
+.receipt-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 @media (max-width: 1024px) {
