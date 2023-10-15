@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './index.module.css'
 import { FaRegTrashAlt } from "react-icons/fa"
-import { NewOrderItem, NewOrderServiceItem } from '../../components'
+import { NewOrderItem, NewOrderServiceItem, NewOrderServiceType } from '../../components'
 import { useCheckout } from '../../contexts/CheckoutContext'
+import { useService } from '../../contexts/ServiceContext'
 
 export default function NewOrder() {
 
   const { checkout, total, removeAll } = useCheckout()
+  const { service } = useService()
 
   const [receiptLength, setReceiptLength] = useState(0)
 
@@ -16,16 +18,18 @@ export default function NewOrder() {
     setReceiptLength(receiptListRef.current.childNodes.length);
   }, [checkout])
 
+
   return (
     <section className={styles['new-order']}>
       <div className={styles['services']}>
         <ul className={styles['service-list']}>
-          <NewOrderServiceItem serviceName={"Trousers"} servicePrice={4.00} />
-          <NewOrderServiceItem serviceName={"Shirts"} servicePrice={2.10} />
-          <NewOrderServiceItem serviceName={"Suits"} servicePrice={6.00} />
-          <NewOrderServiceItem serviceName={"Jacket"} servicePrice={9.50} />
-          <NewOrderServiceItem serviceName={"Shorts"} servicePrice={3.00} />
-          <NewOrderServiceItem serviceName={"Dresses"} servicePrice={12.00} />
+          <NewOrderServiceType serviceName={"Cleaning"} id={"cleaning"}/>
+          <NewOrderServiceType serviceName={"Press Only"} id={"press-only"}/>
+          <NewOrderServiceType serviceName={"Cushions/Duvets Etc"} id={"soft"}/>
+          <NewOrderServiceType serviceName={"Alterations"} id={"alterations"}/>
+        </ul>
+        <ul className={styles['service-items-list']}>
+          {service.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} key={i} />)}
         </ul>
       </div>
       <div className={styles['receipts']}>
