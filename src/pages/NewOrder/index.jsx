@@ -8,8 +8,9 @@ import { useService } from '../../contexts/ServiceContext'
 export default function NewOrder() {
 
   const { checkout, total, removeAll } = useCheckout()
-  const { service } = useService()
+  const { allServices, service } = useService()
 
+  const [activeService, setActiveService] = useState(null);
   const [receiptLength, setReceiptLength] = useState(0)
 
   const receiptListRef = useRef()
@@ -18,18 +19,45 @@ export default function NewOrder() {
     setReceiptLength(receiptListRef.current.childNodes.length);
   }, [checkout])
 
+  const handleServiceTypeClick = (serviceId) => {
+    setActiveService(serviceId);
+  };
 
   return (
     <section className={styles['new-order']}>
       <div className={styles['services']}>
         <ul className={styles['service-list']}>
-          <NewOrderServiceType serviceName={"Cleaning"} id={"cleaning"}/>
-          <NewOrderServiceType serviceName={"Press Only"} id={"press-only"}/>
-          <NewOrderServiceType serviceName={"Cushions/Duvets Etc"} id={"household"}/>
-          <NewOrderServiceType serviceName={"Alterations"} id={"alterations"}/>
+          <NewOrderServiceType
+            serviceName={"Cleaning"}
+            id={"cleaning"}
+            isActive={activeService === "cleaning"}
+            handleService={() => handleServiceTypeClick("cleaning")}
+          />
+          <NewOrderServiceType
+            serviceName={"Press Only"}
+            id={"press-only"}
+            isActive={activeService === "press-only"}
+            handleService={() => handleServiceTypeClick("press-only")}
+          />
+          <NewOrderServiceType
+            serviceName={"Household"}
+            id={"household"}
+            isActive={activeService === "household"}
+            handleService={() => handleServiceTypeClick("household")}
+          />
+          <NewOrderServiceType
+            serviceName={"Alterations"}
+            id={"alterations"}
+            isActive={activeService === "alterations"}
+            handleService={() => handleServiceTypeClick("alterations")}
+          />
         </ul>
         <ul className={styles['service-items-list']}>
-          {service.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} key={i} />)}
+          {service.length ? 
+          (service.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
+          : 
+          (allServices.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
+          }
         </ul>
       </div>
       <div className={styles['receipts']}>

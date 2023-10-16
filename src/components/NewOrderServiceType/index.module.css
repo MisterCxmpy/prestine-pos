@@ -11,4 +11,8 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+
+.active {
+  background: var(--secondary);
 }/*# sourceMappingURL=index.module.css.map */
