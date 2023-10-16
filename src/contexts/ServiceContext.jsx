@@ -6,10 +6,12 @@ const ServiceContext  = createContext();
 
 export const ServiceProvider = ({ children }) => {
   const [service, setService] = useState([]);
+  const [serviceType, setServiceType] = useState("");
   const [allServices, setAllServices] = useState([])
 
   const changeService = (type) => {
     setService(services.services[type])
+    setServiceType(type)
   }
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export const ServiceProvider = ({ children }) => {
   }, []);
 
   return (
-    <ServiceContext.Provider value={{ allServices, service, changeService, setService }}>
+    <ServiceContext.Provider value={{ allServices, service, serviceType, changeService, setService }}>
       {children}
     </ServiceContext.Provider>
   );
