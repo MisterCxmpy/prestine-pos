@@ -6,10 +6,10 @@ export default function NewOrderServiceItem({ serviceName, servicePrice, additio
 
   const serviceData = {id: serviceName, name: serviceName, price: servicePrice, additional: additional}
 
-  const { addToCheckout } = useCheckout()
+  const { openCheck } = useCheckout()
 
   return (
-    <li className={`${styles['service-item']} ${styles[tag]}`} onClick={() => addToCheckout(serviceData)}>
+    <li className={`${styles['service-item']} ${styles[tag]}`} onClick={() => openCheck(serviceData)}>
       <div className={styles['service']}>
         <p>{serviceName}</p>
       </div>

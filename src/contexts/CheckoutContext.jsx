@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
+import { CheckItem } from '../components';
 
 const CheckoutContext = createContext();
 
 export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
   const [total, setTotal] = useState(0.00);
+  const [checkItemActive, setCheckItemActive] = useState(false)
+  const [checkItem, setCheckItem] = useState([])
 
   const addToCheckout = (item) => {
     const existingItem = checkout.find((existingItem) => existingItem.id === item.id);
@@ -45,6 +48,15 @@ export const CheckoutProvider = ({ children }) => {
     setCheckout([])
   }
 
+  const openCheck = (item) => {
+    setCheckItemActive(true)
+    setCheckItem(item)
+  }
+
+  const closeCheck = () => {
+    setCheckItemActive(false)
+  }
+
   useEffect(() => {
     const newTotal = checkout.reduce((acc, item) => {
       return acc + item.price * item.quantity;
@@ -53,7 +65,7 @@ export const CheckoutProvider = ({ children }) => {
   }, [checkout]);
 
   return (
-    <CheckoutContext.Provider value={{ checkout, addToCheckout, removeFromCheckout, removeAllOfType, removeAll, total }}>
+    <CheckoutContext.Provider value={{ checkout, addToCheckout, removeFromCheckout, removeAllOfType, removeAll, openCheck, checkItemActive, checkItem, closeCheck, total }}>
       {children}
     </CheckoutContext.Provider>
   );

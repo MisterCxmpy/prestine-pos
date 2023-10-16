@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './index.module.css'
 import { FaRegTrashAlt } from "react-icons/fa"
-import { NewOrderItem, NewOrderServiceItem, NewOrderServiceType } from '../../components'
+import { CheckItem, NewOrderItem, NewOrderServiceItem, NewOrderServiceType } from '../../components'
 import { useCheckout } from '../../contexts/CheckoutContext'
 import { useService } from '../../contexts/ServiceContext'
 
 export default function NewOrder() {
 
-  const { checkout, total, removeAll } = useCheckout()
+  const { checkout, total, removeAll, checkItemActive, checkItem } = useCheckout()
   const { allServices, service } = useService()
 
   const [activeService, setActiveService] = useState(null);
@@ -54,9 +54,9 @@ export default function NewOrder() {
         </ul>
         <ul className={styles['service-items-list']}>
           {service.length ? 
-          (service.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
+          (service?.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
           : 
-          (allServices.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
+          (allServices?.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
           }
         </ul>
       </div>
@@ -66,7 +66,7 @@ export default function NewOrder() {
           <FaRegTrashAlt onClick={() => removeAll()} />
         </div>
         <ul ref={receiptListRef} className={styles['receipt-list']}>
-          {checkout.map((c, i) => <NewOrderItem itemData={c} key={i} />)} 
+          {checkout?.map((c, i) => <NewOrderItem itemData={c} key={i} />)} 
         </ul>
         <div className={styles['receipt-final']}>
           <div className={styles['receipt-row']}>
@@ -80,6 +80,7 @@ export default function NewOrder() {
           </div>
         </div>
       </div>
+      {checkItemActive ? <CheckItem item={checkItem} /> : null}
     </section>
   )
 }
