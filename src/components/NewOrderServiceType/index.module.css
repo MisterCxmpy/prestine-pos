@@ -15,8 +15,28 @@
 .service > p {
   font-size: 20px;
   font-weight: 600;
+  color: #000;
+}
+
+.cleaning {
+  background: #5e9af3;
+}
+
+.press-only {
+  background: #9beb76;
+}
+
+.household {
+  background: #fffd79;
+}
+
+.alterations {
+  background: #134e72;
 }
 
 .active {
   background: var(--secondary);
+}
+.active > .service > p {
+  color: white;
 }/*# sourceMappingURL=index.module.css.map */

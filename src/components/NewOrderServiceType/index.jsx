@@ -32,7 +32,7 @@ export default function NewOrderServiceType({ serviceName, id, isActive, handleS
 
   return (
     <li
-      className={`${styles["service-type"]} ${active ? styles['active'] : ''}`}
+      className={`${styles["service-type"]} ${active ? styles['active'] : ''} ${styles[id]}`}
       onClick={() => {handleServiceTypeClick(id)}}
       ref={serviceRef}
     >
