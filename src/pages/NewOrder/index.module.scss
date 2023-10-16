@@ -23,6 +23,7 @@
 
 .service-items-list {
   overflow: auto;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 
   &::-webkit-scrollbar{
     display: none;

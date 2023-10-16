@@ -4,7 +4,7 @@ import { useCheckout } from '../../contexts/CheckoutContext'
 
 export default function NewOrderServiceItem({ serviceName, servicePrice, additional }) {
 
-  const serviceData = {id: serviceName, name: serviceName, price: servicePrice}
+  const serviceData = {id: serviceName, name: serviceName, price: servicePrice, additional: additional}
 
   const { addToCheckout } = useCheckout()
 

@@ -25,6 +25,7 @@ export default function NewOrderItem({ itemData }) {
           <p>{itemData.name}</p>
           <p>£{itemData.price.toFixed(2)}</p>
         </div>
+        <p>{itemData.additional}</p>
         <div className={styles['receipt-row']} style={{justifyContent: "start", gap: "10px"}}>
           <BiSolidPlusSquare onClick={() => handleIncrement()} />
           <p>{itemData.quantity}</p>

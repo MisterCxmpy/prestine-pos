@@ -4,163 +4,194 @@
       {
         "id": 0,
         "name": "Jumper",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 1,
         "name": "Top",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 2,
         "name": "Blouse",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 3,
         "name": "Jacket",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 4,
         "name": "Coat",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 5,
         "name": "Rain Coat",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 6,
         "name": "Cardigan",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 7,
         "name": "3 PCS Suit",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 8,
         "name": "Shirts",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 9,
         "name": "Wed Dress",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 10,
         "name": "2 PCS Suit",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 11,
         "name": "PLTD Skirts",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 12,
         "name": "Scarve",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 13,
         "name": "Skirts",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 14,
         "name": "Ties",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 15,
         "name": "Trouses",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 16,
         "name": "Dress",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       },
       {
         "id": 17,
         "name": "PLTD Dress",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Cleaning"
       }
     ],
     "press-only": [
       {
         "id": 18,
         "name": "Suits",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Press Only"
       },
       {
         "id": 19,
         "name": "Jacket",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Press Only"
       },
       {
         "id": 20,
         "name": "Skirts",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Press Only"
       },
       {
         "id": 21,
         "name": "Shirts",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Press Only"
       },
       {
         "id": 22,
         "name": "Trousers",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Press Only"
       }
     ],
-    "soft": [
+    "household": [
       {
         "id": 23,
         "name": "Bed Cover",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Household"
       },
       {
         "id": 24,
         "name": "Pillow",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Household"
       },
       {
         "id": 25,
         "name": "Duvet",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Household"
       },
       {
         "id": 26,
         "name": "Sheet",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Household"
       }
     ],
     "alterations": [
       {
         "id": 27,
         "name": "Coat Zip",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Alterations"
       },
       {
         "id": 28,
         "name": "Coat Shorten",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Alterations"
       },
       {
         "id": 29,
         "name": "Jacket Zip",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Alterations"
       },
       {
         "id": 30,
         "name": "Jacket Shorten",
-        "price": 7.00
+        "price": 7.00,
+        "additional": "Alterations"
       }
     ]
   }

@@ -25,11 +25,11 @@ export default function NewOrder() {
         <ul className={styles['service-list']}>
           <NewOrderServiceType serviceName={"Cleaning"} id={"cleaning"}/>
           <NewOrderServiceType serviceName={"Press Only"} id={"press-only"}/>
-          <NewOrderServiceType serviceName={"Cushions/Duvets Etc"} id={"soft"}/>
+          <NewOrderServiceType serviceName={"Cushions/Duvets Etc"} id={"household"}/>
           <NewOrderServiceType serviceName={"Alterations"} id={"alterations"}/>
         </ul>
         <ul className={styles['service-items-list']}>
-          {service.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} key={i} />)}
+          {service.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} key={i} />)}
         </ul>
       </div>
       <div className={styles['receipts']}>
@@ -41,14 +41,6 @@ export default function NewOrder() {
           {checkout.map((c, i) => <NewOrderItem itemData={c} key={i} />)} 
         </ul>
         <div className={styles['receipt-final']}>
-          <div className={styles['receipt-row']}>
-            <p>Tax 5.25%</p>
-            <p>£0.00</p>
-          </div>
-          <div className={styles['receipt-row']}>
-            <p>Subtotal</p>
-            <p>£0.00</p>
-          </div>
           <div className={styles['receipt-row']}>
             <p>Total</p>
             <p>£{total.toFixed(2)}</p>
