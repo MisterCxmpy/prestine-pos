@@ -37,7 +37,7 @@ export default function NewOrderServiceType({ serviceName, id, isActive, handleS
       ref={serviceRef}
     >
       <div className={styles["service"]}>
-        <h1>{serviceName}</h1>
+        <p>{serviceName}</p>
       </div>
     </li>
   );

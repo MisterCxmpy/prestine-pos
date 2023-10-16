@@ -5,6 +5,8 @@ import { useCheckout } from '../../contexts/CheckoutContext';
 
 export default function NewOrderItem({ itemData }) {
 
+  console.log(itemData)
+
   const { addToCheckout, removeFromCheckout, removeAllOfType } = useCheckout()
 
   const handleIncrement = () => {

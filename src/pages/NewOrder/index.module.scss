@@ -18,7 +18,7 @@
 .service-list, .service-items-list {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
   gap: 10px;
 }
 
@@ -154,6 +154,12 @@
   &:disabled {
     background: #070f15;
     cursor: no-drop;
+  }
+}
+
+@media (max-width: 1624px) {
+  .service-list {
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
   }
 }
 
