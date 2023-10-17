@@ -1,0 +1,135 @@
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7137254902);
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.outer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  background: white;
+  border-radius: var(--border-radius);
+  border: 5px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  align-items: center;
+}
+
+.close-btn {
+  align-self: end;
+  width: 25px;
+  height: 25px;
+  font-size: 32px;
+  line-height: 25px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0 40px;
+}
+.form-input > input {
+  width: 100%;
+  height: 48px;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  padding: 10px 20px;
+  background: var(--primary);
+  font-size: 18px;
+  color: var(--text);
+  border: none;
+}
+.form-input > label {
+  font-size: 17px;
+  padding-bottom: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-buttons {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: 10px;
+  padding: 0 40px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.form-buttons > button {
+  flex: 1;
+  padding: 10px 20px;
+  background: var(--primary);
+  font-size: 18px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+}
+.form-buttons > button:disabled {
+  background: #070f15;
+  cursor: no-drop;
+}
+
+.receipt {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 280px;
+}
+.receipt p {
+  color: black;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  font-size: 12px;
+}
+
+.heading {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.receipt-info {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.ticket-items {
+  padding: 20px 40px;
+}
+
+.ticket-item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.total-pieces {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.note {
+  font-size: 8px !important;
+}/*# sourceMappingURL=index.module.css.map */

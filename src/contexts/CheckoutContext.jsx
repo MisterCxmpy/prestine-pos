@@ -6,8 +6,11 @@ const CheckoutContext = createContext();
 export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
   const [total, setTotal] = useState(0.00);
+
   const [checkItemActive, setCheckItemActive] = useState(false)
   const [checkItem, setCheckItem] = useState([])
+
+  const [checkReceiptActive, setCheckReceiptActive] = useState(false)
 
   const addToCheckout = (item) => {
     const existingItem = checkout.find((existingItem) => existingItem.id === item.id);
@@ -48,6 +51,10 @@ export const CheckoutProvider = ({ children }) => {
     setCheckout([])
   }
 
+  const openCloseReceipt = (status) => {
+    setCheckReceiptActive(status)
+  }
+
   const openCheck = (item) => {
     setCheckItemActive(true)
     setCheckItem(item)
@@ -65,7 +72,7 @@ export const CheckoutProvider = ({ children }) => {
   }, [checkout]);
 
   return (
-    <CheckoutContext.Provider value={{ checkout, addToCheckout, removeFromCheckout, removeAllOfType, removeAll, openCheck, checkItemActive, checkItem, closeCheck, total }}>
+    <CheckoutContext.Provider value={{ checkout, addToCheckout, removeFromCheckout, removeAllOfType, removeAll, openCheck, checkItemActive, checkItem, closeCheck, checkReceiptActive, openCloseReceipt, total }}>
       {children}
     </CheckoutContext.Provider>
   );

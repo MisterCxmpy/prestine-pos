@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './index.module.css'
 import { FaRegTrashAlt } from "react-icons/fa"
-import { CheckItem, NewOrderItem, NewOrderServiceItem, NewOrderServiceType } from '../../components'
+import { CheckItem, FinalReceipt, NewOrderItem, NewOrderServiceItem, NewOrderServiceType } from '../../components'
 import { useCheckout } from '../../contexts/CheckoutContext'
 import { useService } from '../../contexts/ServiceContext'
+import ReactToPrint, { useReactToPrint } from 'react-to-print'
 
 export default function NewOrder() {
 
-  const { checkout, total, removeAll, checkItemActive, checkItem } = useCheckout()
+  const { checkout, total, removeAll, checkItemActive, checkReceiptActive, checkItem, openCloseReceipt } = useCheckout()
   const { allServices, service } = useService()
 
   const [activeService, setActiveService] = useState(null);
@@ -75,12 +76,13 @@ export default function NewOrder() {
           </div>
           <div className={styles['receipt-grid']}>
             <button className={styles['receipt-btn']}>Open Till</button>
-            <button className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Invoice</button>
+            <button onClick={() => openCloseReceipt(true)} className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Invoice</button>
             <button className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Confirm</button>
           </div>
         </div>
       </div>
       {checkItemActive ? <CheckItem item={checkItem} /> : null}
+      {checkReceiptActive ? <FinalReceipt /> : null}
     </section>
   )
 }
