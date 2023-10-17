@@ -23,10 +23,10 @@ export default function FinalReceipt() {
       <div className={styles['outer']}>
         <button onClick={() => openCloseReceipt(false)} className={styles['close-btn']}>&times;</button>
         <FullReceipt ref={receiptRef} checkout={checkout} total={total} totalPieces={totalPieces} />
-        <div className={styles['form-buttons']}>
-          <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
-          <button onClick={() => handlePrint()}>Print Receipt</button>
-        </div>
+      </div>
+      <div className={styles['form-buttons']}>
+        <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
+        <button onClick={() => handlePrint()}>Print Receipt</button>
       </div>
     </div>
   );
@@ -62,7 +62,15 @@ const FullReceipt = forwardRef(({ checkout, total, totalPieces }, ref) => {
           </li>
         </ul>
       </div>
-      {checkout.map((c) => <ItemReceipt ref={ref} key={c.name} name={c.name} quantity={c.quantity} />)}
+      <PageBreak>&nbsp;</PageBreak>
+      {checkout.map((c) => {
+        return(
+          <>
+            <ItemReceipt ref={ref} key={c.name} name={c.name} quantity={c.quantity} />
+            <PageBreak>&nbsp;</PageBreak>
+          </>
+        )
+      })}
     </div>
   )
 })
@@ -73,6 +81,8 @@ const ItemReceipt = forwardRef(({ name, quantity }, ref) => {
     <div ref={ref} className={styles['receipt']}>
       <div className={styles['heading']}></div>
       <div className={styles['receipt-info']}>
+        <p>reg&nbsp;&nbsp;&nbsp;<b>SAT</b>&nbsp;&nbsp;&nbsp;30-06-2023 12:17&nbsp;&nbsp;&nbsp;066070</p>
+        <p className={styles['ticket-no']}>TKT: 6672</p>
         <ul className={styles['ticket-items']}>
           <li className={styles['ticket-item']}>
             <p>{quantity} {name}</p>
@@ -82,3 +92,9 @@ const ItemReceipt = forwardRef(({ name, quantity }, ref) => {
     </div>
   );
 });
+
+function PageBreak() {
+  return (
+    <div className={styles['break']}></div>
+  )
+}
