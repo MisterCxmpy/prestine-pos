@@ -119,4 +119,9 @@
 
 .break {
   page-break-after: always;
+}
+
+.ticket-number {
+  text-align: left !important;
+  margin-bottom: 10px;
 }/*# sourceMappingURL=index.module.css.map */

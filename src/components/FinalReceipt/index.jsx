@@ -63,10 +63,10 @@ const FullReceipt = forwardRef(({ checkout, total, totalPieces }, ref) => {
         </ul>
       </div>
       <PageBreak>&nbsp;</PageBreak>
-      {checkout.map((c) => {
+      {checkout.map((c, i) => {
         return(
           <>
-            <ItemReceipt ref={ref} key={c.name} name={c.name} quantity={c.quantity} />
+            <ItemReceipt ref={ref} key={i} itemNum={i + 1} name={c.name} quantity={c.quantity} total={totalPieces} />
             <PageBreak>&nbsp;</PageBreak>
           </>
         )
@@ -75,7 +75,7 @@ const FullReceipt = forwardRef(({ checkout, total, totalPieces }, ref) => {
   )
 })
 
-const ItemReceipt = forwardRef(({ name, quantity }, ref) => {
+const ItemReceipt = forwardRef(({ name, quantity, itemNum, total }, ref) => {
 
   return (
     <div ref={ref} className={styles['receipt']}>
@@ -86,6 +86,9 @@ const ItemReceipt = forwardRef(({ name, quantity }, ref) => {
         <ul className={styles['ticket-items']}>
           <li className={styles['ticket-item']}>
             <p>{quantity} {name}</p>
+          </li>
+          <li className={styles['total-pieces']}>
+            <p>{itemNum} / {total} pieces</p>
           </li>
         </ul>
       </div>
