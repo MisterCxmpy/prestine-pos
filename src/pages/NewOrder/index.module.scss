@@ -139,7 +139,7 @@
 
 .receipt-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 5px;
   margin-top: 10px  ;
 }
@@ -147,15 +147,20 @@
 .receipt-btn {
   padding: 10px 20px;
   background: var(--primary);
-  font-size: 18px;
+  font-size: 20px;
   color: var(--text);
   border: none;
   cursor: pointer;
+  height: 75px;
 
   &:disabled {
     background: #070f15;
     cursor: no-drop;
   }
+}
+
+.not-paid {
+  background: #070f15;
 }
 
 @media (max-width: 1624px) {

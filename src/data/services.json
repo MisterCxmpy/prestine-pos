@@ -134,35 +134,35 @@
         "name": "Suits",
         "price": 7.00,
         "additional": "Press Only",
-        "tag": "pressOnly"
+        "tag": "press only"
       },
       {
         "id": 19,
         "name": "Jacket",
         "price": 7.00,
         "additional": "Press Only",
-        "tag": "pressOnly"
+        "tag": "press only"
       },
       {
         "id": 20,
         "name": "Skirts",
         "price": 7.00,
         "additional": "Press Only",
-        "tag": "pressOnly"
+        "tag": "press only"
       },
       {
         "id": 21,
         "name": "Shirts",
         "price": 7.00,
         "additional": "Press Only",
-        "tag": "pressOnly"
+        "tag": "press only"
       },
       {
         "id": 22,
         "name": "Trousers",
         "price": 7.00,
         "additional": "Press Only",
-        "tag": "pressOnly"
+        "tag": "press only"
       }
     ],
     "household": [

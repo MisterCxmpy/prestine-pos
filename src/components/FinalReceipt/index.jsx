@@ -5,7 +5,7 @@ import { useReactToPrint } from 'react-to-print'
 
 export default function FinalReceipt() {
   const [totalPieces, setTotalPieces] = useState(0);
-  const { openCloseReceipt, checkout, total } = useCheckout();
+  const { openCloseReceipt, checkout, total, hasPaid } = useCheckout();
   const receiptRef = useRef([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function FinalReceipt() {
     <div className={styles['overlay']}>
       <div className={styles['outer']}>
         <button onClick={() => openCloseReceipt(false)} className={styles['close-btn']}>&times;</button>
-        <FullReceipt ref={receiptRef} checkout={checkout} total={total} totalPieces={totalPieces} />
+        <FullReceipt ref={receiptRef} checkout={checkout} total={total} totalPieces={totalPieces} hasPaid={hasPaid} />
       </div>
       <div className={styles['form-buttons']}>
         <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
@@ -31,12 +31,12 @@ export default function FinalReceipt() {
     </div>
   );
 }
-const FullReceipt = forwardRef(({ checkout, total, totalPieces }, ref) => {
+const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid }, ref) => {
   let currentPiece = 1;
 
   return (
     <div ref={ref} className={styles['receipt']}>
-      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={false}  />
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={false} hasPaid={hasPaid} />
       <PageBreak>&nbsp;</PageBreak>
       {checkout.map((c, i) => {
         const items = [];
@@ -45,19 +45,32 @@ const FullReceipt = forwardRef(({ checkout, total, totalPieces }, ref) => {
           currentPiece += 1;
           items.push(
             <React.Fragment key={index}>
-              <ItemReceipt name={c.name} quantity={c.quantity} itemNum={itemNum} total={totalPieces} />
+              <ItemReceipt name={c.name} quantity={c.quantity} itemNum={itemNum} total={totalPieces} tag={c.tag} />
               <PageBreak>&nbsp;</PageBreak>
             </React.Fragment>
           );
         }
         return items;
       })}
-      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={true}  />
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={true} hasPaid={hasPaid} />
     </div>
   )
 });
 
-const MainReceipt = ({ checkout, total, totalPieces, owner}) => {
+const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid }) => {
+
+  const [currentDateTime, setCurrentDateTime] = useState('');
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const currentDate = new Date();
+      const formattedDateTime = `${currentDate.getDate().toString().padStart(2, '0')}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getFullYear()} ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
+      setCurrentDateTime(formattedDateTime);
+    }, 0);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <>
       <div className={styles['heading']}>
@@ -68,18 +81,27 @@ const MainReceipt = ({ checkout, total, totalPieces, owner}) => {
       </div>
       <p className={styles['owner']}>{owner ? "SHOP COPY" : <>CUSTOMER<br />RECEIPT</>}</p>
       <div className={styles['receipt-info']}>
-        <p>reg&nbsp;&nbsp;&nbsp;<b>SAT</b>&nbsp;&nbsp;&nbsp;30-06-2023 12:17&nbsp;&nbsp;&nbsp;066070</p>
+        <p>reg&nbsp;&nbsp;&nbsp;<b>SAT</b>&nbsp;&nbsp;&nbsp;{currentDateTime}&nbsp;&nbsp;&nbsp;066070</p>
         <p className={styles['ticket-no']}>TKT: 6672</p>
         <ul className={styles['ticket-items']}>
           {checkout.map((c, i) => (
             <li key={i} className={styles['ticket-item']}>
-              <p>{c.quantity} {c.name}</p>
-              <p>{(c.quantity * c.price).toFixed(2)}</p>
+              <div className={styles['ticket-item-name']}>  
+                <p>{c.quantity} {c.name}</p>
+                <p>{(c.quantity * c.price).toFixed(2)}</p>
+              </div>
+              <ul>
+                <li>
+                  {c.tag}
+                </li>
+              </ul>
             </li>
           ))}
           <li className={styles['ticket-item']}>
-            <p>cash</p>
-            <p>{total.toFixed(2)}</p>
+            <div className={styles['ticket-item-name']}>  
+              <p>{hasPaid ? "paid" : "cash"}</p>
+              <p>{total.toFixed(2)}</p>
+            </div>
           </li>
           <li className={styles['total-pieces']}>
             <p>{totalPieces} pieces</p>
@@ -91,7 +113,7 @@ const MainReceipt = ({ checkout, total, totalPieces, owner}) => {
   )
 }
 
-const ItemReceipt = forwardRef(({ name, quantity, itemNum, total }, ref) => {
+const ItemReceipt = forwardRef(({ name, quantity, itemNum, total, tag }, ref) => {
 
   return (
     <div ref={ref} className={styles['receipt-info']}>
@@ -99,7 +121,14 @@ const ItemReceipt = forwardRef(({ name, quantity, itemNum, total }, ref) => {
       <p className={styles['ticket-no']}>TKT: 6672</p>
       <ul className={styles['ticket-items']}>
         <li className={styles['ticket-item']}>
-          <p>{quantity} {name}</p>
+          <div className={styles['ticket-item-name']}>
+            <p>{quantity} {name}</p>
+          </div>
+          <ul>
+            <li>
+              {tag}
+            </li>
+          </ul>
         </li>
         <li className={styles['total-pieces']}>
           <p>{itemNum} / {total} pieces</p>

@@ -8,7 +8,7 @@ import ReactToPrint, { useReactToPrint } from 'react-to-print'
 
 export default function NewOrder() {
 
-  const { checkout, total, removeAll, checkItemActive, checkReceiptActive, checkItem, openCloseReceipt } = useCheckout()
+  const { checkout, total, removeAll, checkItemActive, checkReceiptActive, checkItem, openCloseReceipt, toggleHasPaid, hasPaid } = useCheckout()
   const { allServices, service } = useService()
 
   const [activeService, setActiveService] = useState(null);
@@ -76,6 +76,7 @@ export default function NewOrder() {
           </div>
           <div className={styles['receipt-grid']}>
             <button className={styles['receipt-btn']}>Open Till</button>
+            <button onClick={() => toggleHasPaid()} className={`${styles['receipt-btn']} ${hasPaid ? styles["paid"] : styles["not-paid"]}`}>Paid</button>
             <button onClick={() => openCloseReceipt(true)} className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Invoice</button>
             <button className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Confirm</button>
           </div>

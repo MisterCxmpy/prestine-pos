@@ -6,6 +6,7 @@ const CheckoutContext = createContext();
 export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
   const [total, setTotal] = useState(0.00);
+  const [hasPaid, setHasPaid] = useState(false)
 
   const [checkItemActive, setCheckItemActive] = useState(false)
   const [checkItem, setCheckItem] = useState([])
@@ -64,6 +65,10 @@ export const CheckoutProvider = ({ children }) => {
     setCheckItemActive(false)
   }
 
+  const toggleHasPaid = () => {
+    setHasPaid(!hasPaid)
+  }
+
   useEffect(() => {
     const newTotal = checkout.reduce((acc, item) => {
       return acc + item.price * item.quantity;
@@ -72,7 +77,7 @@ export const CheckoutProvider = ({ children }) => {
   }, [checkout]);
 
   return (
-    <CheckoutContext.Provider value={{ checkout, addToCheckout, removeFromCheckout, removeAllOfType, removeAll, openCheck, checkItemActive, checkItem, closeCheck, checkReceiptActive, openCloseReceipt, total }}>
+    <CheckoutContext.Provider value={{ checkout, addToCheckout, removeFromCheckout, removeAllOfType, removeAll, openCheck, checkItemActive, checkItem, closeCheck, checkReceiptActive, openCloseReceipt, total, toggleHasPaid, hasPaid }}>
       {children}
     </CheckoutContext.Provider>
   );
