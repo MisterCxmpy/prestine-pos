@@ -12,11 +12,11 @@ export default function FinalReceipt() {
     const totalPiecesCount = checkout.reduce((acc, item) => acc + item.quantity, 0);
     setTotalPieces(totalPiecesCount);
   }, [checkout]);
-
-  const handlePrint = useReactToPrint({
-    content: () => receiptRef.current
-  });
   
+  const handlePrint = useReactToPrint({
+    pageStyle: "@page { size: auto;  margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; } }",
+    content: () => receiptRef.current
+  })
 
   return (
     <div className={styles['overlay']}>
@@ -31,17 +31,42 @@ export default function FinalReceipt() {
     </div>
   );
 }
-
 const FullReceipt = forwardRef(({ checkout, total, totalPieces }, ref) => {
+  let currentPiece = 1;
+
   return (
     <div ref={ref} className={styles['receipt']}>
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={false}  />
+      <PageBreak>&nbsp;</PageBreak>
+      {checkout.map((c, i) => {
+        const items = [];
+        for (let index = 0; index < c.quantity; index++) {
+          const itemNum = currentPiece;
+          currentPiece += 1;
+          items.push(
+            <React.Fragment key={index}>
+              <ItemReceipt name={c.name} quantity={c.quantity} itemNum={itemNum} total={totalPieces} />
+              <PageBreak>&nbsp;</PageBreak>
+            </React.Fragment>
+          );
+        }
+        return items;
+      })}
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={true}  />
+    </div>
+  )
+});
+
+const MainReceipt = ({ checkout, total, totalPieces, owner}) => {
+  return (
+    <>
       <div className={styles['heading']}>
-        <p>smart n up</p>
-        <p>Dry Cleaners</p>
-        <p>1 hazelwood court london n13 5ey</p>
-        <p>TEL NO: 020 8886 6385</p>
+        <p className={`${styles['xl']} ${styles["title"]}`}>smart n up</p>
+        <p className={`${styles['xl']} ${styles["title"]}`}>Dry Cleaners</p>
+        <p className={styles['info']}>1 hazelwood court london n13 5ey</p>
+        <p className={styles['info']}>TEL NO: 020 8886 6385</p>
       </div>
-      <p>CUSTOMER<br />RECEIPT</p>
+      <p className={styles['owner']}>{owner ? "SHOP COPY" : <>CUSTOMER<br />RECEIPT</>}</p>
       <div className={styles['receipt-info']}>
         <p>reg&nbsp;&nbsp;&nbsp;<b>SAT</b>&nbsp;&nbsp;&nbsp;30-06-2023 12:17&nbsp;&nbsp;&nbsp;066070</p>
         <p className={styles['ticket-no']}>TKT: 6672</p>
@@ -62,36 +87,24 @@ const FullReceipt = forwardRef(({ checkout, total, totalPieces }, ref) => {
           </li>
         </ul>
       </div>
-      <PageBreak>&nbsp;</PageBreak>
-      {checkout.map((c, i) => {
-        return(
-          <>
-            <ItemReceipt ref={ref} key={i} itemNum={i + 1} name={c.name} quantity={c.quantity} total={totalPieces} />
-            <PageBreak>&nbsp;</PageBreak>
-          </>
-        )
-      })}
-    </div>
+    </>
   )
-})
+}
 
 const ItemReceipt = forwardRef(({ name, quantity, itemNum, total }, ref) => {
 
   return (
-    <div ref={ref} className={styles['receipt']}>
-      <div className={styles['heading']}></div>
-      <div className={styles['receipt-info']}>
-        <p>reg&nbsp;&nbsp;&nbsp;<b>SAT</b>&nbsp;&nbsp;&nbsp;30-06-2023 12:17&nbsp;&nbsp;&nbsp;066070</p>
-        <p className={styles['ticket-no']}>TKT: 6672</p>
-        <ul className={styles['ticket-items']}>
-          <li className={styles['ticket-item']}>
-            <p>{quantity} {name}</p>
-          </li>
-          <li className={styles['total-pieces']}>
-            <p>{itemNum} / {total} pieces</p>
-          </li>
-        </ul>
-      </div>
+    <div ref={ref} className={styles['receipt-info']}>
+      <p>reg&nbsp;&nbsp;&nbsp;<b>SAT</b>&nbsp;&nbsp;&nbsp;30-06-2023 12:17&nbsp;&nbsp;&nbsp;066070</p>
+      <p className={styles['ticket-no']}>TKT: 6672</p>
+      <ul className={styles['ticket-items']}>
+        <li className={styles['ticket-item']}>
+          <p>{quantity} {name}</p>
+        </li>
+        <li className={styles['total-pieces']}>
+          <p>{itemNum} / {total} pieces</p>
+        </li>
+      </ul>
     </div>
   );
 });
