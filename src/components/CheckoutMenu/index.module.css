@@ -1,0 +1,133 @@
+.receipts {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  max-height: 100vh;
+  padding: 10px;
+  padding-left: 35px;
+}
+.receipts::before {
+  top: 0%;
+  left: 0;
+  border-left: 2px solid var(--secondary);
+  transition: 0.5s all;
+}
+.receipts::before {
+  display: block;
+  content: "";
+  width: 40px;
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+}
+
+.header {
+  height: 70px;
+  width: 100%;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  justify-content: space-between;
+}
+.header::before {
+  bottom: 2px;
+  left: 1%;
+  border-bottom: 2px solid var(--secondary);
+  transition: 0.5s all;
+}
+.header::before {
+  display: block;
+  content: "";
+  width: 98%;
+  height: 40px;
+  position: absolute;
+  pointer-events: none;
+}
+.header > svg {
+  cursor: pointer;
+}
+
+.receipt-final {
+  height: auto;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 25px;
+  background: var(--background);
+  position: relative;
+  gap: 5px;
+  z-index: 10;
+}
+.receipt-final::before {
+  top: 2px;
+  left: 1%;
+  border-top: 2px solid var(--secondary);
+  transition: 0.5s all;
+}
+.receipt-final::before {
+  display: block;
+  content: "";
+  width: 98%;
+  height: 40px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.receipt-list {
+  flex: 1 0 0;
+  overflow: auto;
+  padding: 20px 0;
+  min-height: 0;
+}
+.receipt-list::-webkit-scrollbar {
+  display: none;
+}
+
+.receipt-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.receipt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.receipt-btn {
+  padding: 10px 20px;
+  background: var(--primary);
+  font-size: 20px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+  height: 75px;
+}
+.receipt-btn:disabled {
+  background: #070f15;
+  cursor: no-drop;
+}
+
+.not-paid {
+  background: #070f15;
+}
+
+@media (max-width: 1024px) {
+  .receipts {
+    padding-left: 10px;
+  }
+  .receipts::before {
+    display: none;
+  }
+  .receipt-list {
+    flex: 1 0 600px;
+  }
+}/*# sourceMappingURL=index.module.css.map */

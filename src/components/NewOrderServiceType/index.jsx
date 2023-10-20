@@ -37,7 +37,7 @@ export default function NewOrderServiceType({ serviceName, id, isActive, handleS
       ref={serviceRef}
     >
       <div className={styles["service"]}>
-        <p>{serviceName}</p>
+        <p>{serviceName == "press-only" ? "press only" : serviceName}</p>
       </div>
     </li>
   );
