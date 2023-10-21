@@ -8,7 +8,7 @@ export default function CheckoutMenu() {
 
   const days = ["mon", "tue", "wed", "thurs", "fri", "sat"]
 
-  const { checkout, total, removeAll, openCloseCustomerForm, toggleHasPaid, hasPaid, setDay, day } = useCheckout()
+  const { checkout, total, removeAll, openCloseCustomerForm, toggleHasPaid, hasPaid, setDay, day, completeCheckout } = useCheckout()
 
   const [receiptLength, setReceiptLength] = useState(0)
 
@@ -40,7 +40,7 @@ export default function CheckoutMenu() {
           <button className={styles['receipt-btn']}>Open Till</button>
           <button onClick={() => toggleHasPaid()} className={`${styles['receipt-btn']} ${hasPaid ? styles["paid"] : styles["not-paid"]}`}>Paid</button>
           <button onClick={() => openCloseCustomerForm(true)} className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Invoice</button>
-          <button className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Confirm</button>
+          <button onClick={() => completeCheckout()} className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Complete</button>
         </div>
         <div className={styles['receipt-days-grid']}>
           {days.map((d, i) => {

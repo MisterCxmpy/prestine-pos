@@ -17,6 +17,12 @@ export const CheckoutProvider = ({ children }) => {
   const [checkReceiptActive, setCheckReceiptActive] = useState(false);
   const [customerFormActive, setCustomerFormActive] = useState(false);
 
+  const completeCheckout = () => {
+    setCheckout([])
+    setCustomerDetails([])
+    setDay("mon")
+  }
+
   const addToCheckout = (item) => {
     const existingItem = checkout.find(
       (existingItem) => existingItem.id === item.id
@@ -111,7 +117,8 @@ export const CheckoutProvider = ({ children }) => {
         customerFormActive,
         setCustomerDetails,
         setDay,
-        day
+        day,
+        completeCheckout
       }}
     >
       {children}

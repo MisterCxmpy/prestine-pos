@@ -26,7 +26,11 @@ export default function FinalReceipt() {
       </div>
       <div className={styles['form-buttons']}>
         <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
-        <button onClick={() => handlePrint()}>Print Receipt</button>
+        <button onClick={() => {
+          handlePrint()
+          openCloseReceipt(false)
+          set
+        }}>Print Receipt</button>
       </div>
     </div>
   );
