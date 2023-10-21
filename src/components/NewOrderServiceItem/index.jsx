@@ -10,7 +10,6 @@ export default function NewOrderServiceItem({ serviceName, servicePrice, additio
 
   return (
     <li className={`${styles['service-item']} ${styles[tag == "press only" ? "pressOnly" : tag]}`} onClick={() => openCheck(serviceData)}>
-      {console.log(tag)}
       <div className={styles['service']}>
         <p>{serviceName}</p>
       </div>

@@ -5,7 +5,7 @@ import { useReactToPrint } from 'react-to-print'
 
 export default function FinalReceipt() {
   const [totalPieces, setTotalPieces] = useState(0);
-  const { openCloseReceipt, checkout, total, hasPaid } = useCheckout();
+  const { openCloseReceipt, checkout, total, hasPaid, day } = useCheckout();
   const receiptRef = useRef([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function FinalReceipt() {
     <div className={styles['overlay']}>
       <div className={styles['outer']}>
         <button onClick={() => openCloseReceipt(false)} className={styles['close-btn']}>&times;</button>
-        <FullReceipt ref={receiptRef} checkout={checkout} total={total} totalPieces={totalPieces} hasPaid={hasPaid} />
+        <FullReceipt ref={receiptRef} checkout={checkout} total={total} totalPieces={totalPieces} hasPaid={hasPaid} day={day} />
       </div>
       <div className={styles['form-buttons']}>
         <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
@@ -31,33 +31,8 @@ export default function FinalReceipt() {
     </div>
   );
 }
-const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid }, ref) => {
+const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid, day }, ref) => {
   let currentPiece = 1;
-
-  return (
-    <div ref={ref} className={styles['receipt']}>
-      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={false} hasPaid={hasPaid} />
-      <PageBreak>&nbsp;</PageBreak>
-      {checkout.map((c, i) => {
-        const items = [];
-        for (let index = 0; index < c.quantity; index++) {
-          const itemNum = currentPiece;
-          currentPiece += 1;
-          items.push(
-            <React.Fragment key={index}>
-              <ItemReceipt name={c.name} quantity={c.quantity} itemNum={itemNum} total={totalPieces} tag={c.tag} />
-              <PageBreak>&nbsp;</PageBreak>
-            </React.Fragment>
-          );
-        }
-        return items;
-      })}
-      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={true} hasPaid={hasPaid} />
-    </div>
-  )
-});
-
-const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid }) => {
 
   const [currentDateTime, setCurrentDateTime] = useState('');
 
@@ -72,6 +47,31 @@ const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid }) => {
   }, []);
 
   return (
+    <div ref={ref} className={styles['receipt']}>
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={false} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} />
+      <PageBreak>&nbsp;</PageBreak>
+      {checkout.map((c, i) => {
+        const items = [];
+        for (let index = 0; index < c.quantity; index++) {
+          const itemNum = currentPiece;
+          currentPiece += 1;
+          items.push(
+            <React.Fragment key={index}>
+              <ItemReceipt name={c.name} quantity={c.quantity} itemNum={itemNum} total={totalPieces} tag={c.tag} day={day} currentDateTime={currentDateTime} />
+              <PageBreak>&nbsp;</PageBreak>
+            </React.Fragment>
+          );
+        }
+        return items;
+      })}
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={true} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} />
+    </div>
+  )
+});
+
+const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, currentDateTime }) => {
+
+  return (
     <>
       <div className={styles['heading']}>
         <p className={`${styles['xl']} ${styles["title"]}`}>smart n up</p>
@@ -81,8 +81,11 @@ const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid }) => {
       </div>
       <p className={styles['owner']}>{owner ? "SHOP COPY" : <>CUSTOMER<br />RECEIPT</>}</p>
       <div className={styles['receipt-info']}>
-        <p>reg&nbsp;&nbsp;&nbsp;<b>SAT</b>&nbsp;&nbsp;&nbsp;{currentDateTime}&nbsp;&nbsp;&nbsp;066070</p>
-        <p className={styles['ticket-no']}>TKT: 6672</p>
+        <p className={styles['ticket-date']}>reg<b>{day}</b>{currentDateTime}</p>
+        <div className={styles['ticket-no']}>
+          <p>TKT: 6672</p>
+          <p>066070</p>
+        </div>
         <ul className={styles['ticket-items']}>
           {checkout.map((c, i) => (
             <li key={i} className={styles['ticket-item']}>
@@ -113,12 +116,15 @@ const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid }) => {
   )
 }
 
-const ItemReceipt = forwardRef(({ name, quantity, itemNum, total, tag }, ref) => {
+const ItemReceipt = forwardRef(({ name, quantity, itemNum, total, tag, day, currentDateTime }, ref) => {
 
   return (
     <div ref={ref} className={styles['receipt-info']}>
-      <p>reg&nbsp;&nbsp;&nbsp;<b>SAT</b>&nbsp;&nbsp;&nbsp;30-06-2023 12:17&nbsp;&nbsp;&nbsp;066070</p>
-      <p className={styles['ticket-no']}>TKT: 6672</p>
+      <p className={styles['ticket-date']}>reg<b>{day}</b>{currentDateTime}</p>
+        <div className={styles['ticket-no']}>
+          <p>TKT: 6672</p>
+          <p>066070</p>
+        </div>
       <ul className={styles['ticket-items']}>
         <li className={styles['ticket-item']}>
           <div className={styles['ticket-item-name']}>

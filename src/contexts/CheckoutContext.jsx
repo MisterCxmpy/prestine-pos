@@ -1,24 +1,32 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
-import { CheckItem } from '../components';
+import React, { useState, useEffect, useContext, createContext } from "react";
+import { CheckItem } from "../components";
 
 const CheckoutContext = createContext();
 
 export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
-  const [total, setTotal] = useState(0.00);
-  const [hasPaid, setHasPaid] = useState(false)
+  const [customerDetails, setCustomerDetails] = useState([]);
+  const [total, setTotal] = useState(0.0);
+  const [hasPaid, setHasPaid] = useState(false);
 
-  const [checkItemActive, setCheckItemActive] = useState(false)
-  const [checkItem, setCheckItem] = useState([])
+  const [day, setDay] = useState("mon");
 
-  const [checkReceiptActive, setCheckReceiptActive] = useState(false)
+  const [checkItemActive, setCheckItemActive] = useState(false);
+  const [checkItem, setCheckItem] = useState([]);
+
+  const [checkReceiptActive, setCheckReceiptActive] = useState(false);
+  const [customerFormActive, setCustomerFormActive] = useState(false);
 
   const addToCheckout = (item) => {
-    const existingItem = checkout.find((existingItem) => existingItem.id === item.id);
+    const existingItem = checkout.find(
+      (existingItem) => existingItem.id === item.id
+    );
 
     if (existingItem) {
       const updatedCheckout = checkout.map((existingItem) =>
-        existingItem.id === item.id ? { ...existingItem, quantity: existingItem.quantity + 1 } : existingItem
+        existingItem.id === item.id
+          ? { ...existingItem, quantity: existingItem.quantity + 1 }
+          : existingItem
       );
       setCheckout(updatedCheckout);
     } else {
@@ -27,7 +35,9 @@ export const CheckoutProvider = ({ children }) => {
   };
 
   const removeFromCheckout = (item) => {
-    const existingItemIndex = checkout.findIndex((existingItem) => existingItem.id === item.id);
+    const existingItemIndex = checkout.findIndex(
+      (existingItem) => existingItem.id === item.id
+    );
 
     if (existingItemIndex !== -1) {
       const updatedCheckout = [...checkout];
@@ -49,25 +59,29 @@ export const CheckoutProvider = ({ children }) => {
   };
 
   const removeAll = () => {
-    setCheckout([])
-  }
+    setCheckout([]);
+  };
 
   const openCloseReceipt = (status) => {
-    setCheckReceiptActive(status)
-  }
+    setCheckReceiptActive(status);
+  };
+
+  const openCloseCustomerForm = (status) => {
+    setCustomerFormActive(status);
+  };
 
   const openCheck = (item) => {
-    setCheckItemActive(true)
-    setCheckItem(item)
-  }
+    setCheckItemActive(true);
+    setCheckItem(item);
+  };
 
   const closeCheck = () => {
-    setCheckItemActive(false)
-  }
+    setCheckItemActive(false);
+  };
 
   const toggleHasPaid = () => {
-    setHasPaid(!hasPaid)
-  }
+    setHasPaid(!hasPaid);
+  };
 
   useEffect(() => {
     const newTotal = checkout.reduce((acc, item) => {
@@ -77,7 +91,29 @@ export const CheckoutProvider = ({ children }) => {
   }, [checkout]);
 
   return (
-    <CheckoutContext.Provider value={{ checkout, addToCheckout, removeFromCheckout, removeAllOfType, removeAll, openCheck, checkItemActive, checkItem, closeCheck, checkReceiptActive, openCloseReceipt, total, toggleHasPaid, hasPaid }}>
+    <CheckoutContext.Provider
+      value={{
+        checkout,
+        addToCheckout,
+        removeFromCheckout,
+        removeAllOfType,
+        removeAll,
+        openCheck,
+        checkItemActive,
+        checkItem,
+        closeCheck,
+        checkReceiptActive,
+        openCloseReceipt,
+        total,
+        toggleHasPaid,
+        hasPaid,
+        openCloseCustomerForm,
+        customerFormActive,
+        setCustomerDetails,
+        setDay,
+        day
+      }}
+    >
       {children}
     </CheckoutContext.Provider>
   );

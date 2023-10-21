@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import styles from './index.module.css'
-import { CheckItem, CheckoutMenu, FinalReceipt, NewOrderServiceItem, NewOrderServiceType } from '../../components'
+import { CheckItem, CheckoutMenu, CustomerForm, FinalReceipt, NewOrderServiceItem, NewOrderServiceType } from '../../components'
 import { useCheckout } from '../../contexts/CheckoutContext'
 import { useService } from '../../contexts/ServiceContext'
 
 export default function NewOrder() {
 
-  const { checkItemActive, checkReceiptActive, checkItem } = useCheckout()
+  const { checkItemActive, checkReceiptActive, customerFormActive, checkItem, checkout } = useCheckout()
   const { allServices, service } = useService()
 
   const [activeService, setActiveService] = useState(null);
@@ -42,6 +42,7 @@ export default function NewOrder() {
       <CheckoutMenu />
       {checkItemActive ? <CheckItem item={checkItem} /> : null}
       {checkReceiptActive ? <FinalReceipt /> : null}
+      {customerFormActive ? <CustomerForm item={checkout} /> : null}
     </section>
   )
 }

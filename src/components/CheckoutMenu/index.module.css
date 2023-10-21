@@ -102,6 +102,13 @@
   margin-top: 10px;
 }
 
+.receipt-days-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+  margin-top: 10px;
+}
+
 .receipt-btn {
   padding: 10px 20px;
   background: var(--primary);
@@ -114,6 +121,15 @@
 .receipt-btn:disabled {
   background: #070f15;
   cursor: no-drop;
+}
+
+.day {
+  text-transform: uppercase;
+  background: #070f15;
+}
+
+.day.active {
+  background: #FF5733 !important;
 }
 
 .not-paid {
