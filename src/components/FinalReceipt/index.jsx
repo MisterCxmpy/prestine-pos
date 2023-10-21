@@ -3,11 +3,13 @@ import styles from './index.module.css'
 import { useCheckout } from '../../contexts/CheckoutContext'
 import { useReactToPrint } from 'react-to-print'
 import { useTickets } from '../../contexts/TicketsContext';
+import { useUsers } from '../../contexts/UsersContext';
 
 export default function FinalReceipt() {
   const [totalPieces, setTotalPieces] = useState(0);
   const { openCloseReceipt, checkout, total, hasPaid, day, customerDetails } = useCheckout();
   const { insertTicket, generateTicketNumber, ticketNumber } = useTickets()
+  const { insertUser } = useUsers()
   const receiptRef = useRef([]);
 
   useEffect(() => {
@@ -44,7 +46,18 @@ export default function FinalReceipt() {
           handlePrint()
           openCloseReceipt(false)
           await generateTicketNumber()
-          insertTicket({ticketNo: ticketNumber.toString().padStart(4, '0'), date: currentDateTime, day: day, items: checkout, totalPieces: totalPieces, ...customerDetails})
+
+          const ticket = {
+            ticketNo: ticketNumber.toString().padStart(4, '0'),
+            date: currentDateTime,
+            day: day,
+            items: checkout,
+            totalPieces: totalPieces,
+            ...customerDetails
+          };
+
+          insertTicket(ticket)
+          insertUser({...customerDetails, tickets: [ticket]})
         }}>Print Receipt</button>
       </div>
     </div>

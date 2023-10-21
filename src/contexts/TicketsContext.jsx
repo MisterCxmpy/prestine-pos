@@ -12,9 +12,17 @@ export const TicketsProvider = ({ children }) => {
     setTicketNumber(lastTicketNumber)
   }, [lastTicketNumber])
 
-  useEffect(async () => {
-    await generateTicketNumber()
-  }, [])
+  useEffect(() => {
+    async function getTicketNumber() {
+      try {
+        await generateTicketNumber();
+      } catch (error) {
+        console.error("Error generating ticket number:", error);
+      }
+    }
+    getTicketNumber();
+  }, []);
+  
 
   const generateTicketNumber = async () => {
     let newTicketNumber = lastTicketNumber + 1;
