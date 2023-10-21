@@ -5,7 +5,7 @@ const CheckoutContext = createContext();
 
 export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
-  const [customerDetails, setCustomerDetails] = useState([]);
+  const [customerDetails, setCustomerDetails] = useState({});
   const [total, setTotal] = useState(0.0);
   const [hasPaid, setHasPaid] = useState(false);
 
@@ -118,7 +118,8 @@ export const CheckoutProvider = ({ children }) => {
         setCustomerDetails,
         setDay,
         day,
-        completeCheckout
+        completeCheckout,
+        customerDetails
       }}
     >
       {children}

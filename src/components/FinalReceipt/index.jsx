@@ -2,10 +2,12 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import styles from './index.module.css'
 import { useCheckout } from '../../contexts/CheckoutContext'
 import { useReactToPrint } from 'react-to-print'
+import { useTickets } from '../../contexts/TicketsContext';
 
 export default function FinalReceipt() {
   const [totalPieces, setTotalPieces] = useState(0);
-  const { openCloseReceipt, checkout, total, hasPaid, day } = useCheckout();
+  const { openCloseReceipt, checkout, total, hasPaid, day, customerDetails } = useCheckout();
+  const { insertTicket, generateTicketNumber, ticketNumber } = useTickets()
   const receiptRef = useRef([]);
 
   useEffect(() => {
@@ -17,26 +19,6 @@ export default function FinalReceipt() {
     pageStyle: "@page { size: auto;  margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; } }",
     content: () => receiptRef.current
   })
-
-  return (
-    <div className={styles['overlay']}>
-      <div className={styles['outer']}>
-        <button onClick={() => openCloseReceipt(false)} className={styles['close-btn']}>&times;</button>
-        <FullReceipt ref={receiptRef} checkout={checkout} total={total} totalPieces={totalPieces} hasPaid={hasPaid} day={day} />
-      </div>
-      <div className={styles['form-buttons']}>
-        <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
-        <button onClick={() => {
-          handlePrint()
-          openCloseReceipt(false)
-          set
-        }}>Print Receipt</button>
-      </div>
-    </div>
-  );
-}
-const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid, day }, ref) => {
-  let currentPiece = 1;
 
   const [currentDateTime, setCurrentDateTime] = useState('');
 
@@ -51,8 +33,29 @@ const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid, day }, 
   }, []);
 
   return (
+    <div className={styles['overlay']}>
+      <div className={styles['outer']}>
+        <button onClick={() => openCloseReceipt(false)} className={styles['close-btn']}>&times;</button>
+        <FullReceipt ref={receiptRef} checkout={checkout} total={total} totalPieces={totalPieces} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} />
+      </div>
+      <div className={styles['form-buttons']}>
+        <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
+        <button onClick={async () => {
+          handlePrint()
+          openCloseReceipt(false)
+          await generateTicketNumber()
+          insertTicket({ticketNo: ticketNumber.toString().padStart(4, '0'), date: currentDateTime, day: day, items: checkout, totalPieces: totalPieces, ...customerDetails})
+        }}>Print Receipt</button>
+      </div>
+    </div>
+  );
+}
+const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid, day, currentDateTime, ticketNumber }, ref) => {
+  let currentPiece = 1;
+
+  return (
     <div ref={ref} className={styles['receipt']}>
-      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={false} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} />
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={false} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} />
       <PageBreak>&nbsp;</PageBreak>
       {checkout.map((c, i) => {
         const items = [];
@@ -61,19 +64,19 @@ const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid, day }, 
           currentPiece += 1;
           items.push(
             <React.Fragment key={index}>
-              <ItemReceipt name={c.name} quantity={c.quantity} itemNum={itemNum} total={totalPieces} tag={c.tag} day={day} currentDateTime={currentDateTime} />
+              <ItemReceipt name={c.name} quantity={c.quantity} itemNum={itemNum} total={totalPieces} tag={c.tag} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} />
               <PageBreak>&nbsp;</PageBreak>
             </React.Fragment>
           );
         }
         return items;
       })}
-      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={true} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} />
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={true} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} />
     </div>
   )
 });
 
-const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, currentDateTime }) => {
+const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, currentDateTime, ticketNumber }) => {
 
   return (
     <>
@@ -87,7 +90,7 @@ const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, curren
       <div className={styles['receipt-info']}>
         <p className={styles['ticket-date']}>reg<b>{day}</b>{currentDateTime}</p>
         <div className={styles['ticket-no']}>
-          <p>TKT: 6672</p>
+          <p>TKT: {ticketNumber.toString().padStart(4, '0')}</p>
           <p>066070</p>
         </div>
         <ul className={styles['ticket-items']}>
@@ -120,13 +123,13 @@ const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, curren
   )
 }
 
-const ItemReceipt = forwardRef(({ name, quantity, itemNum, total, tag, day, currentDateTime }, ref) => {
+const ItemReceipt = forwardRef(({ name, quantity, itemNum, total, tag, day, currentDateTime, ticketNumber }, ref) => {
 
   return (
     <div ref={ref} className={styles['receipt-info']}>
       <p className={styles['ticket-date']}>reg<b>{day}</b>{currentDateTime}</p>
         <div className={styles['ticket-no']}>
-          <p>TKT: 6672</p>
+          <p>TKT: {ticketNumber.toString().padStart(4, '0')}</p>
           <p>066070</p>
         </div>
       <ul className={styles['ticket-items']}>

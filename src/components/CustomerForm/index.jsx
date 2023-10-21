@@ -22,7 +22,7 @@ export default function CustomerForm({ item }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setCustomerDetails([{customerName: customerName, customerPhone: customerPhone}])
+    setCustomerDetails({ownerName: customerName, ownerMob: customerPhone})
 
     openCloseCustomerForm(false)
     openCloseReceipt(true)
