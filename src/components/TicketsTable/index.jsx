@@ -1,7 +1,12 @@
-import React from 'react'
-import styles from './index.module.css'
+import React from 'react';
+import styles from './index.module.css';
 
-export default function TicketsTable({ result }) {
+export default function TicketsTable({ result, setPreview, setTicketData }) {
+  const handleRowClick = (ticket) => {
+    setTicketData(ticket);
+    setPreview(true);
+  };
+
   return (
     <>
       <thead className={styles['table-heading']}>
@@ -13,31 +18,33 @@ export default function TicketsTable({ result }) {
           <th>Total Pieces</th>
           <th>Owner</th>
           <th>Owner Mobile</th>
+          <th>PAID</th>
         </tr>
       </thead>
       <tbody className={styles['table-body']}>
         {result?.map((t, i) => {
           return (
-            <tr key={i}>
-              <td><div><b>{t.ticketNo}</b></div></td>
-              <td><div>{t.date}</div></td>
-              <td><div style={{textTransform: "uppercase"}}><b>{t.day}</b></div></td>
-              <td><div><ul>{t.items.map((i, id) => {
-                return (
-                  <li key={id}>
-                    {i.quantity}
-                    &nbsp;
-                    {i.name}
-                  </li>
-                )
-              })}</ul></div></td>
-              <td><div><b>{t.totalPieces}</b></div></td>
-              <td><div><b>{t.ownerName}</b></div></td>
-              <td><div><b>{t.ownerMob}</b></div></td>
+            <tr key={i} onClick={() => handleRowClick(t)}>
+              <td><strong>{t.ticketNo}</strong></td>
+              <td>{t.date}</td>
+              <td style={{ textTransform: 'uppercase' }}>{t.day}</td>
+              <td>
+                <ul>
+                  {t.items.map((item, id) => (
+                    <li key={id}>
+                      {item.quantity} &nbsp; {item.name}
+                    </li>
+                  ))}
+                </ul>
+              </td>
+              <td><strong>{t.totalPieces}</strong></td>
+              <td><strong>{t.ownerName}</strong></td>
+              <td><strong>{t.ownerMob}</strong></td>
+              <td><strong>{t.hasPaid ? "Paid" : "Not Paid"}</strong></td>
             </tr>
-          )
+          );
         })}
       </tbody>
     </>
-  )
+  );
 }

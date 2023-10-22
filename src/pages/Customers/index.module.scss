@@ -96,5 +96,9 @@
 }
 
 .spacing {
-  margin-top: 20px;
+  height: 20px;
+
+  &::before {
+    display: none !important;
+  }
 }

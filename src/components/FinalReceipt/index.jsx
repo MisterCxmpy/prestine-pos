@@ -53,7 +53,9 @@ export default function FinalReceipt() {
             day: day,
             items: checkout,
             totalPieces: totalPieces,
-            ...customerDetails
+            ...customerDetails,
+            hasPaid: hasPaid,
+            totalPrice: total
           };
 
           insertTicket(ticket)

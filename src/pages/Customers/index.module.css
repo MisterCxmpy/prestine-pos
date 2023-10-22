@@ -76,5 +76,8 @@
   }
 }
 .spacing {
-  margin-top: 20px;
+  height: 20px;
+}
+.spacing::before {
+  display: none !important;
 }/*# sourceMappingURL=index.module.css.map */
