@@ -29,7 +29,7 @@
   width: 70px;
 }
 .sidebar.closed .link {
-  opacity: 0;
+  display: none;
 }
 .sidebar.closed .logo-name {
   display: none;
@@ -75,6 +75,13 @@
   position: relative;
   transition: var(--transition);
   z-index: 12;
+}
+.nav-item > a.active {
+  background: white;
+}
+.nav-item > a.active > .link,
+.nav-item > a.active > svg {
+  color: black;
 }
 .nav-item > a::after {
   content: "";

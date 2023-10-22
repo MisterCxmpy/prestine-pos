@@ -32,7 +32,7 @@
   width: 70px;
 
   .link {
-    opacity: 0;
+    display: none;
   }
 
   .logo-name {
@@ -71,6 +71,8 @@
   margin: 8px 0;
   list-style: none;
 
+  
+
   > a {
     display: flex;
     height: 100%;
@@ -80,6 +82,16 @@
     position: relative;
     transition: var(--transition);
     z-index: 12;
+
+    &.active {
+
+      background: white;
+  
+      > .link,
+      > svg {
+        color: black;
+      }
+    }
 
     &::after {
       content: "";

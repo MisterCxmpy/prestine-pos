@@ -27,7 +27,7 @@ export const TicketsProvider = ({ children }) => {
   const generateTicketNumber = async () => {
     let newTicketNumber = lastTicketNumber + 1;
     try {
-      while (await checkTicketNumberExists(newTicketNumber)) {
+      while (await checkTicketNumberExists(newTicketNumber.toString().padStart(4, '0'))) {
         newTicketNumber++;
       }
       setLastTicketNumber(newTicketNumber);
