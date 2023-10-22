@@ -54,7 +54,6 @@ export default function Customers() {
   }
 };
 
-
   return (
     <>
       <section className={styles['customers-section']}>
