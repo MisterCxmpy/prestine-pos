@@ -4,6 +4,14 @@
   min-height: calc(100vh - 50px);
 }
 
+.search-bar {
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: var(--border-radius);
+}
+
 .tickets {
   height: 100%;
   padding: 10px;

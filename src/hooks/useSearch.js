@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-function useSearch(forums) {
+function useSearch(searches, type) {
   const [query, setQuery] = useState("");
-  const [result, setResult] = useState(forums);
+  const [result, setResult] = useState(searches);
   const [searching, setSearching] = useState(false);
 
   useEffect(() => {
@@ -10,15 +10,24 @@ function useSearch(forums) {
     console.log(result)
 
     if (query === "") {
-      setResult(forums);
+      setResult(searches);
     } else {
-      if (forums.length) {
+      if (searches.length) {
         setResult(
-          forums.filter((forum) => {
-            const mobile = forum.ownerMob.toLowerCase();
-            const name = forum.ownerName.toLowerCase();
+          type == "customer" ? 
+          searches.filter((search) => {
+            const mobile = search.ownerMob.toLowerCase();
+            const name = search.ownerName.toLowerCase();
             const queryLower = query.toLowerCase();
             return mobile.includes(queryLower) || name.includes(queryLower);
+          })
+          : 
+          searches.filter((search) => {
+            const ticket = search.ticketNo.toLowerCase();
+            const mobile = search.ownerMob.toLowerCase();
+            const name = search.ownerName.toLowerCase();
+            const queryLower = query.toLowerCase();
+            return mobile.includes(queryLower) || name.includes(queryLower) || ticket.includes(queryLower);
           })
         );
       }
@@ -32,7 +41,7 @@ function useSearch(forums) {
     return () => {
       setSearching(false);
     };
-  }, [query, forums]);
+  }, [query, searches]);
 
   return { query, setQuery, result, searching };
 }

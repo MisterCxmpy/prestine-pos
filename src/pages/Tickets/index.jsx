@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import styles from './index.module.css'
 import { useTickets } from '../../contexts/TicketsContext'
+import useSearch from '../../hooks/useSearch';
 
 export default function Tickets() {
 
   const { tickets, getTickets } = useTickets()
+  const { setQuery, result } = useSearch(tickets);
 
   useEffect(() => {
     getTickets()
@@ -13,6 +15,7 @@ export default function Tickets() {
   return (
     <section className={styles['tickets-section']}>
       <div className={styles['tickets']}>
+        <input className={styles['search-bar']} onChange={(e) => setQuery(e.target.value)} type="text" />
         <table className={styles['tickets-list']}>
           <thead className={styles['table-heading']}>
             <tr>
@@ -26,7 +29,7 @@ export default function Tickets() {
             </tr>
           </thead>
           <tbody className={styles['table-body']}>
-            {tickets?.map((t, i) => {
+            {result?.map((t, i) => {
               return (
                 <tr key={i}>
                   <td><div><b>{t.ticketNo}</b></div></td>
