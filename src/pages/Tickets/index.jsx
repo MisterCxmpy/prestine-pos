@@ -6,7 +6,7 @@ import useSearch from '../../hooks/useSearch';
 export default function Tickets() {
 
   const { tickets, getTickets } = useTickets()
-  const { setQuery, result } = useSearch(tickets);
+  const { setQuery, result } = useSearch(tickets, "ticket");
 
   useEffect(() => {
     getTickets()
@@ -15,7 +15,7 @@ export default function Tickets() {
   return (
     <section className={styles['tickets-section']}>
       <div className={styles['tickets']}>
-        <input className={styles['search-bar']} onChange={(e) => setQuery(e.target.value)} type="text" />
+        <input className={styles['search-bar']} onChange={(e) => setQuery(e.target.value)} placeholder='Search for Ticket' type="text" />
         <table className={styles['tickets-list']}>
           <thead className={styles['table-heading']}>
             <tr>

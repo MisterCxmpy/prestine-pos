@@ -6,7 +6,7 @@ import useSearch from '../../hooks/useSearch';
 export default function Customers() {
 
   const { users, getUsers } = useUsers()
-  const { setQuery, result } = useSearch(users);
+  const { setQuery, result } = useSearch(users, "customer");
 
   useEffect(() => {
     getUsers()
@@ -15,7 +15,7 @@ export default function Customers() {
   return (
     <section className={styles['customers-section']}>
       <div className={styles['customers']}>
-        <input className={styles['search-bar']} onChange={(e) => setQuery(e.target.value)} type="text" />
+        <input className={styles['search-bar']} onChange={(e) => setQuery(e.target.value)} placeholder='Search for Customer' type="text" />
         <table className={styles['customer-list']}>
           <thead className={styles['table-heading']}>
             <tr>
