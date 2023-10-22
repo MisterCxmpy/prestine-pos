@@ -38,7 +38,7 @@ export default function FinalReceipt() {
     <div className={styles['overlay']}>
       <div className={styles['outer']}>
         <button onClick={() => openCloseReceipt(false)} className={styles['close-btn']}>&times;</button>
-        <FullReceipt ref={receiptRef} checkout={checkout} total={total} totalPieces={totalPieces} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} />
+        <FullReceipt ref={receiptRef} checkout={checkout} total={total} totalPieces={totalPieces} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} phoneNum={customerDetails.ownerMob} />
       </div>
       <div className={styles['form-buttons']}>
         <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
@@ -63,12 +63,12 @@ export default function FinalReceipt() {
     </div>
   );
 }
-const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid, day, currentDateTime, ticketNumber }, ref) => {
+const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid, day, currentDateTime, ticketNumber, phoneNum }, ref) => {
   let currentPiece = 1;
 
   return (
     <div ref={ref} className={styles['receipt']}>
-      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={false} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} />
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={false} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} phoneNum={phoneNum} />
       <PageBreak>&nbsp;</PageBreak>
       {checkout.map((c, i) => {
         const items = [];
@@ -84,12 +84,12 @@ const FullReceipt = forwardRef(({ checkout, total, totalPieces, hasPaid, day, cu
         }
         return items;
       })}
-      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={true} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} />
+      <MainReceipt checkout={checkout} total={total} totalPieces={totalPieces} owner={true} hasPaid={hasPaid} day={day} currentDateTime={currentDateTime} ticketNumber={ticketNumber} phoneNum={phoneNum} />
     </div>
   )
 });
 
-const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, currentDateTime, ticketNumber }) => {
+const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, currentDateTime, ticketNumber, phoneNum }) => {
 
   return (
     <>
@@ -104,7 +104,7 @@ const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, curren
         <p className={styles['ticket-date']}>reg<b>{day}</b>{currentDateTime}</p>
         <div className={styles['ticket-no']}>
           <p>TKT: {ticketNumber.toString().padStart(4, '0')}</p>
-          <p>066070</p>
+          <p>{owner ? phoneNum : ""}</p>
         </div>
         <ul className={styles['ticket-items']}>
           {checkout.map((c, i) => (
@@ -113,11 +113,6 @@ const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, curren
                 <p>{c.quantity} {c.name}</p>
                 <p>{(c.quantity * c.price).toFixed(2)}</p>
               </div>
-              <ul>
-                <li>
-                  {c.tag}
-                </li>
-              </ul>
             </li>
           ))}
           <li className={styles['ticket-item']}>
@@ -143,18 +138,12 @@ const ItemReceipt = forwardRef(({ name, quantity, itemNum, total, tag, day, curr
       <p className={styles['ticket-date']}>reg<b>{day}</b>{currentDateTime}</p>
         <div className={styles['ticket-no']}>
           <p>TKT: {ticketNumber.toString().padStart(4, '0')}</p>
-          <p>066070</p>
         </div>
       <ul className={styles['ticket-items']}>
         <li className={styles['ticket-item']}>
           <div className={styles['ticket-item-name']}>
             <p>{quantity} {name}</p>
           </div>
-          <ul>
-            <li>
-              {tag}
-            </li>
-          </ul>
         </li>
         <li className={styles['total-pieces']}>
           <p>{itemNum} / {total} pieces</p>

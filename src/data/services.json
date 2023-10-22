@@ -131,35 +131,35 @@
     "press-only": [
       {
         "id": 18,
-        "name": "Suits",
+        "name": "Suits P/O",
         "price": 7.00,
         "additional": "Press Only",
         "tag": "press only"
       },
       {
         "id": 19,
-        "name": "Jacket",
+        "name": "Jacket P/O",
         "price": 7.00,
         "additional": "Press Only",
         "tag": "press only"
       },
       {
         "id": 20,
-        "name": "Skirts",
+        "name": "Skirts P/O",
         "price": 7.00,
         "additional": "Press Only",
         "tag": "press only"
       },
       {
         "id": 21,
-        "name": "Shirts",
+        "name": "Shirts P/O",
         "price": 7.00,
         "additional": "Press Only",
         "tag": "press only"
       },
       {
         "id": 22,
-        "name": "Trousers",
+        "name": "Trousers P/O",
         "price": 7.00,
         "additional": "Press Only",
         "tag": "press only"

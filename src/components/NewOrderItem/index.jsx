@@ -27,9 +27,9 @@ export default function NewOrderItem({ itemData }) {
         </div>
         <p>{itemData.additional}</p>
         <div className={styles['receipt-row']} style={{justifyContent: "start", gap: "10px"}}>
-          <BiSolidPlusSquare onClick={() => handleIncrement()} />
-          <p>{itemData.quantity}</p>
           <BiSolidMinusSquare onClick={() => handleDecrement()} />
+          <p>{itemData.quantity}</p>
+          <BiSolidPlusSquare onClick={() => handleIncrement()} />
           <BiSolidTrash onClick={() => handleRemoval()} />
         </div>
       </div>

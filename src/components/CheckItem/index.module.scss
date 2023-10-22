@@ -64,6 +64,12 @@
   gap: 20px;
 }
 
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
 .form-buttons {
   display: flex;
   width: 100%;

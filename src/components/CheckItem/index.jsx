@@ -4,6 +4,7 @@ import { useCheckout } from '../../contexts/CheckoutContext';
 
 export default function CheckItem({ item }) {
   const [price, setPrice] = useState(item.price);
+  const [quantity, setQuantity] = useState(1);
   const [updatedItem, setUpdatedItem] = useState(item);
 
   const { addToCheckout, closeCheck } = useCheckout()
@@ -18,9 +19,19 @@ export default function CheckItem({ item }) {
     });
   };
 
+  const handleQuantityChange = (e) => {
+    const inputQuantity = e.target.value;
+    setQuantity(inputQuantity);
+
+    setUpdatedItem({
+      ...updatedItem,
+      quantity: parseInt(inputQuantity),
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    addToCheckout(updatedItem);
+    addToCheckout({...updatedItem, price: parseFloat(price), quantity: parseInt(quantity)});
     closeCheck()
   };
 
@@ -33,13 +44,20 @@ export default function CheckItem({ item }) {
             <label htmlFor="name">Item name</label>
             <input type="text" id='name' readOnly value={item.name} />
           </div>
-          <div className={styles['form-input']}>
+          <div className={`${styles['form-input']} ${styles["form-row"]}`}>
             <label htmlFor="price">Item price</label>
             <input
               type='text'
               id='price'
               value={price}
               onChange={handlePriceChange}
+            />
+            <label htmlFor="quantity">Quantity</label>
+            <input
+              type='text'
+              id='quantity'
+              value={quantity}
+              onChange={handleQuantityChange}
             />
           </div>
           <div className={styles['form-buttons']}>

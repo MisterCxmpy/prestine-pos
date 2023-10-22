@@ -36,7 +36,7 @@ export const CheckoutProvider = ({ children }) => {
       );
       setCheckout(updatedCheckout);
     } else {
-      setCheckout([...checkout, { ...item, quantity: 1 }]);
+      setCheckout([...checkout, { ...item }]);
     }
   };
 
