@@ -1,0 +1,33 @@
+.table-heading {
+  
+  > tr > th {
+    text-align: left;
+    padding-right: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+.table-body {
+
+  > tr > td {
+    text-align: left;
+    padding-right: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    vertical-align: top;
+
+
+    li {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+
+@media (max-width: 1624px) {
+  // .tickets-list {
+  //   grid-template-columns: repeat(4, minmax(100px, 1fr));
+  // }
+}

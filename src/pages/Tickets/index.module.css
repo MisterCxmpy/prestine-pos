@@ -5,6 +5,7 @@
 }
 
 .search-bar {
+  max-width: 400px;
   width: 100%;
   padding: 15px 10px;
   font-size: 18px;
@@ -22,6 +23,14 @@
   max-height: calc(100vh - 50px);
 }
 
+@media (max-width: 1024px) {
+  .tickets-section {
+    grid-template-columns: 1fr;
+  }
+  .tickets {
+    padding-right: 10px;
+  }
+}
 .tickets-list tr {
   cursor: pointer;
   position: relative;
@@ -39,33 +48,4 @@
   height: 40px;
   position: absolute;
   pointer-events: none;
-}
-
-.table-heading > tr > th {
-  text-align: left;
-  padding-right: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-
-.table-body > tr > td {
-  text-align: left;
-  padding-right: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  vertical-align: top;
-}
-.table-body > tr > td li {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-@media (max-width: 1024px) {
-  .tickets-section {
-    grid-template-columns: 1fr;
-  }
-  .tickets {
-    padding-right: 10px;
-  }
 }/*# sourceMappingURL=index.module.css.map */

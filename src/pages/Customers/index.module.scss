@@ -5,11 +5,23 @@
 }
 
 .search-bar {
+  max-width: 400px;
   width: 100%;
   padding: 15px 10px;
   font-size: 18px;
   border: none;
   border-radius: var(--border-radius);
+}
+
+.back-btn {
+  max-width: 200px;
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: var(--border-radius);
+  margin-left: auto;
+  cursor: pointer;
 }
 
 .customers {
@@ -81,4 +93,8 @@
   .customers {
     padding-right: 10px;
   }
+}
+
+.spacing {
+  margin-top: 20px;
 }
