@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import styles from './index.module.css'
 import { useUsers } from '../../contexts/UsersContext'
+import useSearch from '../../hooks/useSearch';
 
 export default function Customers() {
 
   const { users, getUsers } = useUsers()
+  const { setQuery, result } = useSearch(users);
 
   useEffect(() => {
     getUsers()
@@ -13,6 +15,7 @@ export default function Customers() {
   return (
     <section className={styles['customers-section']}>
       <div className={styles['customers']}>
+        <input className={styles['search-bar']} onChange={(e) => setQuery(e.target.value)} type="text" />
         <table className={styles['customer-list']}>
           <thead className={styles['table-heading']}>
             <tr>
@@ -22,7 +25,7 @@ export default function Customers() {
             </tr>
           </thead>
           <tbody className={styles['table-body']}>
-            {users?.map((u, i) => {
+            {result?.map((u, i) => {
               return (
                 <tr key={i}>
                   <td><div>{u.userID}</div></td>
