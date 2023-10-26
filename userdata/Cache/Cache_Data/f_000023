@@ -1,0 +1,250 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/ReceiptPreview/index.jsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=572fc08d"; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+let prevRefreshReg;
+let prevRefreshSig;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.__vite_plugin_react_preamble_installed__) {
+    throw new Error("@vitejs/plugin-react can't detect preamble. Something is wrong. See https://github.com/vitejs/vite-plugin-react/pull/11#discussion_r430879201");
+  }
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = (type, id) => {
+    RefreshRuntime.register(type, "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx " + id);
+  };
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+}
+var _s = $RefreshSig$();
+import __vite__cjsImport3_react from "/node_modules/.vite/deps/react.js?v=572fc08d"; const React = __vite__cjsImport3_react.__esModule ? __vite__cjsImport3_react.default : __vite__cjsImport3_react; const forwardRef = __vite__cjsImport3_react["forwardRef"]; const useEffect = __vite__cjsImport3_react["useEffect"]; const useRef = __vite__cjsImport3_react["useRef"];
+import styles from "/src/components/ReceiptPreview/index.module.css";
+import __vite__cjsImport5_reactToPrint from "/node_modules/.vite/deps/react-to-print.js?v=572fc08d"; const useReactToPrint = __vite__cjsImport5_reactToPrint["useReactToPrint"];
+export default function ReceiptPreview({
+  data,
+  setPreview,
+  setTicketData
+}) {
+  _s();
+  const receiptRef = useRef();
+  const handlePrint = useReactToPrint({
+    pageStyle: "@page { size: auto;  margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; } }",
+    content: () => receiptRef.current
+  });
+  const handleClose = () => {
+    setPreview(false);
+    setTicketData([]);
+  };
+  return /* @__PURE__ */ jsxDEV("div", { className: styles["overlay"], children: [
+    /* @__PURE__ */ jsxDEV("div", { className: styles["outer"], children: [
+      /* @__PURE__ */ jsxDEV("button", { onClick: () => handleClose(), className: styles["close-btn"], children: "×" }, void 0, false, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 22,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV(Receipt, { ref: receiptRef, data }, void 0, false, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 23,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+      lineNumber: 21,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV("div", { className: styles["form-buttons"], children: [
+      /* @__PURE__ */ jsxDEV("button", { onClick: () => handleClose(), type: "button", children: "Cancel" }, void 0, false, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 26,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("button", { onClick: async () => {
+        handlePrint();
+        handleClose();
+      }, children: "Print Receipt" }, void 0, false, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 27,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+      lineNumber: 25,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+    lineNumber: 20,
+    columnNumber: 10
+  }, this);
+}
+_s(ReceiptPreview, "bDg83wGOWVymWndOBdVSOIdHZOk=", false, function() {
+  return [useReactToPrint];
+});
+_c = ReceiptPreview;
+const Receipt = forwardRef(_c2 = ({
+  data
+}, ref) => {
+  return /* @__PURE__ */ jsxDEV("div", { ref, className: styles["receipt"], children: [
+    /* @__PURE__ */ jsxDEV("div", { className: styles["heading"], children: [
+      /* @__PURE__ */ jsxDEV("p", { className: `${styles["xl"]} ${styles["title"]}`, children: "smart n up" }, void 0, false, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 43,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("p", { className: `${styles["xl"]} ${styles["title"]}`, children: "Dry Cleaners" }, void 0, false, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 44,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("p", { className: styles["info"], children: "1 hazelwood court london n13 5ey" }, void 0, false, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 45,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("p", { className: styles["info"], children: "TEL NO: 020 8886 6385" }, void 0, false, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 46,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+      lineNumber: 42,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV("p", { className: styles["owner"], children: "SHOP COPY" }, void 0, false, {
+      fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+      lineNumber: 48,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV("div", { className: styles["receipt-info"], children: [
+      /* @__PURE__ */ jsxDEV("p", { className: styles["ticket-date"], children: [
+        "reg",
+        /* @__PURE__ */ jsxDEV("b", { children: data.day }, void 0, false, {
+          fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+          lineNumber: 50,
+          columnNumber: 49
+        }, this),
+        data.date
+      ] }, void 0, true, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 50,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("div", { className: styles["ticket-no"], children: [
+        /* @__PURE__ */ jsxDEV("p", { children: [
+          "TKT: ",
+          data.ticketNo
+        ] }, void 0, true, {
+          fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+          lineNumber: 52,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("p", { children: data.ownerMob }, void 0, false, {
+          fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+          lineNumber: 53,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 51,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("ul", { className: styles["ticket-items"], children: [
+        data.items.map((i, x) => /* @__PURE__ */ jsxDEV("li", { className: styles["ticket-item"], children: /* @__PURE__ */ jsxDEV("div", { className: styles["ticket-item-name"], children: [
+          /* @__PURE__ */ jsxDEV("p", { children: [
+            i.quantity,
+            " ",
+            i.name
+          ] }, void 0, true, {
+            fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+            lineNumber: 58,
+            columnNumber: 17
+          }, this),
+          /* @__PURE__ */ jsxDEV("p", { children: (i.quantity * i.price).toFixed(2) }, void 0, false, {
+            fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+            lineNumber: 59,
+            columnNumber: 17
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+          lineNumber: 57,
+          columnNumber: 15
+        }, this) }, x, false, {
+          fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+          lineNumber: 56,
+          columnNumber: 37
+        }, this)),
+        /* @__PURE__ */ jsxDEV("li", { className: styles["ticket-item"], children: /* @__PURE__ */ jsxDEV("div", { className: styles["ticket-item-name"], children: [
+          /* @__PURE__ */ jsxDEV("p", { children: data.hasPaid ? "PAID" : "CASH" }, void 0, false, {
+            fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+            lineNumber: 64,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV("p", { children: data.totalPrice.toFixed(2) }, void 0, false, {
+            fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+            lineNumber: 65,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+          lineNumber: 63,
+          columnNumber: 13
+        }, this) }, void 0, false, {
+          fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+          lineNumber: 62,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("li", { className: styles["total-pieces"], children: [
+          /* @__PURE__ */ jsxDEV("p", { children: [
+            data.totalPieces,
+            " pieces"
+          ] }, void 0, true, {
+            fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+            lineNumber: 69,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("p", { className: styles["note"], children: "note: all items left longer than 90 days will be given to charity" }, void 0, false, {
+            fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+            lineNumber: 70,
+            columnNumber: 13
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+          lineNumber: 68,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+        lineNumber: 55,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+      lineNumber: 49,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx",
+    lineNumber: 41,
+    columnNumber: 10
+  }, this);
+});
+_c3 = Receipt;
+var _c, _c2, _c3;
+$RefreshReg$(_c, "ReceiptPreview");
+$RefreshReg$(_c2, "Receipt$forwardRef");
+$RefreshReg$(_c3, "Receipt");
+if (import.meta.hot && !inWebWorker) {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/CosgunPC/Documents/Coding/smartenup-pos/src/components/ReceiptPreview/index.jsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports)
+        return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(currentExports, nextExports);
+      if (invalidateMessage)
+        import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+
+//# sourceMappingURL=data:application/json;base64,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O0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFHQSxLQUpGO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFLQTtBQUFBLFFBQ0EsdUJBQUMsUUFBRyxXQUFXNUIsT0FBTyxjQUFjLEdBQ2xDO0FBQUEsaUNBQUMsT0FBR0c7QUFBQUEsaUJBQUs0QjtBQUFBQSxZQUFZO0FBQUEsZUFBckI7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBNEI7QUFBQSxVQUM1Qix1QkFBQyxPQUFFLFdBQVcvQixPQUFPLE1BQU0sR0FBRyxpRkFBOUI7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBK0Y7QUFBQSxhQUZqRztBQUFBO0FBQUE7QUFBQTtBQUFBLGVBR0E7QUFBQSxXQWxCRjtBQUFBO0FBQUE7QUFBQTtBQUFBLGFBbUJBO0FBQUEsU0F6QkY7QUFBQTtBQUFBO0FBQUE7QUFBQSxXQTBCQTtBQUFBLE9BbENGO0FBQUE7QUFBQTtBQUFBO0FBQUEsU0FtQ0E7QUFFSixDQUFDO0FBQUNnQyxNQXZDSWxCO0FBQU8sSUFBQUQsSUFBQUUsS0FBQWlCO0FBQUFDLGFBQUFwQixJQUFBO0FBQUFvQixhQUFBbEIsS0FBQTtBQUFBa0IsYUFBQUQsS0FBQSIsIm5hbWVzIjpbIlJlYWN0IiwiZm9yd2FyZFJlZiIsInVzZUVmZmVjdCIsInVzZVJlZiIsInN0eWxlcyIsInVzZVJlYWN0VG9QcmludCIsIlJlY2VpcHRQcmV2aWV3IiwiZGF0YSIsInNldFByZXZpZXciLCJzZXRUaWNrZXREYXRhIiwiX3MiLCJyZWNlaXB0UmVmIiwiaGFuZGxlUHJpbnQiLCJwYWdlU3R5bGUiLCJjb250ZW50IiwiY3VycmVudCIsImhhbmRsZUNsb3NlIiwiX2MiLCJSZWNlaXB0IiwiX2MyIiwicmVmIiwiZGF5IiwiZGF0ZSIsInRpY2tldE5vIiwib3duZXJNb2IiLCJpdGVtcyIsIm1hcCIsImkiLCJ4IiwicXVhbnRpdHkiLCJuYW1lIiwicHJpY2UiLCJ0b0ZpeGVkIiwiaGFzUGFpZCIsInRvdGFsUHJpY2UiLCJ0b3RhbFBpZWNlcyIsIl9jMyIsIiRSZWZyZXNoUmVnJCJdLCJzb3VyY2VzIjpbImluZGV4LmpzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHsgZm9yd2FyZFJlZiwgdXNlRWZmZWN0LCB1c2VSZWYgfSBmcm9tICdyZWFjdCdcclxuaW1wb3J0IHN0eWxlcyBmcm9tICcuL2luZGV4Lm1vZHVsZS5jc3MnXHJcbmltcG9ydCB7IHVzZVJlYWN0VG9QcmludCB9IGZyb20gJ3JlYWN0LXRvLXByaW50JztcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFJlY2VpcHRQcmV2aWV3KHsgZGF0YSwgc2V0UHJldmlldywgc2V0VGlja2V0RGF0YSB9KSB7XHJcbiAgY29uc3QgcmVjZWlwdFJlZiA9IHVzZVJlZigpO1xyXG4gIFxyXG4gIGNvbnN0IGhhbmRsZVByaW50ID0gdXNlUmVhY3RUb1ByaW50KHtcclxuICAgIHBhZ2VTdHlsZTogXCJAcGFnZSB7IHNpemU6IGF1dG87ICBtYXJnaW46IDBtbTsgfSBAbWVkaWEgcHJpbnQgeyBib2R5IHsgLXdlYmtpdC1wcmludC1jb2xvci1hZGp1c3Q6IGV4YWN0OyB9IH1cIixcclxuICAgIGNvbnRlbnQ6ICgpID0+IHJlY2VpcHRSZWYuY3VycmVudFxyXG4gIH0pXHJcblxyXG4gIGNvbnN0IGhhbmRsZUNsb3NlID0gKCkgPT4ge1xyXG4gICAgc2V0UHJldmlldyhmYWxzZSlcclxuICAgIHNldFRpY2tldERhdGEoW10pXHJcbiAgfVxyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPGRpdiBjbGFzc05hbWU9e3N0eWxlc1snb3ZlcmxheSddfT5cclxuICAgICAgPGRpdiBjbGFzc05hbWU9e3N0eWxlc1snb3V0ZXInXX0+XHJcbiAgICAgICAgPGJ1dHRvbiBvbkNsaWNrPXsoKSA9PiBoYW5kbGVDbG9zZSgpfSBjbGFzc05hbWU9e3N0eWxlc1snY2xvc2UtYnRuJ119PiZ0aW1lczs8L2J1dHRvbj5cclxuICAgICAgICA8UmVjZWlwdCByZWY9e3JlY2VpcHRSZWZ9IGRhdGE9e2RhdGF9Lz5cclxuICAgICAgPC9kaXY+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPXtzdHlsZXNbJ2Zvcm0tYnV0dG9ucyddfT5cclxuICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9eygpID0+IGhhbmRsZUNsb3NlKCl9IHR5cGU9J2J1dHRvbic+Q2FuY2VsPC9idXR0b24+XHJcbiAgICAgICAgPGJ1dHRvbiBvbkNsaWNrPXthc3luYyAoKSA9PiB7XHJcbiAgICAgICAgICBoYW5kbGVQcmludCgpXHJcbiAgICAgICAgICBoYW5kbGVDbG9zZSgpXHJcbiAgICAgICAgfX0+UHJpbnQgUmVjZWlwdDwvYnV0dG9uPlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvZGl2PlxyXG4gIClcclxufVxyXG5cclxuY29uc3QgUmVjZWlwdCA9IGZvcndhcmRSZWYoKHsgZGF0YSB9LCByZWYpID0+IHtcclxuICByZXR1cm4gKFxyXG4gICAgPGRpdiByZWY9e3JlZn0gY2xhc3NOYW1lPXtzdHlsZXNbJ3JlY2VpcHQnXX0+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPXtzdHlsZXNbJ2hlYWRpbmcnXX0+XHJcbiAgICAgICAgPHAgY2xhc3NOYW1lPXtgJHtzdHlsZXNbJ3hsJ119ICR7c3R5bGVzW1widGl0bGVcIl19YH0+c21hcnQgbiB1cDwvcD5cclxuICAgICAgICA8cCBjbGFzc05hbWU9e2Ake3N0eWxlc1sneGwnXX0gJHtzdHlsZXNbXCJ0aXRsZVwiXX1gfT5EcnkgQ2xlYW5lcnM8L3A+XHJcbiAgICAgICAgPHAgY2xhc3NOYW1lPXtzdHlsZXNbJ2luZm8nXX0+MSBoYXplbHdvb2QgY291cnQgbG9uZG9uIG4xMyA1ZXk8L3A+XHJcbiAgICAgICAgPHAgY2xhc3NOYW1lPXtzdHlsZXNbJ2luZm8nXX0+VEVMIE5POiAwMjAgODg4NiA2Mzg1PC9wPlxyXG4gICAgICA8L2Rpdj5cclxuICAgICAgPHAgY2xhc3NOYW1lPXtzdHlsZXNbJ293bmVyJ119PlNIT1AgQ09QWTwvcD5cclxuICAgICAgPGRpdiBjbGFzc05hbWU9e3N0eWxlc1sncmVjZWlwdC1pbmZvJ119PlxyXG4gICAgICAgIDxwIGNsYXNzTmFtZT17c3R5bGVzWyd0aWNrZXQtZGF0ZSddfT5yZWc8Yj57ZGF0YS5kYXl9PC9iPntkYXRhLmRhdGV9PC9wPlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPXtzdHlsZXNbJ3RpY2tldC1ubyddfT5cclxuICAgICAgICAgIDxwPlRLVDoge2RhdGEudGlja2V0Tm99PC9wPlxyXG4gICAgICAgICAgPHA+e2RhdGEub3duZXJNb2J9PC9wPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICAgIDx1bCBjbGFzc05hbWU9e3N0eWxlc1sndGlja2V0LWl0ZW1zJ119PlxyXG4gICAgICAgICAge2RhdGEuaXRlbXMubWFwKChpLCB4KSA9PiAoXHJcbiAgICAgICAgICAgIDxsaSBrZXk9e3h9IGNsYXNzTmFtZT17c3R5bGVzWyd0aWNrZXQtaXRlbSddfT5cclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17c3R5bGVzWyd0aWNrZXQtaXRlbS1uYW1lJ119PiAgXHJcbiAgICAgICAgICAgICAgICA8cD57aS5xdWFudGl0eX0ge2kubmFtZX08L3A+XHJcbiAgICAgICAgICAgICAgICA8cD57KGkucXVhbnRpdHkgKiBpLnByaWNlKS50b0ZpeGVkKDIpfTwvcD5cclxuICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgPC9saT5cclxuICAgICAgICAgICkpfVxyXG4gICAgICAgICAgPGxpIGNsYXNzTmFtZT17c3R5bGVzWyd0aWNrZXQtaXRlbSddfT5cclxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9e3N0eWxlc1sndGlja2V0LWl0ZW0tbmFtZSddfT4gIFxyXG4gICAgICAgICAgICAgIDxwPntkYXRhLmhhc1BhaWQgPyBcIlBBSURcIiA6IFwiQ0FTSFwifTwvcD5cclxuICAgICAgICAgICAgICA8cD57ZGF0YS50b3RhbFByaWNlLnRvRml4ZWQoMil9PC9wPlxyXG4gICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgIDwvbGk+XHJcbiAgICAgICAgICA8bGkgY2xhc3NOYW1lPXtzdHlsZXNbJ3RvdGFsLXBpZWNlcyddfT5cclxuICAgICAgICAgICAgPHA+e2RhdGEudG90YWxQaWVjZXN9IHBpZWNlczwvcD5cclxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPXtzdHlsZXNbJ25vdGUnXX0+bm90ZTogYWxsIGl0ZW1zIGxlZnQgbG9uZ2VyIHRoYW4gOTAgZGF5cyB3aWxsIGJlIGdpdmVuIHRvIGNoYXJpdHk8L3A+XHJcbiAgICAgICAgICA8L2xpPlxyXG4gICAgICAgIDwvdWw+XHJcbiAgICAgIDwvZGl2PlxyXG4gICAgPC9kaXY+XHJcbiAgKVxyXG59KSJdLCJmaWxlIjoiQzovVXNlcnMvQ29zZ3VuUEMvRG9jdW1lbnRzL0NvZGluZy9zbWFydGVudXAtcG9zL3NyYy9jb21wb25lbnRzL1JlY2VpcHRQcmV2aWV3L2luZGV4LmpzeCJ9

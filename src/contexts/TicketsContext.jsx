@@ -42,9 +42,8 @@ export const TicketsProvider = ({ children }) => {
   
   const checkTicketNumberExists = async (ticketNumber) => {
     try {
-      const response = await fetch(`http://localhost:3000/tickets/${ticketNumber}`);
-      const data = await response.json()
-      return data.exists;
+      const response = await window.api.checkTicketNumberExists(ticketNumber);
+      return response;
     } catch (error) {
       console.error(error);
       return false;
@@ -52,29 +51,18 @@ export const TicketsProvider = ({ children }) => {
   };
   
   const insertTicket = (ticketData) => {
-    const apiUrl = 'http://localhost:3000/tickets';
-
-    fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json', 
-      },
-      body: JSON.stringify(ticketData),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Ticket inserted successfully:', data);
-    })
-    .catch(error => {
-      console.error('Error inserting ticket:', error);
-    });
+    try {
+      const response = window.api.insertTicket(ticketData)
+      console.log(response)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const getTickets = async () => {
     try {
-      const response = await fetch("http://localhost:3000/tickets");
-      const data = await response.json();
-      setTickets(data.data);
+      const response = await window.api.getAllTickets();
+      setTickets(response)
     } catch (error) {
       console.error('Error fetching tickets:', error);
     }
@@ -82,12 +70,11 @@ export const TicketsProvider = ({ children }) => {
 
   const getTicketForCustomer = async (phoneNumber) => {
     try {
-      const response = await fetch(`http://localhost:3000/tickets/p/${phoneNumber}`);
-      const data = await response.json();
-      setCustomerTickers(data.data);
-      console.log(data.data)
+      const response = await window.api.getTicketByPhone(phoneNumber)
+      console.log(response)
+      setCustomerTickers(response)
     } catch (error) {
-      console.error('Error fetching tickets:', error);
+      console.error(error)
     }
   };
 

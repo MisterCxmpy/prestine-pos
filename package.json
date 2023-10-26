@@ -1,34 +1,52 @@
 {
-  "name": "Pristine",
+  "name": "Prestine",
   "private": true,
   "version": "1.0.0",
-  "main": "electron/main.js",
   "author": "Cosgun Hussein",
-  "description": "Pristine",
-  "homepage": "/",
+  "description": "Prestine POS",
+  "main": "public/electron.js",
+  "homepage": "./",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "start-dev": "vite",
+    "start-build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "electron:serve": "concurrently -k \"cross-env BROWSER=none npm run dev\" \"npm run electron:start\"",
-    "electron:build": "npm run build && electron-builder -c.extraMetadata.main=build/main.js",
-    "electron:start": "wait-on tcp:5173 && electron ."
+    "start-electron": "nodemon --watch ./public/* --exec \"electron .\"",
+    "dev": "concurrently \"npm run start-dev\" \"wait-on tcp:5173 && npm run start-electron\" ",
+    "postinstall": "electron-builder install-app-deps",
+    "pack-app": "npm run start-build && electron-builder --dir",
+    "pack-build": "electron-builder --dir",
+    "build": "npm run start-build && electron-builder",
+    "clear": "concurrently \"node db/users.js\" \"node db/tickets.js\""
   },
   "build": {
-    "appId": "Pristine",
+    "appId": "com.prestine.app",
+    "productName": "Prestine",
+    "files": [
+      "dist/**/*",
+      "public/electron.js"
+    ],
+    "directories": {
+      "buildResources": "dist"
+    },
+    "extraResources": [
+      {
+        "from": "db",
+        "to": "db"
+      },
+      {
+        "from": "./db/",
+        "to": "db/",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
     "win": {
       "target": [
         "nsis"
-      ],
-      "icon": "public/installer.ico"
+      ]
     },
-    "files": [
-      "dist/**/*",
-      "electron/main.js",
-      "node_modules/**/*",
-      "package.json"
-    ],
     "nsis": {
       "uninstallDisplayName": "Pristine",
       "license": "license.txt",
@@ -36,34 +54,30 @@
       "allowToChangeInstallationDirectory": "true",
       "installerIcon": "public/installer.ico",
       "uninstallerIcon": "public/installer.ico"
-    },
-    "directories": {
-      "output": "releases",
-      "buildResources": "dist"
     }
   },
   "dependencies": {
-    "concurrently": "^8.2.2",
-    "cross-env": "^7.0.3",
     "electron-is-dev": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.16.0",
-    "react-to-pdf": "^1.0.1",
     "react-to-print": "^2.14.15",
-    "wait-on": "^7.0.1"
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
+    "concurrently": "^8.2.2",
     "electron": "^27.0.2",
     "electron-builder": "^24.6.4",
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.5"
+    "nodemon": "^3.0.1",
+    "vite": "^4.4.5",
+    "wait-on": "^7.0.1"
   }
 }
