@@ -15,6 +15,10 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 720,
+    minWidth: 1280,
+    minHeight: 720,
+    autoHideMenuBar: true,
+    icon: path.join(__dirname, 'favicon.ico'),
     webPreferences: {
       preload: isDev 
         ? path.join(app.getAppPath(), './public/preload.js') 
@@ -44,7 +48,6 @@ app.setPath(
     : path.join(process.resourcesPath, 'userdata/')
 );
 
-// When the app is ready to load
 app.whenReady().then(async () => {
   await createWindow();
 });
