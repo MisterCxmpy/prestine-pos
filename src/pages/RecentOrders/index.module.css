@@ -1,1 +1,51 @@
-/*# sourceMappingURL=index.module.css.map */
+.tickets-section {
+  width: 100%;
+  display: grid;
+  min-height: calc(100vh - 50px);
+}
+
+.search-bar {
+  max-width: 400px;
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: var(--border-radius);
+}
+
+.tickets {
+  height: 100%;
+  padding: 10px;
+  padding-right: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-height: calc(100vh - 50px);
+}
+
+@media (max-width: 1024px) {
+  .tickets-section {
+    grid-template-columns: 1fr;
+  }
+  .tickets {
+    padding-right: 10px;
+  }
+}
+.tickets-list tr {
+  cursor: pointer;
+  position: relative;
+}
+.tickets-list tr::before {
+  bottom: 0px;
+  left: 0;
+  border-bottom: 2px solid var(--secondary);
+  transition: 0.5s all;
+}
+.tickets-list tr::before {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  pointer-events: none;
+}/*# sourceMappingURL=index.module.css.map */

@@ -18,7 +18,7 @@ const createWindow = () => {
     minWidth: 1280,
     minHeight: 720,
     autoHideMenuBar: true,
-    icon: path.join(__dirname, 'favicon.ico'),
+    icon: path.join(app.getAppPath(), './dist/favicon.ico'),
     webPreferences: {
       preload: isDev 
         ? path.join(app.getAppPath(), './public/preload.js') 
@@ -148,42 +148,31 @@ ipcMain.handle("get-ticket-by-phone", (event, args) => {
   });
 });
 
+ipcMain.handle("get-recent-tickets", (event) => {
+  const sql = "SELECT * FROM tickets ORDER BY id DESC LIMIT 15";
+  return new Promise((resolve, reject) => {
+    ticketsDb.all(sql, [], (err, rows) => {
+      if (err) {
+        reject(err.message);
+      } else {
+        const tickets = rows.map(row => ({
+          ticketNo: row.ticketNo,
+          date: row.date,
+          day: row.day,
+          items: JSON.parse(row.items),
+          totalPieces: row.totalPieces,
+          ownerName: row.ownerName,
+          ownerMob: row.ownerMob,
+          hasPaid: row.hasPaid,
+          totalPrice: row.totalPrice
+        }));
+        resolve(tickets);
+      }
+    });
+  });
+});
+
 // Users
-
-// ipcMain.handle("insert-user", (event, args) => {
-
-//   window.api.getUserByPhone(args.ownerMob, (err, existingUser) => {
-//     if (err) {
-//       return err
-//     }
-
-//     if (existingUser) {
-//       const updatedTickets = JSON.parse(existingUser.tickets || '[]').concat(args.tickets);
-//       window.api.updateUserTickets(args.ownerMob, updatedTickets), (updateErr) => {
-//         if (updateErr) {
-//           return updateErr
-//         }
-//         return "Successfully updated user tickets"
-//       }
-//     } else {
-//       if (!args.ownerName || !ownerMob) {
-
-//         const sql = "INSERT INTO users (ownerName, ownerMob, tickets) VALUES (?, ?, ?)";
-//         return new Promise((resolve, reject) => {
-//           usersDb.run(sql, [args.ownerName, args.ownerMob, JSON.stringify(args.tickets)], function(err) {
-//             if (err) {
-//               reject(err.message);
-//             } else {
-//               resolve(`User with ID ${this.lastID} inserted successfully.`);
-//             }
-//           });
-//         });
-//       }
-//     }
-//   })
-
-// });
-
 
 ipcMain.handle("insert-user", async (event, args) => {
   const checkUserSQL = "SELECT * FROM users WHERE ownerMob = ?";
@@ -202,7 +191,6 @@ ipcMain.handle("insert-user", async (event, args) => {
     });
 
     if (existingUser) {
-      console.log("Existing")
       const updatedTickets = JSON.parse(existingUser.tickets || '[]').concat(args.tickets);
       return new Promise((resolve, reject) => {
         usersDb.run(updateUserTicketsSQL, [JSON.stringify(updatedTickets), args.ownerMob], function (err) {

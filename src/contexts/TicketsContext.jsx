@@ -5,6 +5,7 @@ const TicketsContext  = createContext();
 export const TicketsProvider = ({ children }) => {
 
   const [tickets, setTickets] = useState([])
+  const [recentTickets, setRecentTickets] = useState([])
   const [customerTickets, setCustomerTickers] = useState([])
 
   const [lastTicketNumber, setLastTicketNumber] = useState(0);
@@ -68,6 +69,15 @@ export const TicketsProvider = ({ children }) => {
     }
   };
 
+  const getRecentTickets = async () => {
+    try {
+      const response = await window.api.getRecentTickets();
+      setRecentTickets(response)
+    } catch (error) {
+      console.error('Error fetching tickets:', error);
+    }
+  };
+
   const getTicketForCustomer = async (phoneNumber) => {
     try {
       const response = await window.api.getTicketByPhone(phoneNumber)
@@ -83,7 +93,7 @@ export const TicketsProvider = ({ children }) => {
   }, []);
 
   return (
-    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers }}>
+    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers, getRecentTickets, recentTickets }}>
       {children}
     </TicketsContext.Provider>
   );
