@@ -6,7 +6,7 @@ import { ReceiptPreview, TicketsTable } from '../../components';
 
 export default function Tickets() {
 
-  const { tickets, getTickets } = useTickets()
+  const { tickets, getTickets, newTickets } = useTickets()
   const { setQuery, result } = useSearch(tickets, "ticket");
 
   const [preview, setPreview] = useState(false)
@@ -14,7 +14,7 @@ export default function Tickets() {
 
   useEffect(() => {
     getTickets()
-  }, [])
+  }, [newTickets])
 
   return (
     <>

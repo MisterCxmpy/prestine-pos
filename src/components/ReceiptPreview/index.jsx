@@ -31,7 +31,7 @@ export default function ReceiptPreview({ data, setPreview, setTicketData }) {
         }}>Print Receipt</button>
         {data.complete ? null : <button onClick={() => setNewPreview(true)} style={{gridColumn: "span 2", background: "var(--danger)"}}>Complete Ticket</button>}
       </div>
-      {newPreview ? <PaymentForm setPreview={setNewPreview} data={data} /> : null}
+      {newPreview ? <PaymentForm setPreview={setNewPreview} oldHandleClose={handleClose} data={data} /> : null}
     </div>
   )
 }

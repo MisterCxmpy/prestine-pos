@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './index.module.css'
 import { useTickets } from '../../contexts/TicketsContext';
 
-export default function PaymentForm({ setPreview, data }) {
+export default function PaymentForm({ setPreview, data, oldHandleClose }) {
 
   const { setTicketToComplete } = useTickets()
 
@@ -35,7 +35,7 @@ export default function PaymentForm({ setPreview, data }) {
     setInputValue("")
     setTotalCost(data.totalPrice)
     handleClose()
-    window.location.reload(false)
+    oldHandleClose()
   }
 
   useEffect(() => {
