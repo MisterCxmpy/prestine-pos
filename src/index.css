@@ -30,6 +30,9 @@
   --accent: #3c83be;
 
   --navy-shadow: rgba(2,12,27,0.7);
+  --success: #28a745;
+  --danger: #dc3545;
+  --info: #17a2b8;
 }
 
 a {
@@ -61,4 +64,8 @@ body, #root {
 
 tr {
   display: table-row;
+}
+
+button {
+  cursor: pointer;
 }

@@ -16,7 +16,7 @@
 
 .outer {
   width: 375px;
-  max-height: 500px;
+  max-height: 600px;
   background: white;
   border-radius: var(--border-radius);
   border: 5px solid var(--primary);
@@ -47,17 +47,14 @@
 }
 
 .form-buttons {
-  display: flex;
+  display: grid;
   width: 400px;
-  flex-direction: row;
   gap: 10px;
   padding: 0 40px;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 10px;
+  grid-template-columns: 1fr 1fr;
 
   > button {
-    flex: 1;
     padding: 10px 20px;
     background: var(--primary);
     font-size: 18px;

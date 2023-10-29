@@ -16,4 +16,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.complete {
+  background: var(--success);
+  padding: 10px;
+  border-radius: var(--border-radius);
+}
+
+.not-complete {
+  background: var(--danger);
+  padding: 10px;
+  border-radius: var(--border-radius);
 }/*# sourceMappingURL=index.module.css.map */

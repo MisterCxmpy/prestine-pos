@@ -19,6 +19,7 @@ export default function TicketsTable({ result, setPreview, setTicketData }) {
           <th>Owner</th>
           <th>Owner Mobile</th>
           <th>PAID</th>
+          <th>Complete</th>
         </tr>
       </thead>
       <tbody className={styles['table-body']}>
@@ -38,10 +39,11 @@ export default function TicketsTable({ result, setPreview, setTicketData }) {
                   ))}
                 </ul>
               </td>
-              <td><strong>{t.totalPieces}</strong></td>
+              <td>{t.totalPieces}</td>
               <td><strong>{t.ownerName}</strong></td>
               <td><strong>{t.ownerMob}</strong></td>
-              <td><strong>{t.hasPaid ? "Paid" : "Not Paid"}</strong></td>
+              <td>{t.hasPaid ? "Paid" : "Not Paid"}</td>
+              <td><strong><span className={styles[t.complete ? "complete" : "not-complete"]}>{t.complete ? "Complete" : "Not Complete"}</span></strong></td>
             </tr>
           );
         })}

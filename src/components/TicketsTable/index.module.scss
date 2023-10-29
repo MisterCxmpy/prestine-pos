@@ -26,6 +26,18 @@
   }
 }
 
+.complete {
+  background: var(--success);
+  padding: 10px;
+  border-radius: var(--border-radius);
+}
+
+.not-complete {
+  background: var(--danger);
+  padding: 10px;
+  border-radius: var(--border-radius);
+}
+
 @media (max-width: 1624px) {
   // .tickets-list {
   //   grid-template-columns: repeat(4, minmax(100px, 1fr));

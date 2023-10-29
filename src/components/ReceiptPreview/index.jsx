@@ -1,9 +1,11 @@
-import React, { forwardRef, useEffect, useRef } from 'react'
+import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import styles from './index.module.css'
 import { useReactToPrint } from 'react-to-print';
+import PaymentForm from '../PaymentForm';
 
 export default function ReceiptPreview({ data, setPreview, setTicketData }) {
   const receiptRef = useRef();
+  const [newPreview, setNewPreview] = useState()
   
   const handlePrint = useReactToPrint({
     pageStyle: "@page { size: auto;  margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; } }",
@@ -27,7 +29,9 @@ export default function ReceiptPreview({ data, setPreview, setTicketData }) {
           handlePrint()
           handleClose()
         }}>Print Receipt</button>
+        {data.complete ? null : <button onClick={() => setNewPreview(true)} style={{gridColumn: "span 2", background: "var(--danger)"}}>Complete Ticket</button>}
       </div>
+      {newPreview ? <PaymentForm setPreview={setNewPreview} data={data} /> : null}
     </div>
   )
 }

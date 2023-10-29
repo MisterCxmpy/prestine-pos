@@ -74,9 +74,9 @@ process.on('uncaughtException', (error) => {
 // Tickets
 
 ipcMain.handle("insert-ticket", (event, args) => {
-  const sql = "INSERT INTO tickets (ticketNo, date, day, items, totalPieces, ownerName, ownerMob, hasPaid, totalPrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  const sql = "INSERT INTO tickets (ticketNo, date, day, items, totalPieces, ownerName, ownerMob, hasPaid, totalPrice, complete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   return new Promise((resolve, reject) => {
-    ticketsDb.run(sql, [args.ticketNo, args.date, args.day, JSON.stringify(args.items), args.totalPieces, args.ownerName, args.ownerMob, args.hasPaid, args.totalPrice], function(err) {
+    ticketsDb.run(sql, [args.ticketNo, args.date, args.day, JSON.stringify(args.items), args.totalPieces, args.ownerName, args.ownerMob, args.hasPaid, args.totalPrice, args.complete], function(err) {
       if (err) {
         reject(err.message);
       } else {
@@ -94,6 +94,7 @@ ipcMain.handle("get-all-tickets", (event) => {
         reject(err.message);
       } else {
         const tickets = rows.map(row => ({
+          id: row.ID,
           ticketNo: row.ticketNo,
           date: row.date,
           day: row.day,
@@ -102,7 +103,8 @@ ipcMain.handle("get-all-tickets", (event) => {
           ownerName: row.ownerName,
           ownerMob: row.ownerMob,
           hasPaid: row.hasPaid,
-          totalPrice: row.totalPrice
+          totalPrice: row.totalPrice,
+          complete: row.complete
         }));
         resolve(tickets);
       }
@@ -132,6 +134,7 @@ ipcMain.handle("get-ticket-by-phone", (event, args) => {
         reject(err.message);
       } else {
         const tickets = rows.map(row => ({
+          id: row.ID,
           ticketNo: row.ticketNo,
           date: row.date,
           day: row.day,
@@ -140,7 +143,8 @@ ipcMain.handle("get-ticket-by-phone", (event, args) => {
           ownerName: row.ownerName,
           ownerMob: row.ownerMob,
           hasPaid: row.hasPaid,
-          totalPrice: row.totalPrice
+          totalPrice: row.totalPrice,
+          complete: row.complete
         }));
         resolve(tickets);
       }
@@ -156,6 +160,7 @@ ipcMain.handle("get-recent-tickets", (event) => {
         reject(err.message);
       } else {
         const tickets = rows.map(row => ({
+          id: row.ID,
           ticketNo: row.ticketNo,
           date: row.date,
           day: row.day,
@@ -164,9 +169,24 @@ ipcMain.handle("get-recent-tickets", (event) => {
           ownerName: row.ownerName,
           ownerMob: row.ownerMob,
           hasPaid: row.hasPaid,
-          totalPrice: row.totalPrice
+          totalPrice: row.totalPrice,
+          complete: row.complete
         }));
         resolve(tickets);
+      }
+    });
+  });
+});
+
+ipcMain.handle("set-ticket-to-complete", (event, args) => {
+  const sql = "UPDATE tickets SET complete = ? WHERE id = ?";
+  
+  return new Promise((resolve, reject) => {
+    ticketsDb.run(sql, [true, args], function(err) {
+      if (err) {
+        reject(err.message);
+      } else {
+        resolve(`Ticket with ID ${args} marked as complete.`);
       }
     });
   });

@@ -88,12 +88,22 @@ export const TicketsProvider = ({ children }) => {
     }
   };
 
+  const setTicketToComplete = async (id) => {
+    try {
+      const response = await window.api.setTicketToComplete(id)
+      await window.api.getAllTickets()
+      console.log(response)
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
   useEffect(() => {
     getTickets();
   }, []);
 
   return (
-    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers, getRecentTickets, recentTickets }}>
+    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers, getRecentTickets, recentTickets, setTicketToComplete }}>
       {children}
     </TicketsContext.Provider>
   );

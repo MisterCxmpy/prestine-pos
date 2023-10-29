@@ -1,0 +1,154 @@
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.outer {
+  max-width: 70%;
+  max-height: 80%;
+  height: 100%;
+  background: var(--background);
+  border-radius: var(--border-radius);
+  border: 5px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow: auto;
+}
+.outer p {
+  color: var(--text);
+}
+
+.close-btn {
+  align-self: end;
+  width: 25px;
+  height: 25px;
+  font-size: 32px;
+  line-height: 25px;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.form {
+  padding: 0 25px;
+}
+
+.payment-form {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.top {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+}
+.top > .change-amount, .top > input {
+  background: var(--secondary);
+  border-radius: var(--border-radius);
+}
+.top > input {
+  font-size: 24px;
+  padding: 0 10px;
+  border: none;
+  color: var(--text);
+}
+.top > input::-moz-placeholder {
+  font-size: 18px;
+  font-style: italic;
+}
+.top > input::placeholder {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.change-amount {
+  padding: 10px;
+}
+
+.payment-amount {
+  width: 100%;
+  background: var(--secondary);
+  padding: 30px 20px;
+  font-size: 2.2rem;
+  border-radius: var(--border-radius);
+}
+
+.quick-payments {
+  width: -moz-max-content;
+  width: max-content;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+.quick-payment-option {
+  background: var(--secondary);
+  height: 100%;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.quick-payment {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.quick-payment > p {
+  text-align: center;
+  width: 100%;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.keys {
+  margin-top: 10px;
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+}
+.keys > li {
+  width: 100%;
+}
+.keys > li > button {
+  width: 100%;
+  height: 100px;
+  font-size: 20px;
+  color: var(--text);
+  background: var(--primary);
+  border: none;
+  border-radius: var(--border-radius);
+}
+
+.bottom {
+  margin-top: 25px;
+}
+.bottom > button {
+  padding: 10px 20px;
+  font-size: 20px;
+  float: right;
+  background: var(--primary);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--text);
+}/*# sourceMappingURL=index.module.css.map */

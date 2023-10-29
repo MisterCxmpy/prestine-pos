@@ -43,7 +43,7 @@ export default function FinalReceipt() {
       <div className={styles['form-buttons']}>
         <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
         <button onClick={async () => {
-          handlePrint()
+          // handlePrint()
           openCloseReceipt(false)
           await generateTicketNumber()
 
@@ -55,7 +55,8 @@ export default function FinalReceipt() {
             totalPieces: totalPieces,
             ...customerDetails,
             hasPaid: hasPaid,
-            totalPrice: total
+            totalPrice: total,
+            complete: false
           };
 
           insertTicket(ticket)
