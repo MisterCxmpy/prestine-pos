@@ -52,14 +52,22 @@ app.setPath(
     : path.join(process.resourcesPath, 'userdata/')
 );
 
-app.whenReady().then(async () => {
-  await createWindow();
+app.whenReady().then(() => {
+  createWindow();
 
-  autoUpdater.checkForUpdates()
+  autoUpdater.checkForUpdates();
 
-  autoUpdater.on("update-available", (info) => {
-    autoUpdater.downloadUpdate()
-  })
+  autoUpdater.on('update-available', (info) => {
+    mainWindow.webContents.send('update-available', info);
+  });
+
+  autoUpdater.on('download-progress', (progressObj) => {
+    mainWindow.webContents.send('download-progress', progressObj);
+  });
+
+  autoUpdater.on('update-downloaded', (info) => {
+    mainWindow.webContents.send('update-downloaded', info);
+  });
 });
 
 app.on('window-all-closed', () => {
