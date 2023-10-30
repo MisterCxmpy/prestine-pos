@@ -63,7 +63,7 @@ const Receipt = forwardRef(({ data }, ref) => {
           ))}
           <li className={styles['ticket-item']}>
             <div className={styles['ticket-item-name']}>  
-              <p>{data.hasPaid ? "PAID" : "CASH"}</p>
+              <p>{data.hasPaid ? "PAID" : "TO PAY"}</p>
               <p>{data.totalPrice.toFixed(2)}</p>
             </div>
           </li>

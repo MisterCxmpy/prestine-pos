@@ -120,7 +120,7 @@ const MainReceipt = ({ checkout, total, totalPieces, owner, hasPaid, day, curren
           ))}
           <li className={styles['ticket-item']}>
             <div className={styles['ticket-item-name']}>  
-              <p>{hasPaid ? "paid" : "cash"}</p>
+              <p>{hasPaid ? "PAID" : "TO PAY"}</p>
               <p>{total.toFixed(2)}</p>
             </div>
           </li>
