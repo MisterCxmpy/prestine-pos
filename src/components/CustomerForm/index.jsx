@@ -38,6 +38,8 @@ export default function CustomerForm({ item }) {
     const handleKeyPressEvent = (event) => {
       if (event.key === 'Escape') {
         closeCheck();
+      } else if (event.key === "Enter") {
+        handleSubmit()
       }
     };
     window.addEventListener('keydown', handleKeyPressEvent);
