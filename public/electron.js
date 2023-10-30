@@ -240,18 +240,19 @@ ipcMain.handle("insert-user", async (event, args) => {
         });
       });
     } else {
-      if (!ownerName || !ownerMob) {
+      if (!args.ownerName || !args.ownerMob) {
         return "Missing credientials"
-      }
-      return new Promise((resolve, reject) => {
-        usersDb.run(insertUserSQL, [args.ownerName, args.ownerMob, JSON.stringify(args.tickets)], function(err) {
-          if (err) {
-            reject(err.message);
-          } else {
-            resolve(`User with ID ${this.lastID} inserted successfully.`);
-          }
+      } else {
+        return new Promise((resolve, reject) => {
+          usersDb.run(insertUserSQL, [args.ownerName, args.ownerMob, JSON.stringify(args.tickets)], function(err) {
+            if (err) {
+              reject(err.message);
+            } else {
+              resolve(`User with ID ${this.lastID} inserted successfully.`);
+            }
+          });
         });
-      });
+      }
     }
   } catch (error) {
     return error.message;
