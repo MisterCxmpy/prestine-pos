@@ -56,6 +56,10 @@ app.whenReady().then(async () => {
   await createWindow();
 
   autoUpdater.checkForUpdates()
+
+  autoUpdater.on("update-available", (info) => {
+    autoUpdater.downloadUpdate()
+  })
 });
 
 app.on('window-all-closed', () => {
