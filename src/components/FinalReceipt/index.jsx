@@ -38,38 +38,14 @@ export default function FinalReceipt() {
     const handleKeyPressEvent = (event) => {
       if (event.key === 'Escape') {
         openCloseReceipt(false);
-      } else if (event.key === 'Enter') {
-        finishTicket();
       }
     };
-  
     window.addEventListener('keydown', handleKeyPressEvent);
-  
+
     return () => {
       window.removeEventListener('keydown', handleKeyPressEvent);
     };
-  }, []);  
-
-  const finishTicket = async () => {
-    handlePrint()
-    openCloseReceipt(false)
-    await generateTicketNumber()
-
-    const ticket = {
-      ticketNo: ticketNumber.toString().padStart(4, '0'),
-      date: currentDateTime,
-      day: day,
-      items: checkout,
-      totalPieces: totalPieces,
-      ...customerDetails,
-      hasPaid: hasPaid,
-      totalPrice: total,
-      complete: false
-    };
-
-    insertTicket(ticket)
-    insertUser({...customerDetails, tickets: [ticket]})
-  }
+  }, []);
 
   return (
     <div className={styles['overlay']}>
@@ -79,7 +55,25 @@ export default function FinalReceipt() {
       </div>
       <div className={styles['form-buttons']}>
         <button onClick={() => openCloseReceipt(false)} type='button'>Cancel</button>
-        <button onClick={() => finishTicket()}>Print Receipt</button>
+        <button onClick={async () => {
+          openCloseReceipt(false)
+          await generateTicketNumber()
+
+          const ticket = {
+            ticketNo: ticketNumber.toString().padStart(4, '0'),
+            date: currentDateTime,
+            day: day,
+            items: checkout,
+            totalPieces: totalPieces,
+            ...customerDetails,
+            hasPaid: hasPaid,
+            totalPrice: total,
+            complete: false
+          };
+
+          insertTicket(ticket)
+          insertUser({...customerDetails, tickets: [ticket]})
+        }}>Print Receipt</button>
       </div>
     </div>
   );
