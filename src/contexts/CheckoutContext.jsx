@@ -21,6 +21,7 @@ export const CheckoutProvider = ({ children }) => {
     setCheckout([])
     setCustomerDetails([])
     setDay("mon")
+    setHasPaid(false)
   }
 
   const addToCheckout = (item) => {

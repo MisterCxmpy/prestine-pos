@@ -54,11 +54,11 @@ export default function PaymentForm({ setPreview, data, oldHandleClose }) {
           </div>
           <div className={styles['payment-form']}>
             <ul className={styles['quick-payments']}>
-              {["£50.00", "£20.00", "£10.00", "£5.00"].map((p, i) => {
+              {["50.00", "20.00", "10.00", "5.00"].map((p, i) => {
                 return (
                   <li key={i} className={styles['quick-payment-option']}>
-                    <div className={styles['quick-payment']}>
-                      <p>{p}</p>
+                    <div onClick={() => handleKeyPress(parseFloat(p))} className={styles['quick-payment']}>
+                      <p>£{p}</p>
                     </div>
                   </li>
                 )

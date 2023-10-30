@@ -5,7 +5,6 @@ const TicketsContext  = createContext();
 export const TicketsProvider = ({ children }) => {
 
   const [tickets, setTickets] = useState([])
-  const [newTickets, setNewTickets] = useState([])
   const [recentTickets, setRecentTickets] = useState([])
   const [customerTickets, setCustomerTickers] = useState([])
 
@@ -28,6 +27,15 @@ export const TicketsProvider = ({ children }) => {
     getTicketNumber();
   }, []);
   
+
+  const updateTicketsData = async () => {
+    try {
+      const response = await window.api.getAllTickets();
+      setTickets(response);
+    } catch (error) {
+      console.error('Error updating tickets data:', error);
+    }
+  };
 
   const generateTicketNumber = async () => {
     let newTicketNumber = lastTicketNumber + 1;
@@ -56,6 +64,7 @@ export const TicketsProvider = ({ children }) => {
     try {
       const response = window.api.insertTicket(ticketData)
       console.log(response)
+      updateTicketsData()
     } catch (error) {
       console.error(error)
     }
@@ -92,8 +101,8 @@ export const TicketsProvider = ({ children }) => {
   const setTicketToComplete = async (id) => {
     try {
       const response = await window.api.setTicketToComplete(id)
-      setNewTickets(getTickets())
       console.log(response)
+      updateTicketsData()
     } catch (error) {
       console.error(error)
     }
@@ -104,7 +113,7 @@ export const TicketsProvider = ({ children }) => {
   }, []);
 
   return (
-    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers, getRecentTickets, recentTickets, setTicketToComplete, newTickets }}>
+    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers, getRecentTickets, recentTickets, setTicketToComplete }}>
       {children}
     </TicketsContext.Provider>
   );

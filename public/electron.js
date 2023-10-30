@@ -228,6 +228,9 @@ ipcMain.handle("insert-user", async (event, args) => {
         });
       });
     } else {
+      if (!ownerName || !ownerMob) {
+        return "Missing credientials"
+      }
       return new Promise((resolve, reject) => {
         usersDb.run(insertUserSQL, [args.ownerName, args.ownerMob, JSON.stringify(args.tickets)], function(err) {
           if (err) {
