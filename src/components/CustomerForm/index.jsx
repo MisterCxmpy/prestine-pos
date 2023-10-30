@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styles from './index.module.css'
 import { useCheckout } from '../../contexts/CheckoutContext';
+import { useEffect } from 'react';
 
 export default function CustomerForm({ item }) {
 
@@ -32,6 +33,19 @@ export default function CustomerForm({ item }) {
     openCloseCustomerForm(false)
     openCloseReceipt(true)
   }
+
+  useEffect(() => {
+    const handleKeyPressEvent = (event) => {
+      if (event.key === 'Escape') {
+        closeCheck();
+      }
+    };
+    window.addEventListener('keydown', handleKeyPressEvent);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPressEvent);
+    };
+  }, []);
   
   return (
     <div className={styles['overlay']}>

@@ -12,6 +12,10 @@ export default function PaidForm({ setPreview, price}) {
 
   const handleClose = () => {
     setPreview(false);
+    setChangeAmount(0)
+    setInputValue("")
+    setTotalCost(price)
+    handleClose()
   };
 
   const handleKeyPress = (key) => {
@@ -42,6 +46,19 @@ export default function PaidForm({ setPreview, price}) {
     const newChangeAmount = totalCost - entered;
     setChangeAmount(newChangeAmount < 0 ? newChangeAmount : 0);
   }, [inputValue, totalCost]);
+
+  useEffect(() => {
+    const handleKeyPressEvent = (event) => {
+      if (event.key === 'Escape') {
+        handleClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyPressEvent);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPressEvent);
+    };
+  }, []);
 
   return (
     <div className={styles['overlay']}>

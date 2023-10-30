@@ -179,10 +179,10 @@ ipcMain.handle("get-recent-tickets", (event) => {
 });
 
 ipcMain.handle("set-ticket-to-complete", (event, args) => {
-  const sql = "UPDATE tickets SET complete = ? WHERE id = ?";
-  
+  const sql = "UPDATE tickets SET complete = ?, hasPaid = ? WHERE id = ?";
+
   return new Promise((resolve, reject) => {
-    ticketsDb.run(sql, [true, args], function(err) {
+    ticketsDb.run(sql, [true, true, args], function(err) {
       if (err) {
         reject(err.message);
       } else {

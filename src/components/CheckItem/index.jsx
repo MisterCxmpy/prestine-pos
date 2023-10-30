@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
 import { useCheckout } from '../../contexts/CheckoutContext';
+import { useEffect } from 'react';
 
 export default function CheckItem({ item }) {
   const [price, setPrice] = useState(item.price);
@@ -34,6 +35,19 @@ export default function CheckItem({ item }) {
     addToCheckout({...updatedItem, price: parseFloat(price), quantity: parseInt(quantity)});
     closeCheck()
   };
+
+  useEffect(() => {
+    const handleKeyPressEvent = (event) => {
+      if (event.key === 'Escape') {
+        closeCheck();
+      }
+    };
+    window.addEventListener('keydown', handleKeyPressEvent);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPressEvent);
+    };
+  }, []);
 
   return (
     <div className={styles['overlay']}>

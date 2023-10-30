@@ -34,6 +34,19 @@ export default function FinalReceipt() {
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    const handleKeyPressEvent = (event) => {
+      if (event.key === 'Escape') {
+        openCloseReceipt(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyPressEvent);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPressEvent);
+    };
+  }, []);
+
   return (
     <div className={styles['overlay']}>
       <div className={styles['outer']}>

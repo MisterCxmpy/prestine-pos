@@ -2,8 +2,12 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import styles from './index.module.css'
 import { useReactToPrint } from 'react-to-print';
 import PaymentForm from '../PaymentForm';
+import { useTickets } from '../../contexts/TicketsContext';
 
 export default function ReceiptPreview({ data, setPreview, setTicketData }) {
+
+  const { setTicketToComplete } = useTickets()
+
   const receiptRef = useRef();
   const [newPreview, setNewPreview] = useState()
   
@@ -15,6 +19,30 @@ export default function ReceiptPreview({ data, setPreview, setTicketData }) {
   const handleClose = () => {
     setPreview(false)
     setTicketData([])
+  }
+
+  useEffect(() => {
+    const handleKeyPressEvent = (event) => {
+      if (event.key === 'Escape') {
+        handleClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyPressEvent);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPressEvent);
+    };
+  }, []);
+
+  let content = null;
+
+  if (newPreview) {
+    if (data.hasPaid) {
+      setTicketToComplete(data.id);
+      handleClose()
+    } else {
+      content = <PaymentForm setPreview={setNewPreview} oldHandleClose={handleClose} data={data} />;
+    }
   }
 
   return (
@@ -31,7 +59,7 @@ export default function ReceiptPreview({ data, setPreview, setTicketData }) {
         }}>Print Receipt</button>
         {data.complete ? null : <button onClick={() => setNewPreview(true)} style={{gridColumn: "span 2", background: "var(--danger)"}}>Complete Ticket</button>}
       </div>
-      {newPreview ? <PaymentForm setPreview={setNewPreview} oldHandleClose={handleClose} data={data} /> : null}
+      {newPreview ? content : null}
     </div>
   )
 }
