@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const sqlite3 = require("sqlite3").verbose();
 const isDev = require('electron-is-dev'); 
 const path = require('path');
+const { autoUpdater, AppUpdater } = require("electron-updater")
 
 const usersDbPath = isDev ? path.join(__dirname, "../db/users.db") : path.join(process.resourcesPath, "/db/users.db");
 const usersDb = new sqlite3.Database(usersDbPath, sqlite3.OPEN_READWRITE);
@@ -10,6 +11,9 @@ const ticketsDbPath = isDev ? path.join(__dirname, "../db/tickets.db") : path.jo
 const ticketsDb = new sqlite3.Database(ticketsDbPath, sqlite3.OPEN_READWRITE);
 
 let mainWindow;
+
+autoUpdater.autoDownload = true
+autoUpdater.autoInstallOnAppQuit = true
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
@@ -50,6 +54,8 @@ app.setPath(
 
 app.whenReady().then(async () => {
   await createWindow();
+
+  autoUpdater.checkForUpdates()
 });
 
 app.on('window-all-closed', () => {

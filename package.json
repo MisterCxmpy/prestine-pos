@@ -5,6 +5,11 @@
   "author": "Cosgun Hussein",
   "description": "Prestine POS",
   "main": "public/electron.js",
+  "repository": "https://github.com/MisterCxmpy/smartenup-pos",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
   "homepage": "./",
   "scripts": {
     "start-dev": "vite",
@@ -58,6 +63,7 @@
   },
   "dependencies": {
     "electron-is-dev": "^2.0.0",
+    "electron-updater": "^6.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
