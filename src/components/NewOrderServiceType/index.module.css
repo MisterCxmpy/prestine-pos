@@ -35,6 +35,10 @@
   background: #134e72;
 }
 
+.repairs {
+  background: #795ead;
+}
+
 .active {
   background: var(--secondary);
 }

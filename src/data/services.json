@@ -4,126 +4,126 @@
       {
         "id": 0,
         "name": "Jumper",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 1,
         "name": "Top",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 2,
         "name": "Blouse",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 3,
         "name": "Jacket",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 4,
         "name": "Coat",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 5,
         "name": "Rain Coat",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 6,
         "name": "Cardigan",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 7,
         "name": "3 PCS Suit",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 8,
         "name": "Shirts",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 9,
         "name": "Wed Dress",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 10,
         "name": "2 PCS Suit",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 11,
         "name": "PLTD Skirts",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 12,
         "name": "Scarve",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 13,
         "name": "Skirts",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 14,
         "name": "Ties",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 15,
         "name": "Trousers",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 16,
         "name": "Dress",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       },
       {
         "id": 17,
         "name": "PLTD Dress",
-        "price": 7.00,
+        "price": "",
         "additional": "Cleaning",
         "tag": "cleaning"
       }
@@ -132,35 +132,35 @@
       {
         "id": 18,
         "name": "Suits P/O",
-        "price": 7.00,
+        "price": "",
         "additional": "Press Only",
         "tag": "press only"
       },
       {
         "id": 19,
         "name": "Jacket P/O",
-        "price": 7.00,
+        "price": "",
         "additional": "Press Only",
         "tag": "press only"
       },
       {
         "id": 20,
         "name": "Skirts P/O",
-        "price": 7.00,
+        "price": "",
         "additional": "Press Only",
         "tag": "press only"
       },
       {
         "id": 21,
         "name": "Shirts P/O",
-        "price": 7.00,
+        "price": "",
         "additional": "Press Only",
         "tag": "press only"
       },
       {
         "id": 22,
         "name": "Trousers P/O",
-        "price": 7.00,
+        "price": "",
         "additional": "Press Only",
         "tag": "press only"
       }
@@ -169,112 +169,112 @@
       {
         "id": 23,
         "name": "Bed Cover",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 24,
         "name": "Sofa Cover",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 25,
         "name": "Pillow",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 26,
         "name": "Cushion Cover",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 27,
         "name": "K/S Blanket",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 28,
         "name": "Table Cloth",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 29,
         "name": "Double Blanket",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 30,
         "name": "Rug",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 31,
         "name": "Single Blanket",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 32,
         "name": "Sleeping Bag",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 33,
         "name": "K/S Duvet",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 34,
         "name": "K/S Sheet",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 35,
         "name": "Double Duvet",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 36,
         "name": "Double Sheet",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 37,
         "name": "Single Duvet",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       },
       {
         "id": 38,
         "name": "Single Sheet",
-        "price": 7.00,
+        "price": "",
         "additional": "Household",
         "tag": "household"
       }
@@ -283,100 +283,228 @@
       {
         "id": 39,
         "name": "Curtain /Metre",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 40,
         "name": "Coat Zip",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 41,
         "name": "Coat Shorten",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 42,
         "name": "Jacket Zip",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 43,
         "name": "Jacket Shorten",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 44,
         "name": "Skirt Zip",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 45,
         "name": "Coat Sleeve",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 46,
         "name": "Trousers Zip",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 47,
         "name": "Jacket Sleeve",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 48,
         "name": "Skirt Repair",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 49,
         "name": "Skirt Shorten",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 50,
         "name": "Jacket Repair",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 51,
         "name": "Trousers Shorten",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
       },
       {
         "id": 52,
         "name": "Coat Repair",
-        "price": 7.00,
+        "price": "",
         "additional": "Alterations",
         "tag": "alterations"
+      }
+    ],
+    "repairs": [
+      {
+        "id": 53,
+        "name": "Jumper RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 54,
+        "name": "Top RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 55,
+        "name": "Blouse RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 56,
+        "name": "Jacket RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 57,
+        "name": "Coat RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 58,
+        "name": "Rain Coat RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 59,
+        "name": "Cardigan RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 60,
+        "name": "3 PCS Suit RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 61,
+        "name": "Shirts RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 62,
+        "name": "Wed Dress RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 63,
+        "name": "2 PCS Suit RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 64,
+        "name": "PLTD Skirts RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 65,
+        "name": "Scarve RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 66,
+        "name": "Skirts RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 67,
+        "name": "Ties RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 68,
+        "name": "Trousers RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 69,
+        "name": "Dress RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
+      },
+      {
+        "id": 70,
+        "name": "PLTD Dress RPR",
+        "price": "",
+        "additional": "Repairs",
+        "tag": "repairs"
       }
     ]
   }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './index.module.css'
 import { CheckItem, CheckoutMenu, CustomerForm, FinalReceipt, NewOrderServiceItem, NewOrderServiceType } from '../../components'
 import { useCheckout } from '../../contexts/CheckoutContext'
@@ -11,11 +11,15 @@ export default function NewOrder() {
 
   const [activeService, setActiveService] = useState(null);
 
-  const serviceTypes = ["cleaning", "press-only", "household", "alterations"]
+  const serviceTypes = ["cleaning", "press-only", "household", "alterations", "repairs"]
 
   const handleServiceTypeClick = (serviceId) => {
     setActiveService(serviceId);
   };
+
+  useEffect(() => {
+    setActiveService(null)
+  }, [])
 
   return (
     <section className={styles['new-order']}>

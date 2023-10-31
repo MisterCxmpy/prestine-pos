@@ -51,6 +51,10 @@
   color: var(--text);
   border: none;
 }
+.form-input > input[type=checkbox] {
+  width: 48px;
+  margin-left: auto;
+}
 .form-input > label {
   font-size: 17px;
   padding-bottom: 10px;

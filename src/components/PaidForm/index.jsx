@@ -66,7 +66,7 @@ export default function PaidForm({ setPreview, price}) {
         <button onClick={() => handleClose()} className={styles['close-btn']}>&times;</button>
         <div className={styles['form']}>
           <div className={styles['payment-amount']}>
-            <p>Balance due: £{totalCost.toFixed(2)}</p>
+            <p>Payment due: £{totalCost.toFixed(2)}</p>
           </div>
           <div className={styles['payment-form']}>
             <ul className={styles['quick-payments']}>
@@ -83,7 +83,7 @@ export default function PaidForm({ setPreview, price}) {
             <div className={styles['calculator']}>
               <div className={styles['top']}>
                 <div className={styles['change-amount']}>
-                  <p>£{changeAmount}</p>
+                  <p>£{(Math.abs(changeAmount)).toFixed(2)}</p>
                 </div>
                 <input
                   type="text"

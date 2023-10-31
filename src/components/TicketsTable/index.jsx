@@ -43,7 +43,7 @@ export default function TicketsTable({ result, setPreview, setTicketData }) {
               <td><strong>{t.ownerName}</strong></td>
               <td><strong>{t.ownerMob}</strong></td>
               <td>{t.hasPaid ? "Paid" : "Not Paid"}</td>
-              <td><strong><span className={styles[t.complete ? "complete" : "not-complete"]}>{t.complete ? "Complete" : "Not Complete"}</span></strong></td>
+              <td><strong><span className={styles[t.complete ? "complete" : "not-complete"]}>{t.complete ? "Collected" : "Not Collected"}</span></strong></td>
             </tr>
           );
         })}

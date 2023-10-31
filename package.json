@@ -5,7 +5,7 @@
   "author": "Cosgun Hussein",
   "description": "Prestine POS",
   "main": "public/electron.js",
-  "repository": "https://github.com/MisterCxmpy/smartenup-pos",
+  "repository": "https://github.com/MisterCxmpy/prestine-pos",
   "publish": {
     "provider": "github",
     "releaseType": "release"
