@@ -7,7 +7,7 @@ import { useService } from '../../contexts/ServiceContext'
 export default function NewOrder() {
 
   const { checkItemActive, checkReceiptActive, customerFormActive, checkItem, checkout } = useCheckout()
-  const { allServices, service } = useService()
+  const { allServices, service, setService } = useService()
 
   const [activeService, setActiveService] = useState(null);
 
@@ -19,6 +19,7 @@ export default function NewOrder() {
 
   useEffect(() => {
     setActiveService(null)
+    setService([])
   }, [])
 
   return (
