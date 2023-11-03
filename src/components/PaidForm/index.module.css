@@ -57,7 +57,7 @@
 .top {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2.05fr;
   gap: 10px;
 }
 .top > .change-amount, .top > input {
@@ -66,7 +66,7 @@
 }
 .top > input {
   font-size: 24px;
-  padding: 0 10px;
+  padding: 15px 10px;
   border: none;
   color: var(--text);
 }
@@ -81,6 +81,10 @@
 
 .change-amount {
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 24px;
 }
 
 .payment-amount {
