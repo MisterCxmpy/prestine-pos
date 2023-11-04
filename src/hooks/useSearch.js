@@ -6,9 +6,6 @@ function useSearch(searches, type) {
   const [searching, setSearching] = useState(false);
 
   useEffect(() => {
-
-    console.log(result)
-
     if (query === "") {
       setResult(searches);
     } else {
@@ -16,15 +13,15 @@ function useSearch(searches, type) {
         setResult(
           type == "customer" ? 
           searches.filter((search) => {
-            const mobile = search.ownerMob.toLowerCase();
-            const name = search.ownerName.toLowerCase();
+            const mobile = search.ownerMob?.toLowerCase();
+            const name = search.ownerName?.toLowerCase();
             const queryLower = query.toLowerCase();
             return mobile.includes(queryLower) || name.includes(queryLower);
           })
           : 
           searches.filter((search) => {
-            const ticket = search.ticketNo.toLowerCase();
-            const mobile = search.ownerMob.toLowerCase();
+            const ticket = search.ticketNo?.toLowerCase();
+            const mobile = search.ownerMob?.toLowerCase();
             const name = search.ownerName.toLowerCase();
             const queryLower = query.toLowerCase();
             return mobile.includes(queryLower) || name.includes(queryLower) || ticket.includes(queryLower);

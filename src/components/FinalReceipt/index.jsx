@@ -8,7 +8,7 @@ import { useUsers } from '../../contexts/UsersContext';
 export default function FinalReceipt() {
   const [totalPieces, setTotalPieces] = useState(0);
   const { openCloseReceipt, checkout, total, hasPaid, day, customerDetails } = useCheckout();
-  const { insertTicket, generateTicketNumber, ticketNumber } = useTickets()
+  const { insertTicket, generateTicketNumber, ticketNumber} = useTickets()
   const { insertUser } = useUsers()
   const receiptRef = useRef([]);
 
@@ -27,9 +27,16 @@ export default function FinalReceipt() {
     openCloseReceipt(false)
     await generateTicketNumber()
 
+    const date = new Date().toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }).replace(/\//g, '-')
+
     const ticket = {
       ticketNo: ticketNumber.toString().padStart(4, '0'),
       date: currentDateTime,
+      dateOnly: date,
       day: day,
       items: checkout,
       totalPieces: totalPieces,

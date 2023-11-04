@@ -7,6 +7,7 @@ contextBridge.exposeInMainWorld('api', {
   getTicketByPhone: (args) => ipcRenderer.invoke('get-ticket-by-phone', args),
   getRecentTickets: (args) => ipcRenderer.invoke("get-recent-tickets", args),
   setTicketToComplete: (args) => ipcRenderer.invoke("set-ticket-to-complete", args),
+  getTodaysData: (args) => ipcRenderer.invoke("get-todays-data", args),
 
   insertUser: (args) => ipcRenderer.invoke('insert-user', args),
   getUserByPhone: (args) => ipcRenderer.invoke('get-user-by-phone', args),

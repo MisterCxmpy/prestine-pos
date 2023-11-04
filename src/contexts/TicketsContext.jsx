@@ -5,10 +5,12 @@ const TicketsContext  = createContext();
 export const TicketsProvider = ({ children }) => {
 
   const [tickets, setTickets] = useState([])
+  const [todaysData, setTodaysData] = useState([])
   const [recentTickets, setRecentTickets] = useState([])
   const [customerTickets, setCustomerTickers] = useState([])
 
   const [lastTicketNumber, setLastTicketNumber] = useState(0);
+  const [totalPrices, setTotalPrices] = useState(0);
 
   const [ticketNumber, setTicketNumber] = useState(lastTicketNumber)
 
@@ -63,7 +65,6 @@ export const TicketsProvider = ({ children }) => {
   const insertTicket = (ticketData) => {
     try {
       const response = window.api.insertTicket(ticketData)
-      console.log(response)
       updateTicketsData()
     } catch (error) {
       console.error(error)
@@ -74,6 +75,18 @@ export const TicketsProvider = ({ children }) => {
     try {
       const response = await window.api.getAllTickets();
       setTickets(response)
+    } catch (error) {
+      console.error('Error fetching tickets:', error);
+    }
+  };
+
+  const getTodaysData = async () => {
+    try {
+      const response = await window.api.getTodaysData();
+
+      console.log(response)
+      setTodaysData(response)
+      setTotalPrices((Math.abs(response.totalPrices)).toFixed(2))
     } catch (error) {
       console.error('Error fetching tickets:', error);
     }
@@ -91,7 +104,6 @@ export const TicketsProvider = ({ children }) => {
   const getTicketForCustomer = async (phoneNumber) => {
     try {
       const response = await window.api.getTicketByPhone(phoneNumber)
-      console.log(response)
       setCustomerTickers(response)
     } catch (error) {
       console.error(error)
@@ -101,7 +113,6 @@ export const TicketsProvider = ({ children }) => {
   const setTicketToComplete = async (id) => {
     try {
       const response = await window.api.setTicketToComplete(id)
-      console.log(response)
       updateTicketsData()
     } catch (error) {
       console.error(error)
@@ -113,7 +124,7 @@ export const TicketsProvider = ({ children }) => {
   }, []);
 
   return (
-    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers, getRecentTickets, recentTickets, setTicketToComplete }}>
+    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers, getRecentTickets, recentTickets, todaysData, setTicketToComplete, getTodaysData, totalPrices, setTotalPrices }}>
       {children}
     </TicketsContext.Provider>
   );

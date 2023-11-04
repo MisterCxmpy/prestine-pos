@@ -92,9 +92,9 @@ process.on('uncaughtException', (error) => {
 // Tickets
 
 ipcMain.handle("insert-ticket", (event, args) => {
-  const sql = "INSERT INTO tickets (ticketNo, date, day, items, totalPieces, ownerName, ownerMob, hasPaid, totalPrice, complete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  const sql = "INSERT INTO tickets (ticketNo, date, dateOnly, day, items, totalPieces, ownerName, ownerMob, hasPaid, totalPrice, complete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   return new Promise((resolve, reject) => {
-    ticketsDb.run(sql, [args.ticketNo, args.date, args.day, JSON.stringify(args.items), args.totalPieces, args.ownerName, args.ownerMob, args.hasPaid, args.totalPrice, args.complete], function(err) {
+    ticketsDb.run(sql, [args.ticketNo, args.date, args.dateOnly, args.day, JSON.stringify(args.items), args.totalPieces, args.ownerName, args.ownerMob, args.hasPaid, args.totalPrice, args.complete], function(err) {
       if (err) {
         reject(err.message);
       } else {
@@ -115,6 +115,7 @@ ipcMain.handle("get-all-tickets", (event) => {
           id: row.ID,
           ticketNo: row.ticketNo,
           date: row.date,
+          dateOnly: row.dateOnly,
           day: row.day,
           items: JSON.parse(row.items),
           totalPieces: row.totalPieces,
@@ -144,7 +145,6 @@ ipcMain.handle("check-ticket-number-exists", (event, args) => {
 });
 
 ipcMain.handle("get-ticket-by-phone", (event, args) => {
-  console.log(args)
   const query = 'SELECT * FROM tickets WHERE ownerMob = ?';
   return new Promise((resolve, reject) => {
     ticketsDb.all(query, [args], (err, rows) => {
@@ -209,6 +209,35 @@ ipcMain.handle("set-ticket-to-complete", (event, args) => {
     });
   });
 });
+
+ipcMain.handle("get-todays-data", (event, args) => {
+  const today = new Date().toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).replace(/\//g, '-');
+
+  const getDataSql = "SELECT * FROM tickets WHERE dateOnly = ?";
+  const getTotalPriceSql = "SELECT totalPrice FROM tickets WHERE dateOnly = ? AND complete = ?";
+  
+  return new Promise((resolve, reject) => {
+    ticketsDb.all(getDataSql, [today], (err, rows) => {
+      if (err) {
+        reject(err.message);
+      } else {
+        ticketsDb.all(getTotalPriceSql, [today, true], (err, priceRows) => {
+          if (err) {
+            reject(err.message);
+          } else {
+            const totalPrices = priceRows.reduce((sum, row) => sum + row.totalPrice, 0);
+            resolve({ tickets: rows.length, totalPrices: totalPrices });
+          }
+        });
+      }
+    });
+  });
+});
+
 
 // Users
 

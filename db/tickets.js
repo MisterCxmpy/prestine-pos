@@ -7,7 +7,7 @@ const db = new sqlite.Database(dbPath, sqlite.OPEN_READWRITE, (err) => {
 });
 
 const tickets =
-  "CREATE TABLE tickets (ID INTEGER UNIQUE PRIMARY KEY, ticketNo VARCHAR(255), date DATE, day VARCHAR(20), items JSONB[], totalPieces INTEGER, ownerName VARCHAR(255), ownerMob VARCHAR(20), hasPaid BOOLEAN, totalPrice FLOAT, complete BOOLEAN)";
+  "CREATE TABLE tickets (ID INTEGER UNIQUE PRIMARY KEY, ticketNo VARCHAR(255), date DATE, dateOnly DATE, day VARCHAR(20), items JSONB[], totalPieces INTEGER, ownerName VARCHAR(255), ownerMob VARCHAR(20), hasPaid BOOLEAN, totalPrice FLOAT, complete BOOLEAN)";
 
 db.run(tickets, [], (err) => {
   if (err) console.error("Error creating Tickets: ", err);

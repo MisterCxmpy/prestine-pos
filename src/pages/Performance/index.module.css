@@ -1,1 +1,14 @@
-/*# sourceMappingURL=index.module.css.map */
+.performance-section {
+  width: 100%;
+  display: grid;
+}
+
+.performance {
+  height: 100%;
+  padding: 10px;
+  padding-right: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-height: calc(100vh - 50px);
+}/*# sourceMappingURL=index.module.css.map */

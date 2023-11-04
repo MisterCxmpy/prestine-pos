@@ -43,7 +43,6 @@ export default function CheckItem({ item }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(price)
     addToCheckout({...updatedItem, name: isCleaningChecked ? `${item.name} + Cleaning` : item.name, price: parseFloat(price == "" ? 0 : price), quantity: parseInt(quantity)});
     closeCheck();
   };

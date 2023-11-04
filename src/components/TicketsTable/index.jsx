@@ -24,7 +24,6 @@ export default function TicketsTable({ result, setPreview, setTicketData }) {
       </thead>
       <tbody className={styles['table-body']}>
         {result?.map((t, i) => {
-          console.log(result)
           return (
             <tr key={i} onClick={() => handleRowClick(t)}>
               <td><strong>{t.ticketNo}</strong></td>
