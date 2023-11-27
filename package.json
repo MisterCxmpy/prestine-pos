@@ -22,7 +22,7 @@
     "pack-app": "npm run start-build && electron-builder --dir",
     "pack-build": "electron-builder --dir",
     "build": "npm run start-build && electron-builder",
-    "clear": "concurrently \"node db/users.js\" \"node db/tickets.js\""
+    "clear": "concurrently \"node db/users.js\" \"node db/tickets.js\" \"node db/performance.js\""
   },
   "build": {
     "appId": "com.prestine.app",

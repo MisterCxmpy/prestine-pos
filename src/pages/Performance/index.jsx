@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styles from './index.module.css'
 import { useTickets } from '../../contexts/TicketsContext'
+import { PerformanceItem } from '../../components'
 
 export default function Performance() {
 
@@ -15,16 +16,8 @@ export default function Performance() {
       <div className={styles['performance']}>
         <h1>Performance Stats</h1>
         <ul className={styles['performance-list']}>
-          <li className={styles['performance-item']}>
-            <span className={styles['item-heading']}>Taken In*</span>
-            <span className={styles['item-value']}>{todaysData.tickets}</span>
-            <span className={styles['item-desc']}>The amount of items brought into the shop today.</span>
-          </li>
-          <li className={styles['performance-item']}>
-            <span className={styles['item-heading']}>Earnings*</span>
-            <span className={styles['item-value']}>£{totalPrices}</span>
-            <span className={styles['item-desc']}>The amount of money earned today.</span>
-          </li>
+          <PerformanceItem heading={"Taken In*"} value={todaysData.tickets} desc={"The amount of items brought into the shop today."} />
+          <PerformanceItem heading={"Earnings*"} value={"$" + totalPrices} desc={"The amount of money earned today."} />
         </ul>
       </div>
     </section>
