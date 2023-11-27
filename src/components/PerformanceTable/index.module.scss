@@ -1,0 +1,15 @@
+.performance-table {
+  width: 100%;
+  max-width: 1024px;
+  padding: 10px
+}
+
+.performance-header {
+  
+  > tr > th {
+    text-align: left;
+    padding-right: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}

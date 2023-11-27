@@ -3,7 +3,7 @@ import React, { useState, useContext, createContext, useEffect } from 'react';
 const PerformanceContext  = createContext();
 
 export const PerformanceProvider = ({ children }) => {
-  const [todaysPerformance, setTodaysPerformance] = useState({});
+  const [todaysPerformance, setTodaysPerformance] = useState([]);
   const [performance, setPerformance] = useState([]);
   
   const setTodaysPerformanceData = async () => {
@@ -29,9 +29,12 @@ export const PerformanceProvider = ({ children }) => {
 
   useEffect(() => {
     insertNewPerformance()
+  }, [])
+
+  useEffect(() => {
     setTodaysPerformanceData()
     setPerformanceData()
-  }, [])
+  }, [todaysPerformance, performance])
 
   return (
     <PerformanceContext.Provider value={{ performance, todaysPerformance, updatePerformance, setTodaysPerformanceData }}>

@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react'
 import styles from './index.module.css'
-import { PerformanceItem } from '../../components'
+import { PerformanceItem, PerformanceTable } from '../../components'
 import { usePerformance } from '../../contexts/PerformanceContext'
 
 export default function Performance() {
 
-  const { performance, todaysPerformance, setTodaysPerformanceData } = usePerformance()
-
-  useEffect(() => {
-    setTodaysPerformanceData()
-  }, [])
+  const { performance, todaysPerformance } = usePerformance()
 
   return (
     <section className={styles['performance-section']}>
@@ -20,6 +16,7 @@ export default function Performance() {
           <PerformanceItem heading={"Earnings*"} value={"£" + (Math.abs(todaysPerformance[0]?.earnings)).toFixed(2)} desc={"The amount of money earned today."} />
         </ul>
       </div>
+      <PerformanceTable performanceData={performance} />
     </section>
   )
 }

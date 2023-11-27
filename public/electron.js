@@ -393,19 +393,41 @@ ipcMain.handle("update-performance", (event, args) => {
   });
 });
 
-ipcMain.handle("create-new-day", (event, args) => {
+ipcMain.handle("create-new-day", async (event, args) => {
   const currentDate = new Date().toLocaleDateString('en-GB');
+  const checkQuery = `SELECT * FROM performance WHERE date = ?`;
   const insertQuery = `INSERT INTO performance (date, takenIn, earnings) VALUES (?, 0, 0)`;
 
-  return new Promise((resolve, reject) => {
-    performanceDb.run(insertQuery, [currentDate], function (err) {
-      if (err) {
-        reject(err.message);
-      } else {
-        resolve(`New day entry for date ${currentDate} created successfully.`);
-      }
+  try {
+    const existingEntry = await new Promise((resolve, reject) => {
+      performanceDb.get(checkQuery, [currentDate], (err, row) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve(row);
+        }
+      });
     });
-  });
+
+    if (!existingEntry) {
+      await new Promise((resolve, reject) => {
+        performanceDb.run(insertQuery, [currentDate], function (err) {
+          if (err) {
+            reject(err.message);
+          } else {
+            resolve(`New day entry for date ${currentDate} created successfully.`);
+          }
+        });
+      });
+
+      return `New day entry for date ${currentDate} created successfully.`;
+    } else {
+      return `Entry for date ${currentDate} already exists.`;
+    }
+  } catch (error) {
+    return `Error creating new day entry: ${error}`;
+  }
 });
+
 
 
