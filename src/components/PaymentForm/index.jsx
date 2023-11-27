@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styles from './index.module.css'
 import { useTickets } from '../../contexts/TicketsContext';
+import { usePerformance } from '../../contexts/PerformanceContext';
+import { useCheckout } from '../../contexts/CheckoutContext';
 
 export default function PaymentForm({ setPreview, data, oldHandleClose }) {
 
   const { setTicketToComplete } = useTickets()
+  const { updatePerformance } = usePerformance()
+  const { setPaidAmount } = useCheckout()
 
   const [changeAmount, setChangeAmount] = useState(0);
   const [inputValue, setInputValue] = useState('');
@@ -30,12 +34,14 @@ export default function PaymentForm({ setPreview, data, oldHandleClose }) {
   };
 
   const handleFinish = (id) => {
+    updatePerformance(0, data.totalPrice)
     setTicketToComplete(id)
     setChangeAmount(0)
     setInputValue("")
     setTotalCost(data.totalPrice)
     handleClose()
     oldHandleClose()
+    setPaidAmount(0.0)
   }
 
   useEffect(() => {

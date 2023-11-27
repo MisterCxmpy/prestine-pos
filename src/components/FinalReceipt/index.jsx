@@ -4,11 +4,13 @@ import { useCheckout } from '../../contexts/CheckoutContext'
 import { useReactToPrint } from 'react-to-print'
 import { useTickets } from '../../contexts/TicketsContext';
 import { useUsers } from '../../contexts/UsersContext';
+import { usePerformance } from '../../contexts/PerformanceContext';
 
 export default function FinalReceipt() {
   const [totalPieces, setTotalPieces] = useState(0);
-  const { openCloseReceipt, checkout, total, hasPaid, day, customerDetails } = useCheckout();
+  const { openCloseReceipt, checkout, total, paidAmount, hasPaid, day, customerDetails } = useCheckout();
   const { insertTicket, generateTicketNumber, ticketNumber} = useTickets()
+  const { updatePerformance } = usePerformance()
   const { insertUser } = useUsers()
   const receiptRef = useRef([]);
 
@@ -47,6 +49,7 @@ export default function FinalReceipt() {
     };
     insertTicket(ticket)
     insertUser({...customerDetails, tickets: [ticket]})
+    updatePerformance(totalPieces, paidAmount)
   }
 
   const [currentDateTime, setCurrentDateTime] = useState('');

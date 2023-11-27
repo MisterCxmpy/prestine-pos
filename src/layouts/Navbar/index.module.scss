@@ -54,6 +54,7 @@
   height: 60px;
   line-height: 60px;
   min-width: 40px;
+  padding-left: 10px;
 }
 
 .hamburger {
@@ -71,8 +72,6 @@
   margin: 8px 0;
   list-style: none;
 
-  
-
   > a {
     display: flex;
     height: 100%;
@@ -86,6 +85,7 @@
     &.active {
 
       background: white;
+      border-radius: var(--border-radius);
   
       > .link,
       > svg {

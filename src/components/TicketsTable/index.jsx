@@ -24,8 +24,9 @@ export default function TicketsTable({ result, setPreview, setTicketData }) {
       </thead>
       <tbody className={styles['table-body']}>
         {result?.length > 0 ? (
-          result.map((u, i) => (
+          result.map((t, i) => (
             <tr key={i} onClick={() => handleRowClick(t)}>
+              {console.log(t)}
               <td><strong>{t.ticketNo}</strong></td>
               <td>{t.date}</td>
               <td style={{ textTransform: 'uppercase' }}>{t.day}</td>

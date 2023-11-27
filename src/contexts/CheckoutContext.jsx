@@ -7,6 +7,7 @@ export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
   const [customerDetails, setCustomerDetails] = useState({});
   const [total, setTotal] = useState(0.0);
+  const [paidAmount, setPaidAmount] = useState(0.0);
   const [hasPaid, setHasPaid] = useState(false);
 
   const [day, setDay] = useState("mon");
@@ -22,6 +23,7 @@ export const CheckoutProvider = ({ children }) => {
     setCustomerDetails([])
     setDay("mon")
     setHasPaid(false)
+    setPaidAmount(0.0)
   }
 
   const addToCheckout = (item) => {
@@ -117,6 +119,8 @@ export const CheckoutProvider = ({ children }) => {
         checkReceiptActive,
         openCloseReceipt,
         total,
+        paidAmount,
+        setPaidAmount,
         toggleHasPaid,
         hasPaid,
         openCloseCustomerForm,

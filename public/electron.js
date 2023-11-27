@@ -10,6 +10,9 @@ const usersDb = new sqlite3.Database(usersDbPath, sqlite3.OPEN_READWRITE);
 const ticketsDbPath = isDev ? path.join(__dirname, "../db/tickets.db") : path.join(process.resourcesPath, "/db/tickets.db");
 const ticketsDb = new sqlite3.Database(ticketsDbPath, sqlite3.OPEN_READWRITE);
 
+const performanceDbPath = isDev ? path.join(__dirname, "../db/performance.db") : path.join(process.resourcesPath, "/db/performance.db");
+const performanceDb = new sqlite3.Database(performanceDbPath, sqlite3.OPEN_READWRITE);
+
 let mainWindow;
 
 autoUpdater.autoDownload = true
@@ -288,8 +291,6 @@ ipcMain.handle("insert-user", async (event, args) => {
   }
 });
 
-
-
 ipcMain.handle("get-user-by-phone", (event, args) => {
   const sql = "SELECT * FROM users WHERE ownerMob = ?";
   return new Promise((resolve, reject) => {
@@ -302,7 +303,6 @@ ipcMain.handle("get-user-by-phone", (event, args) => {
     });
   });
 });
-
 
 ipcMain.handle("update-user-tickets", (event, args) => {
   const updateQuery = `UPDATE users SET tickets = ? WHERE ownerMob = ?`;
@@ -335,3 +335,77 @@ ipcMain.handle("get-all-users", (event) => {
     });
   });
 });
+
+// Performance
+
+ipcMain.handle("get-performance-today", (event, args) => {
+  const currentDate = new Date().toLocaleDateString('en-GB');
+  const selectQuery = `SELECT * FROM performance WHERE date = ?`;
+
+  return new Promise((resolve, reject) => {
+    performanceDb.all(selectQuery, [currentDate], (err, rows) => {
+      if (err) {
+        reject(err.message);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+});
+
+ipcMain.handle("get-all-performance", (event, args) => {
+  const selectQuery = `SELECT * FROM performance`;
+
+  return new Promise((resolve, reject) => {
+    performanceDb.all(selectQuery, [], (err, rows) => {
+      if (err) {
+        reject(err.message);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+});
+
+ipcMain.handle("update-performance", (event, args) => {
+  const currentDate = new Date().toLocaleDateString('en-GB');
+  const selectQuery = `SELECT * FROM performance WHERE date = ?`;
+  const updateQuery = `UPDATE performance SET takenIn = ?, earnings = ? WHERE date = ?`;
+
+  return new Promise((resolve, reject) => {
+    performanceDb.get(selectQuery, [currentDate], (selectErr, row) => {
+      if (selectErr) {
+        reject(selectErr.message);
+        return;
+      }
+
+      const updatedTakenIn = row ? row.takenIn + args.takenIn : args.takenIn;
+      const updatedEarnings = row ? row.earnings + args.earnings : args.earnings;
+
+      performanceDb.run(updateQuery, [updatedTakenIn, updatedEarnings, currentDate], (updateErr) => {
+        if (updateErr) {
+          reject(updateErr.message);
+        } else {
+          resolve(`Performance for date ${currentDate} updated successfully.`);
+        }
+      });
+    });
+  });
+});
+
+ipcMain.handle("create-new-day", (event, args) => {
+  const currentDate = new Date().toLocaleDateString('en-GB');
+  const insertQuery = `INSERT INTO performance (date, takenIn, earnings) VALUES (?, 0, 0)`;
+
+  return new Promise((resolve, reject) => {
+    performanceDb.run(insertQuery, [currentDate], function (err) {
+      if (err) {
+        reject(err.message);
+      } else {
+        resolve(`New day entry for date ${currentDate} created successfully.`);
+      }
+    });
+  });
+});
+
+
