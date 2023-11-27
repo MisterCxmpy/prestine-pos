@@ -90,12 +90,17 @@ export const CheckoutProvider = ({ children }) => {
     setHasPaid(!hasPaid);
   };
 
+  const updateTotal = (value) => {
+    setTotal(value);
+  };
+
   useEffect(() => {
     const newTotal = checkout.reduce((acc, item) => {
       return acc + item.price * item.quantity;
     }, 0);
     setTotal(newTotal);
   }, [checkout]);
+  
 
   return (
     <CheckoutContext.Provider
@@ -120,7 +125,8 @@ export const CheckoutProvider = ({ children }) => {
         setDay,
         day,
         completeCheckout,
-        customerDetails
+        customerDetails,
+        updateTotal
       }}
     >
       {children}

@@ -42,13 +42,19 @@ export default function Customers() {
   } else {
     return (
       <tbody className={styles['table-body']}>
-        {result?.map((u, i) => (
-          <tr key={i} onClick={() => handleRowClick(u)}>
-            <td className={styles['userID']}>{u.userID}</td>
-            <td className={styles['ownerName']}><b>{u.ownerName}</b></td>
-            <td className={styles['ownerMob']}><b>{u.ownerMob}</b></td>
+        {result?.length > 0 ? (
+          result.map((u, i) => (
+            <tr key={i} onClick={() => handleRowClick(u)}>
+              <td className={styles['userID']}>{u.userID}</td>
+              <td className={styles['ownerName']}><b>{u.ownerName}</b></td>
+              <td className={styles['ownerMob']}><b>{u.ownerMob}</b></td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="3">No customers available</td>
           </tr>
-        ))}
+        )}
       </tbody>
     );
   }

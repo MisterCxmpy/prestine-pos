@@ -16,12 +16,14 @@ export default function Performance() {
         <h1>Performance Stats</h1>
         <ul className={styles['performance-list']}>
           <li className={styles['performance-item']}>
-            <span>Taken In: </span>
-            <span>{todaysData.tickets}</span>
+            <span className={styles['item-heading']}>Taken In*</span>
+            <span className={styles['item-value']}>{todaysData.tickets}</span>
+            <span className={styles['item-desc']}>The amount of items brought into the shop today.</span>
           </li>
           <li className={styles['performance-item']}>
-            <span>Earnings: </span>
-            <span>£{totalPrices}</span>
+            <span className={styles['item-heading']}>Earnings*</span>
+            <span className={styles['item-value']}>£{totalPrices}</span>
+            <span className={styles['item-desc']}>The amount of money earned today.</span>
           </li>
         </ul>
       </div>

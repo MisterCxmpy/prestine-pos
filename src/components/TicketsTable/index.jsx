@@ -23,8 +23,8 @@ export default function TicketsTable({ result, setPreview, setTicketData }) {
         </tr>
       </thead>
       <tbody className={styles['table-body']}>
-        {result?.map((t, i) => {
-          return (
+        {result?.length > 0 ? (
+          result.map((u, i) => (
             <tr key={i} onClick={() => handleRowClick(t)}>
               <td><strong>{t.ticketNo}</strong></td>
               <td>{t.date}</td>
@@ -44,8 +44,12 @@ export default function TicketsTable({ result, setPreview, setTicketData }) {
               <td>{t.hasPaid ? "Paid" : "Not Paid"}</td>
               <td><strong><span className={styles[t.complete ? "complete" : "not-complete"]}>{t.complete ? "Collected" : "Not Collected"}</span></strong></td>
             </tr>
-          );
-        })}
+          ))
+        ) : (
+          <tr>
+            <td colSpan="3">No Tickets available</td>
+          </tr>
+        )}
       </tbody>
     </>
   );

@@ -4,7 +4,7 @@ import { useCheckout } from '../../contexts/CheckoutContext';
 
 export default function PaidForm({ setPreview, price}) {
 
-  const { toggleHasPaid } = useCheckout()
+  const { toggleHasPaid, updateTotal } = useCheckout()
 
   const [changeAmount, setChangeAmount] = useState(0);
   const [inputValue, setInputValue] = useState('');
@@ -28,9 +28,14 @@ export default function PaidForm({ setPreview, price}) {
 
   const handleContinue = () => {
     const entered = parseFloat(inputValue);
+
+    if (!entered) return
+
     const newTotalCost = totalCost - entered;
     setTotalCost(newTotalCost < 0 ? 0 : newTotalCost);
     setInputValue("")
+
+    updateTotal(newTotalCost)
   };
 
   const handleFinish = () => {
