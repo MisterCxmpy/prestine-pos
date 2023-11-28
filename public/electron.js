@@ -39,6 +39,7 @@ const createWindow = () => {
     mainWindow.loadURL("http://localhost:5173");
   } else {
     mainWindow.loadFile(path.join(app.getAppPath(), "dist/index.html"));
+    autoUpdater.checkForUpdates();
   }
 
   if (isDev) {
@@ -57,20 +58,6 @@ app.setPath(
 
 app.whenReady().then(() => {
   createWindow();
-
-  autoUpdater.checkForUpdates();
-
-  autoUpdater.on('update-available', (info) => {
-    mainWindow.webContents.send('update-available', info);
-  });
-
-  autoUpdater.on('download-progress', (progressObj) => {
-    mainWindow.webContents.send('download-progress', progressObj);
-  });
-
-  autoUpdater.on('update-downloaded', (info) => {
-    mainWindow.webContents.send('update-downloaded', info);
-  });
 });
 
 app.on('window-all-closed', () => {
@@ -83,6 +70,31 @@ app.on('activate', () => {
   if (mainWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Ok'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail: 'A new version is being downloaded.'
+  }
+  dialog.showMessageBox(dialogOpts, (response) => {
+  });
+})
+
+autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+  };
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
 });
 
 process.on('uncaughtException', (error) => {
