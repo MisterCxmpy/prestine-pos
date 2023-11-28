@@ -30,7 +30,7 @@ export default function Navbar() {
     <>
       <nav className={`${styles["sidebar"]} ${!menuOpen ? styles["closed"] : ""}`}>
         <div className={styles["logo-details"]}>
-          <h1 className={styles["logo-name"]}>Pristine</h1>
+          <h1 className={styles["logo-name"]}>Prestine</h1>
           <GiHamburgerMenu className={styles["hamburger"]} onClick={() => setMenuOpen(!menuOpen)}/>
         </div>
         <ul className={styles["nav-list"]}>
