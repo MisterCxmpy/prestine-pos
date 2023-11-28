@@ -63,7 +63,7 @@
       ]
     },
     "nsis": {
-      "uninstallDisplayName": "Pristine",
+      "uninstallDisplayName": "Prestine",
       "license": "license.txt",
       "oneClick": "false",
       "allowToChangeInstallationDirectory": "true",
