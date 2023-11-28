@@ -35,13 +35,14 @@ const createWindow = () => {
     },
   });
 
+  autoUpdater.checkForUpdatesAndNotify();
+  
   if (isDev) {
     mainWindow.loadURL("http://localhost:5173");
   } else {
     mainWindow.loadFile(path.join(app.getAppPath(), "dist/index.html"));
-    autoUpdater.checkForUpdates();
   }
-
+  
   if (isDev) {
     mainWindow.webContents.on('did-frame-finish-load', () => {
       mainWindow.webContents.openDevTools({ mode: 'detach' });
