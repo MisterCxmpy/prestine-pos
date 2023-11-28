@@ -94,6 +94,10 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.receipt-row > p {
+  font-size: 18px;
+  padding: 10px 0;
+}
 
 .receipt-grid {
   display: grid;

@@ -1,7 +1,7 @@
 {
   "name": "Prestine",
   "private": true,
-  "version": "1.4.5",
+  "version": "1.4.6",
   "author": "Cosgun Hussein",
   "description": "Prestine POS",
   "main": "public/electron.js",
@@ -26,6 +26,7 @@
   },
   "build": {
     "appId": "com.prestine.app",
+    "compression": "maximum",
     "productName": "Prestine",
     "files": [
       "dist/**/*",
