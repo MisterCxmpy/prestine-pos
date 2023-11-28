@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import styles from './index.module.css'
 import { FaRegTrashAlt } from "react-icons/fa"
 import NewOrderItem from '../NewOrderItem'
 import { useCheckout } from '../../contexts/CheckoutContext'
 import { PaidForm } from '..'
+import { useReactToPrint } from 'react-to-print'
 
 export default function CheckoutMenu() {
 
@@ -15,6 +16,12 @@ export default function CheckoutMenu() {
   const [paidForm, setPaidForm] = useState(false)
 
   const receiptListRef = useRef()
+  const emptyRef = useRef()
+
+  const handlePrint = useReactToPrint({
+    pageStyle: "@page { size: 0mm 0mm;  margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; } }",
+    content: () => emptyRef.current
+  })
 
   const handleDayClick = (dayId) => {
     setDay(dayId);
@@ -51,7 +58,7 @@ export default function CheckoutMenu() {
             <p>£{total.toFixed(2)}</p>
           </div>
           <div className={styles['receipt-grid']}>
-            <button className={styles['receipt-btn']}>Open Till</button>
+            <button onClick={() => handlePrint()} className={styles['receipt-btn']}>Open Till</button>
             <button onClick={() => handlePaid()} className={`${styles['receipt-btn']} ${hasPaid ? styles["paid"] : styles["not-paid"]}`}>Paid</button>
             <button onClick={() => openCloseCustomerForm(true)} className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Invoice</button>
             <button onClick={() => completeCheckout()} className={styles['receipt-btn']} disabled={receiptLength <= 0 ? true : false}>Clear</button>
@@ -68,6 +75,15 @@ export default function CheckoutMenu() {
         </div>
       </div>
       {paidForm ? <PaidForm setPreview={setPaidForm} price={total} /> : null}
+      <Empty ref={emptyRef} />
     </>
   )
 }
+
+const Empty = forwardRef(({ }, ref) => {
+  return (
+    <div style={{width: "0", height: "fit-content", overflow: "hidden"}} ref={ref}>
+
+    </div>
+  )
+})
