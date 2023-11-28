@@ -9,8 +9,6 @@ export const PerformanceProvider = ({ children }) => {
   const setTodaysPerformanceData = async () => {
     const response = await window.api.getTodaysPerformance()
     setTodaysPerformance(response)
-
-    console.log(response)
   }
 
   const setPerformanceData = async () => {

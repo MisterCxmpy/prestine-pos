@@ -26,7 +26,6 @@ export default function TicketsTable({ result, setPreview, setTicketData }) {
         {result?.length > 0 ? (
           result.map((t, i) => (
             <tr key={i} onClick={() => handleRowClick(t)}>
-              {console.log(t)}
               <td><strong>{t.ticketNo}</strong></td>
               <td>{t.date}</td>
               <td style={{ textTransform: 'uppercase' }}>{t.day}</td>
