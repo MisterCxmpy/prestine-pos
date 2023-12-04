@@ -98,6 +98,30 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
   })
 });
 
+autoUpdater.on('checking-for-update', () => {
+  console.log('Checking for update...');
+});
+
+autoUpdater.on('update-available', (info) => {
+  console.log('Update available:', info);
+});
+
+autoUpdater.on('update-not-available', () => {
+  console.log('Update not available.');
+});
+
+autoUpdater.on('error', (err) => {
+  console.error('Update error:', err);
+});
+
+autoUpdater.on('download-progress', (progressObj) => {
+  console.log('Download progress:', progressObj);
+});
+
+autoUpdater.on('update-downloaded', (info) => {
+  console.log('Update downloaded:', info);
+});
+
 process.on('uncaughtException', (error) => {
   console.log(`Exception: ${error}`);
   if (process.platform !== 'darwin') {
