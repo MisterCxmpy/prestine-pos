@@ -9,6 +9,8 @@ export const CheckoutProvider = ({ children }) => {
   const [total, setTotal] = useState(0.0);
   const [paidAmount, setPaidAmount] = useState(0.0);
   const [hasPaid, setHasPaid] = useState(false);
+  const [discountValue, setDiscountValue] = useState(0);
+  const [discountType, setDiscountType] = useState("%");
 
   const [day, setDay] = useState("mon");
 
@@ -17,6 +19,7 @@ export const CheckoutProvider = ({ children }) => {
 
   const [checkReceiptActive, setCheckReceiptActive] = useState(false);
   const [customerFormActive, setCustomerFormActive] = useState(false);
+  const [discountFormActive, setDiscountFormActive] = useState(false);
 
   const completeCheckout = () => {
     setCheckout([])
@@ -24,6 +27,8 @@ export const CheckoutProvider = ({ children }) => {
     setDay("mon")
     setHasPaid(false)
     setPaidAmount(0.0)
+    setDiscountValue(0);
+    setDiscountType("%");
   }
 
   const addToCheckout = (item) => {
@@ -79,6 +84,10 @@ export const CheckoutProvider = ({ children }) => {
     setCustomerFormActive(status);
   };
 
+  const openCloseDiscountForm = (status) => {
+    setDiscountFormActive(status);
+  };
+
   const openCheck = (item) => {
     setCheckItemActive(true);
     setCheckItem(item);
@@ -130,7 +139,13 @@ export const CheckoutProvider = ({ children }) => {
         day,
         completeCheckout,
         customerDetails,
-        updateTotal
+        updateTotal,
+        openCloseDiscountForm, 
+        discountFormActive, 
+        setDiscountValue,
+        discountValue,
+        setDiscountType,
+        discountType,
       }}
     >
       {children}

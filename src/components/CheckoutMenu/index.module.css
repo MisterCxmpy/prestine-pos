@@ -98,6 +98,18 @@
   font-size: 18px;
   padding: 10px 0;
 }
+.receipt-row > button {
+  padding: 0 20px;
+  background: var(--primary);
+  font-size: 20px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+}
+.receipt-row > button:disabled {
+  background: #070f15;
+  cursor: no-drop;
+}
 
 .receipt-grid {
   display: grid;
