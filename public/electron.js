@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const sqlite3 = require("sqlite3").verbose();
 const isDev = require('electron-is-dev'); 
 const path = require('path');
