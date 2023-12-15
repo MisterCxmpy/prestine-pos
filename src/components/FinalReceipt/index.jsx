@@ -25,10 +25,18 @@ export default function FinalReceipt() {
   const receiptRef = useRef([]);
 
   useEffect(() => {
-    const totalPiecesCount = checkout.reduce(
-      (acc, item) => acc + item.quantity,
-      0
-    );
+    const totalPiecesCount = checkout.reduce((acc, item) => {
+      let quantityToAdd = item.quantity;
+
+      if (item.name === "2 PCS Suit") {
+        quantityToAdd *= 2;
+      } else if (item.name === "3 PCS Suit") {
+        quantityToAdd *= 3;
+      }
+
+      return acc + quantityToAdd;
+    }, 0);
+
     setTotalPieces(totalPiecesCount);
   }, [checkout]);
 
@@ -175,15 +183,24 @@ const FullReceipt = forwardRef(
         {checkout.map((c, i) => {
           const items = [];
           for (let index = 0; index < c.quantity; index++) {
+            let quantityToAdd = 1;
+
+            if (c.name === "2 PCS Suit") {
+              quantityToAdd = 2;
+            } else if (c.name === "3 PCS Suit") {
+              quantityToAdd = 3;
+            }
+
             const itemNum = currentPiece;
             currentPiece += 1;
+
             items.push(
               <React.Fragment key={index}>
                 <ItemReceipt
                   name={c.name}
                   quantity={c.quantity}
                   itemNum={itemNum}
-                  total={totalPieces}
+                  total={totalPieces * quantityToAdd}
                   tag={c.tag}
                   day={day}
                   currentDateTime={currentDateTime}
@@ -195,6 +212,7 @@ const FullReceipt = forwardRef(
           }
           return items;
         })}
+
         <MainReceipt
           checkout={checkout}
           total={total}
@@ -205,6 +223,8 @@ const FullReceipt = forwardRef(
           currentDateTime={currentDateTime}
           ticketNumber={ticketNumber}
           phoneNum={phoneNum}
+          discountValue={discountValue}
+          discountType={discountType}
         />
       </div>
     );
@@ -268,7 +288,8 @@ const MainReceipt = ({
               <div className={styles["ticket-item-name"]}>
                 <p>DISCOUNT</p>
                 <p>
-                  {parseFloat(discountValue).toFixed(2)} {discountType == "%" ? "%" : null}
+                  {parseFloat(discountValue).toFixed(2)}{" "}
+                  {discountType == "%" ? "%" : null}
                 </p>
               </div>
             </li>

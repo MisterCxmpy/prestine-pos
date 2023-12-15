@@ -88,7 +88,7 @@ export default function CheckItem({ item }) {
             />
           </div>
           {
-            item.tag == "alterations" ? <div className={`${styles['form-input']} ${styles["form-row"]}`}>
+            item.tag == "alterations" || item.tag == "repairs" ? <div className={`${styles['form-input']} ${styles["form-row"]}`}>
             <label htmlFor="cleaning">+ Cleaning</label>
             <input
               type='checkbox'
