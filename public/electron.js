@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const sqlite3 = require("sqlite3").verbose();
 const isDev = require('electron-is-dev'); 
 const path = require('path');
+const fs = require('fs');
 const { autoUpdater, AppUpdater } = require("electron-updater")
 
 const usersDbPath = isDev ? path.join(__dirname, "../db/users.db") : path.join(process.resourcesPath, "/db/users.db");
@@ -466,5 +467,14 @@ ipcMain.handle("create-new-day", async (event, args) => {
   }
 });
 
+ipcMain.handle('add-item', (event, args) => {
+  const servicesPath = path.join(__dirname, '../src/data', 'services.json');
+  const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
 
+  services.services[args.tag] = [...services.services[args.tag], args];
+
+  fs.writeFileSync(servicesPath, JSON.stringify(services, null, 2));
+
+  return { success: true };
+});
 

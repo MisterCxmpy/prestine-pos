@@ -67,7 +67,7 @@
   margin: 8px 0;
   list-style: none;
 }
-.nav-item > a {
+.nav-item > a, .nav-item button {
   display: flex;
   height: 100%;
   width: 100%;
@@ -77,15 +77,16 @@
   transition: var(--transition);
   z-index: 12;
 }
-.nav-item > a.active {
+.nav-item > a.active, .nav-item button.active {
   background: white;
   border-radius: var(--border-radius);
 }
 .nav-item > a.active > .link,
-.nav-item > a.active > svg {
+.nav-item > a.active > svg, .nav-item button.active > .link,
+.nav-item button.active > svg {
   color: black;
 }
-.nav-item > a::after {
+.nav-item > a::after, .nav-item button::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -97,14 +98,14 @@
   transform-origin: left;
   z-index: -2;
 }
-.nav-item > a:hover::after {
+.nav-item > a:hover::after, .nav-item button:hover::after {
   transform: scaleX(1);
 }
-.nav-item > a:hover > .link, .nav-item > a:hover > svg {
+.nav-item > a:hover > .link, .nav-item > a:hover > svg, .nav-item button:hover > .link, .nav-item button:hover > svg {
   color: black;
   transition: var(--transition);
 }
-.nav-item > a > svg {
+.nav-item > a > svg, .nav-item button > svg {
   height: 60px;
   line-height: 60px;
   min-width: 40px;

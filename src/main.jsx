@@ -9,21 +9,24 @@ import { ServiceProvider } from './contexts/ServiceContext.jsx'
 import { TicketsProvider } from './contexts/TicketsContext.jsx'
 import { UsersProvider } from './contexts/UsersContext.jsx'
 import { PerformanceProvider } from './contexts/PerformanceContext.jsx'
+import { ItemProvider } from './contexts/ItemContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <HashRouter>
     <NavbarProvider>
-      <CheckoutProvider>
-        <PerformanceProvider>
-          <ServiceProvider>
-            <TicketsProvider>
-              <UsersProvider>
-                <App />
-              </UsersProvider>
-            </TicketsProvider>
-          </ServiceProvider>
-        </PerformanceProvider>
-      </CheckoutProvider>
+      <ItemProvider>
+        <CheckoutProvider>
+          <PerformanceProvider>
+            <ServiceProvider>
+              <TicketsProvider>
+                <UsersProvider>
+                  <App />
+                </UsersProvider>
+              </TicketsProvider>
+            </ServiceProvider>
+          </PerformanceProvider>
+        </CheckoutProvider>
+      </ItemProvider>
     </NavbarProvider>
   </HashRouter>
 )

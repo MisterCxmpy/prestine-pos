@@ -313,7 +313,7 @@
         "additional": "Household",
         "tag": "household"
       }
-    ],    
+    ],
     "alterations": [
       {
         "id": 44,
@@ -481,7 +481,7 @@
       {
         "id": 67,
         "name": "Coat Under arm",
-        "price":       "12.5",
+        "price": "12.5",
         "additional": "Repairs",
         "tag": "repairs"
       },
