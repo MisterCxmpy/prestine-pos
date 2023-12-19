@@ -50,11 +50,11 @@ const AddItemModal = () => {
       id: highestId + 1,
       name: itemName,
       price: itemPrice,
-      additional: selectedCategory,
+      additional: selectedCategory == "press-only" ? "Press Only" : selectedCategory,
       tag: selectedCategory.replace('-', ' '),
     };
 
-    addItem(selectedCategory, newItem)
+    addItem({category: selectedCategory, item: newItem})
 
     setOpenClose(false);
     setItemName('');

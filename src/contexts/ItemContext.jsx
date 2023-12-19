@@ -5,7 +5,7 @@ const ItemContext  = createContext();
 export const ItemProvider = ({ children }) => {
   const [openClose, setOpenClose] = useState(false);
 
-  const addItem = (selectedCategory, item) => {
+  const addItem = (item) => {
     try {
       const response = window.api.addItem(item)
     } catch (error) {

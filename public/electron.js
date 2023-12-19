@@ -471,7 +471,9 @@ ipcMain.handle('add-item', (event, args) => {
   const servicesPath = path.join(__dirname, '../src/data', 'services.json');
   const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
 
-  services.services[args.tag] = [...services.services[args.tag], args];
+  console.log(args)
+
+  services.services[args.category] = [...services.services[args.category], args.item];
 
   fs.writeFileSync(servicesPath, JSON.stringify(services, null, 2));
 
