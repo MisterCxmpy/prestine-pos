@@ -467,11 +467,18 @@ ipcMain.handle("create-new-day", async (event, args) => {
   }
 });
 
-ipcMain.handle('add-item', (event, args) => {
-  const servicesPath = path.join(__dirname, '../src/data', 'services.json');
+// Services
+
+ipcMain.handle('get-all-services', (event, args) => {
+  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(process.resourcesPath, "services.json");
   const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
 
-  console.log(args)
+  return services.services;
+});
+
+ipcMain.handle('add-item', (event, args) => {
+  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(process.resourcesPath, "services.json");
+  const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
 
   services.services[args.category] = [...services.services[args.category], args.item];
 

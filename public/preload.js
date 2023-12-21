@@ -19,5 +19,6 @@ contextBridge.exposeInMainWorld('api', {
   updatePerformance: (args) => ipcRenderer.invoke('update-performance', args),
   createNewDay: (args) => ipcRenderer.invoke('create-new-day', args),
 
-  addItem: (args) => ipcRenderer.invoke('add-item', args)
+  addItem: (args) => ipcRenderer.invoke('add-item', args),
+  getAllServices: (args) => ipcRenderer.invoke('get-all-services', args)
 });

@@ -182,15 +182,15 @@ const FullReceipt = forwardRef(
         <PageBreak>&nbsp;</PageBreak>
         {checkout.map((c, i) => {
           const items = [];
-          for (let index = 0; index < c.quantity; index++) {
-            let quantityToAdd = 1;
+          let quantity = c.quantity
 
-            if (c.name === "2 PCS Suit") {
-              quantityToAdd = 2;
-            } else if (c.name === "3 PCS Suit") {
-              quantityToAdd = 3;
-            }
+          if (c.name === "2 PCS Suit") {
+            quantity = 2;
+          } else if (c.name === "3 PCS Suit") {
+            quantity = 3;
+          }
 
+          for (let index = 0; index < quantity; index++) {
             const itemNum = currentPiece;
             currentPiece += 1;
 
@@ -200,7 +200,7 @@ const FullReceipt = forwardRef(
                   name={c.name}
                   quantity={c.quantity}
                   itemNum={itemNum}
-                  total={totalPieces * quantityToAdd}
+                  total={totalPieces * 1}
                   tag={c.tag}
                   day={day}
                   currentDateTime={currentDateTime}
@@ -297,7 +297,7 @@ const MainReceipt = ({
           <li className={styles["ticket-item"]}>
             <div className={styles["ticket-item-name"]}>
               <p>{hasPaid ? "PAID" : "TO PAY"}</p>
-              <p>{total.toFixed(2)}</p>
+              <p>{total > 0 ? total.toFixed(2) : 0}</p>
             </div>
           </li>
           <li className={styles["total-pieces"]}>

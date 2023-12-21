@@ -1,7 +1,7 @@
 {
   "name": "Prestine",
   "private": false,
-  "version": "1.6.4",
+  "version": "1.6.6",
   "author": "Cosgun Hussein",
   "description": "Prestine POS",
   "main": "public/electron.js",
@@ -30,7 +30,8 @@
     "productName": "Prestine",
     "files": [
       "dist/**/*",
-      "public/electron.js"
+      "public/electron.js",
+      "src/data/services.json"
     ],
     "publish": [
       {
@@ -46,6 +47,10 @@
       {
         "from": "db",
         "to": "db"
+      },
+      {
+        "from": "./src/data/services.json",
+        "to": "services.json"
       },
       {
         "from": "./db/",
@@ -66,8 +71,7 @@
     "nsis": {
       "uninstallDisplayName": "Prestine",
       "license": "license.txt",
-      "oneClick": "false",
-      "allowToChangeInstallationDirectory": "true",
+      "oneClick": "true",
       "installerIcon": "public/installer.ico",
       "uninstallerIcon": "public/installer.ico"
     }
