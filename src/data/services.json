@@ -161,6 +161,34 @@
         "price": "4.5",
         "additional": "Cleaning",
         "tag": "cleaning"
+      },
+      {
+        "id": 82,
+        "name": "123",
+        "price": "1",
+        "additional": "cleaning",
+        "tag": "cleaning"
+      },
+      {
+        "id": 83,
+        "name": "123123",
+        "price": "123",
+        "additional": "cleaning",
+        "tag": "cleaning"
+      },
+      {
+        "id": 84,
+        "name": "12311",
+        "price": "12",
+        "additional": "cleaning",
+        "tag": "cleaning"
+      },
+      {
+        "id": 85,
+        "name": "12312",
+        "price": "1",
+        "additional": "cleaning",
+        "tag": "cleaning"
       }
     ],
     "press-only": [

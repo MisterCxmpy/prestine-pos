@@ -182,15 +182,17 @@ const FullReceipt = forwardRef(
         <PageBreak>&nbsp;</PageBreak>
         {checkout.map((c, i) => {
           const items = [];
+          console.log(c)
           let quantity = c.quantity
 
           if (c.name === "2 PCS Suit") {
-            quantity = 2;
+            quantity = c.quantity * 2;
           } else if (c.name === "3 PCS Suit") {
-            quantity = 3;
+            quantity = c.quantity * 3;
           }
 
           for (let index = 0; index < quantity; index++) {
+            console.log(quantity)
             const itemNum = currentPiece;
             currentPiece += 1;
 

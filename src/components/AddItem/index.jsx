@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.css'
-import services from "../../data/services.json"
 import { useItem } from '../../contexts/ItemContext';
+import { useService } from '../../contexts/ServiceContext';
 
 const AddItemModal = () => {
 
   const { setOpenClose, addItem } = useItem()
+  const { allServices } = useService()
 
   const [itemName, setItemName] = useState('');
   const [itemPrice, setItemPrice] = useState('');
@@ -16,6 +17,10 @@ const AddItemModal = () => {
     alterations: false,
     repairs: false,
   });
+
+  useEffect(() => {
+    console.log(allServices)
+  }, [])
 
   const handleCheckboxChange = (category) => {
     setSelectedCategories((prevCategories) => {
@@ -31,12 +36,9 @@ const AddItemModal = () => {
   
 
   const handleAddItem = () => {
-    const highestId = Math.max(
-      ...Object.keys(services.services).flatMap(
-        (category) => services.services[category].map((item) => item.id)
-      ),
-      0
-    );
+    const highestId = Math.max(...allServices.map(item => item.id), 0);
+
+    console.log(highestId)
 
     const selectedCategory = Object.keys(selectedCategories).find(
       (category) => selectedCategories[category]
