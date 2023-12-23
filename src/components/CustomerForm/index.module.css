@@ -83,4 +83,18 @@
 .form-buttons > button:disabled {
   background: #070f15;
   cursor: no-drop;
+}
+
+.form ~ button {
+  flex: 1;
+  padding: 10px 20px;
+  background: var(--primary);
+  font-size: 18px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+}
+.form ~ button:disabled {
+  background: #070f15;
+  cursor: no-drop;
 }/*# sourceMappingURL=index.module.css.map */

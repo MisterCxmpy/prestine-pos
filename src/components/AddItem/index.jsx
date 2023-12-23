@@ -6,7 +6,7 @@ import { useService } from '../../contexts/ServiceContext';
 const AddItemModal = () => {
 
   const { setOpenClose, addItem } = useItem()
-  const { allServices } = useService()
+  const { allServices, fetchAllServices } = useService()
 
   const [itemName, setItemName] = useState('');
   const [itemPrice, setItemPrice] = useState('');
@@ -17,10 +17,6 @@ const AddItemModal = () => {
     alterations: false,
     repairs: false,
   });
-
-  useEffect(() => {
-    console.log(allServices)
-  }, [])
 
   const handleCheckboxChange = (category) => {
     setSelectedCategories((prevCategories) => {
@@ -68,6 +64,8 @@ const AddItemModal = () => {
       alterations: false,
       repairs: false,
     });
+
+    fetchAllServices()
   };
 
   return (

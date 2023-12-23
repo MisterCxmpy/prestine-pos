@@ -189,6 +189,20 @@
         "price": "1",
         "additional": "cleaning",
         "tag": "cleaning"
+      },
+      {
+        "id": 86,
+        "name": "short",
+        "price": "213",
+        "additional": "cleaning",
+        "tag": "cleaning"
+      },
+      {
+        "id": 87,
+        "name": "SHORT 2",
+        "price": "2",
+        "additional": "cleaning",
+        "tag": "cleaning"
       }
     ],
     "press-only": [

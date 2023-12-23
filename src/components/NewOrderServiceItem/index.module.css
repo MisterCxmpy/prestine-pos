@@ -9,7 +9,7 @@
 
 .service {
   display: flex;
-  padding: 20px;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   height: 100%;
@@ -19,6 +19,8 @@
   width: 100%;
   color: #000;
   font-weight: 600;
+  text-transform: uppercase;
+  font-size: 20px;
 }
 
 .cleaning {

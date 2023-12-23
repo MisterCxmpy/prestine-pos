@@ -15,22 +15,23 @@ export const ServiceProvider = ({ children }) => {
     setServiceType(type);
   };
 
+  const fetchAllServices = async () => {
+    const allServicesObject = await window.api.getAllServices();
+    if (allServicesObject) {
+      const allServicesArray = Object.values(allServicesObject).reduce((accumulator, currentValue) => {
+        return accumulator.concat(currentValue);
+      }, []);
+      setAllServices(allServicesArray);
+    }
+  };
+
   useEffect(() => {
-    const fetchAllServices = async () => {
-      const allServicesObject = await window.api.getAllServices();
-      if (allServicesObject) {
-        const allServicesArray = Object.values(allServicesObject).reduce((accumulator, currentValue) => {
-          return accumulator.concat(currentValue);
-        }, []);
-        setAllServices(allServicesArray);
-      }
-    };
 
     fetchAllServices();
   }, [service]);
 
   return (
-    <ServiceContext.Provider value={{ allServices, service, serviceType, changeService, setService }}>
+    <ServiceContext.Provider value={{ allServices, service, serviceType, changeService, setService, fetchAllServices }}>
       {children}
     </ServiceContext.Provider>
   );

@@ -25,7 +25,7 @@
 .service-items-list {
   margin-top: 25px;
   overflow: auto;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
 
   &::-webkit-scrollbar{
     display: none;
