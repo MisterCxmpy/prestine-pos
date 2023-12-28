@@ -163,34 +163,6 @@
         "tag": "cleaning"
       },
       {
-        "id": 82,
-        "name": "123",
-        "price": "1",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
-        "id": 83,
-        "name": "123123",
-        "price": "123",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
-        "id": 84,
-        "name": "12311",
-        "price": "12",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
-        "id": 85,
-        "name": "12312",
-        "price": "1",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
         "id": 86,
         "name": "short",
         "price": "213",
@@ -199,50 +171,8 @@
       },
       {
         "id": 87,
-        "name": "SHORT 2",
-        "price": "2",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
-        "id": 88,
-        "name": "test",
-        "price": "12",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
-        "id": 89,
-        "name": "test2",
-        "price": "2",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
-        "id": 90,
-        "name": "1231112",
-        "price": "12",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
-        "id": 91,
-        "name": "ewafewr",
-        "price": "14",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
-        "id": 92,
-        "name": "634636",
-        "price": "3",
-        "additional": "cleaning",
-        "tag": "cleaning"
-      },
-      {
-        "id": 93,
-        "name": "eryet",
-        "price": "3",
+        "name": "Track Suit",
+        "price": "10.5",
         "additional": "cleaning",
         "tag": "cleaning"
       }

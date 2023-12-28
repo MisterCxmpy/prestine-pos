@@ -4,7 +4,7 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  max-height: 100vh;
+  min-height: calc(100vh - 50px);
   padding: 10px;
   padding-left: 35px;
 

@@ -505,3 +505,25 @@ ipcMain.handle('add-item', (event, args) => {
   return { success: true };
 });
 
+ipcMain.handle('delete-item', (event, args) => {
+  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(process.resourcesPath, "services.json");
+  const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
+
+  const itemId = args.itemId;
+
+  for (const category in services.services) {
+    const categoryItems = services.services[category];
+    
+    const itemIndex = categoryItems.findIndex(item => item.id === itemId);
+
+    if (itemIndex !== -1) {
+      categoryItems.splice(itemIndex, 1);
+      fs.writeFileSync(servicesPath, JSON.stringify(services, null, 2));
+      return { success: true };
+    }
+  }
+
+  return { success: false, error: 'Item not found' };
+});
+
+

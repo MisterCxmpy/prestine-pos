@@ -21,5 +21,6 @@ contextBridge.exposeInMainWorld('api', {
   createNewDay: (args) => ipcRenderer.invoke('create-new-day', args),
 
   addItem: (args) => ipcRenderer.invoke('add-item', args),
+  deleteItem: (args) => ipcRenderer.invoke('delete-item', args),
   getAllServices: (args) => ipcRenderer.invoke('get-all-services', args)
 });

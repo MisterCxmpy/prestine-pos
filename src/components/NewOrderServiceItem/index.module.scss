@@ -5,6 +5,13 @@
   cursor: pointer;
   transition: scale var(--transition);
   animation: start 0.1s ease;
+  position: relative;
+
+  &:hover {
+    > .delete-service {
+      display: flex;
+    }
+  }
 }
 
 .service {
@@ -21,6 +28,7 @@
     font-weight: 600;
     text-transform: uppercase;
     font-size: 20px;
+    cursor: pointer;
   }
 }
 
@@ -51,4 +59,18 @@
   to {
     scale: 1;
   }
+}
+
+.delete-service {
+  position: absolute;
+  top: 2.5px;
+  right: 2.5px;
+  width: 15px;
+  height: 15px;
+  display: none;
+  border-radius: 50%;
+  border: solid 2px red;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
 }

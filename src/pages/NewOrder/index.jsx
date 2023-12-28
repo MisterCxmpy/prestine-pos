@@ -38,9 +38,9 @@ export default function NewOrder() {
         </ul>
         <ul className={styles['service-items-list']}>
           {service.length ? 
-          (service?.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
+          (service?.map((s, i) => <NewOrderServiceItem id={s.id} serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
           : 
-          (allServices?.map((s, i) => <NewOrderServiceItem serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
+          (allServices?.map((s, i) => <NewOrderServiceItem id={s.id} serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
           }
         </ul>
       </div>

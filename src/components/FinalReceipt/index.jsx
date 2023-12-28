@@ -6,6 +6,12 @@ import { useTickets } from "../../contexts/TicketsContext";
 import { useUsers } from "../../contexts/UsersContext";
 import { usePerformance } from "../../contexts/PerformanceContext";
 
+const itemMultiplierConfig = {
+  "2 pcs suit": 2,
+  "track suit": 2,
+  "3 pcs suit": 3,
+};
+
 export default function FinalReceipt() {
   const [totalPieces, setTotalPieces] = useState(0);
   const {
@@ -26,17 +32,13 @@ export default function FinalReceipt() {
 
   useEffect(() => {
     const totalPiecesCount = checkout.reduce((acc, item) => {
-      let quantityToAdd = item.quantity;
-
-      if (item.name === "2 PCS Suit") {
-        quantityToAdd *= 2;
-      } else if (item.name === "3 PCS Suit") {
-        quantityToAdd *= 3;
-      }
-
+      const itemNameLowercase = item.name.toLowerCase();
+      const quantityMultiplier = itemMultiplierConfig[itemNameLowercase] || 1;
+      const quantityToAdd = item.quantity * quantityMultiplier;
+  
       return acc + quantityToAdd;
     }, 0);
-
+  
     setTotalPieces(totalPiecesCount);
   }, [checkout]);
 
@@ -182,17 +184,12 @@ const FullReceipt = forwardRef(
         <PageBreak>&nbsp;</PageBreak>
         {checkout.map((c, i) => {
           const items = [];
-          console.log(c)
-          let quantity = c.quantity
 
-          if (c.name === "2 PCS Suit") {
-            quantity = c.quantity * 2;
-          } else if (c.name === "3 PCS Suit") {
-            quantity = c.quantity * 3;
-          }
+          const itemNameLowercase = c.name.toLowerCase();
+          const quantityMultiplier = itemMultiplierConfig[itemNameLowercase] || 1;
+          const quantity = c.quantity * quantityMultiplier;
 
           for (let index = 0; index < quantity; index++) {
-            console.log(quantity)
             const itemNum = currentPiece;
             currentPiece += 1;
 

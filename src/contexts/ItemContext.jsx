@@ -1,9 +1,12 @@
 import React, { useState, useContext, createContext } from 'react';
+import { useService } from './ServiceContext';
 
 const ItemContext  = createContext();
 
 export const ItemProvider = ({ children }) => {
   const [openClose, setOpenClose] = useState(false);
+
+  const { fetchAllServices } = useService();
 
   const addItem = (item) => {
     try {
@@ -13,8 +16,23 @@ export const ItemProvider = ({ children }) => {
     }
   }
 
+  const deleteItem = async (itemId) => {
+    try {
+      const response = await window.api.deleteItem({ itemId });
+      if (response.success) {
+        console.log('Item deleted successfully');
+        fetchAllServices()
+      } else {
+        console.error('Error deleting item:', response.error);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+
   return (
-    <ItemContext.Provider value={{ openClose, setOpenClose, addItem }}>
+    <ItemContext.Provider value={{ openClose, setOpenClose, addItem, deleteItem }}>
       {children}
     </ItemContext.Provider>
   );
