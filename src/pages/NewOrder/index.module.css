@@ -32,6 +32,16 @@
   display: none;
 }
 
+.search-bar {
+  max-width: 400px;
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: var(--border-radius);
+  margin-bottom: -25px;
+}
+
 @media (max-width: 1624px) {
   .service-list {
     grid-template-columns: repeat(4, minmax(100px, 1fr));

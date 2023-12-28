@@ -10,23 +10,37 @@ function useSearch(searches, type) {
       setResult(searches);
     } else {
       if (searches.length) {
-        setResult(
-          type == "customer" ? 
-          searches.filter((search) => {
-            const mobile = search.ownerMob?.toLowerCase();
-            const name = search.ownerName?.toLowerCase();
-            const queryLower = query.toLowerCase();
-            return mobile.includes(queryLower) || name.includes(queryLower);
-          })
-          : 
-          searches.filter((search) => {
-            const ticket = search.ticketNo?.toLowerCase();
-            const mobile = search.ownerMob?.toLowerCase();
-            const name = search.ownerName.toLowerCase();
-            const queryLower = query.toLowerCase();
-            return mobile.includes(queryLower) || name.includes(queryLower) || ticket.includes(queryLower);
-          })
-        );
+        const queryLower = query.toLowerCase();
+
+        switch (type) {
+          case "customer":
+            setResult(
+              searches.filter((search) => {
+                const mobile = search.ownerMob?.toLowerCase();
+                const name = search.ownerName?.toLowerCase();
+                return mobile.includes(queryLower) || name.includes(queryLower);
+              }))
+            break;
+          case "ticket":
+            setResult(
+              searches.filter((search) => {
+                const ticket = search.ticketNo?.toLowerCase();
+                const mobile = search.ownerMob?.toLowerCase();
+                const name = search.ownerName.toLowerCase();
+                return mobile.includes(queryLower) || name.includes(queryLower) || ticket.includes(queryLower);
+              }))
+            break;
+          case "service":
+            setResult(
+              searches.filter((search) => {
+                const name = search.name?.toLowerCase();
+                return name.includes(queryLower);
+              })
+            );
+            break;
+          default:
+            break;
+        }
       }
     }
     

@@ -91,7 +91,7 @@ const AddItemModal = () => {
               onChange={(e) => setItemPrice(e.target.value)}
             />
           </div>
-          <div className={styles['form-input']}>
+          <div className={`${styles['form-input']} ${styles['category-types']}`}>
             {Object.keys(selectedCategories).map((category) => (
               <label key={category}>
                 <input

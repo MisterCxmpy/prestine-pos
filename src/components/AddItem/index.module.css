@@ -36,9 +36,16 @@
   margin-bottom: 50px;
 }
 
+.category-types {
+  justify-content: center;
+}
+
 .form-input {
   width: 100%;
   padding: 0 40px;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
 }
 .form-input > input {
   width: 100%;
@@ -58,6 +65,9 @@
 .form-input > label {
   font-size: 17px;
   padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  text-transform: capitalize;
 }
 
 .form {
