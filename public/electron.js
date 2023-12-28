@@ -146,7 +146,7 @@ ipcMain.handle("insert-ticket", (event, args) => {
 });
 
 ipcMain.handle("get-all-tickets", (event) => {
-  const sql = "SELECT * FROM tickets";
+  const sql = "SELECT * FROM tickets ORDER BY ticketNo";
   return new Promise((resolve, reject) => {
     ticketsDb.all(sql, [], (err, rows) => {
       if (err) {
@@ -279,6 +279,23 @@ ipcMain.handle("get-todays-data", (event, args) => {
   });
 });
 
+ipcMain.handle("delete-ticket-by-id", (event, args) => {
+  const sql = "DELETE FROM tickets WHERE id = ?";
+  return new Promise((resolve, reject) => {
+    ticketsDb.run(sql, [args], function (err) {
+      if (err) {
+        reject(err.message);
+      } else {
+        if (this.changes > 0) {
+          resolve({ success: true, message: "Ticket deleted successfully" });
+        } else {
+          resolve({ success: false, message: "Ticket not found" });
+        }
+      }
+    });
+  });
+});
+
 
 // Users
 
@@ -373,6 +390,7 @@ ipcMain.handle("get-all-users", (event) => {
     });
   });
 });
+
 
 // Performance
 

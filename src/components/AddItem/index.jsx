@@ -34,8 +34,6 @@ const AddItemModal = () => {
   const handleAddItem = () => {
     const highestId = Math.max(...allServices.map(item => item.id), 0);
 
-    console.log(highestId)
-
     const selectedCategory = Object.keys(selectedCategories).find(
       (category) => selectedCategories[category]
     );

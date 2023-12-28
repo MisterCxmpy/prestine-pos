@@ -110,6 +110,21 @@ export const TicketsProvider = ({ children }) => {
     }
   };
 
+  const deleteTicketById = async (ticketId) => {
+  try {
+    const response = await window.api.deleteTicketById(ticketId);
+    if (response.success) {
+      console.log(response.message);
+      getTickets()
+    } else {
+      console.error(response.message);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
   const setTicketToComplete = async (id) => {
     try {
       const response = await window.api.setTicketToComplete(id)
@@ -124,7 +139,7 @@ export const TicketsProvider = ({ children }) => {
   }, []);
 
   return (
-    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers, getRecentTickets, recentTickets, todaysData, setTicketToComplete, getTodaysData, totalPrices, setTotalPrices }}>
+    <TicketsContext.Provider value={{ insertTicket, generateTicketNumber, ticketNumber, tickets, getTickets, getTicketForCustomer, customerTickets, setCustomerTickers, getRecentTickets, recentTickets, todaysData, setTicketToComplete, getTodaysData, totalPrices, setTotalPrices, deleteTicketById }}>
       {children}
     </TicketsContext.Provider>
   );

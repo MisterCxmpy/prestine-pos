@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from './index.module.css';
+import { useTickets } from '../../contexts/TicketsContext';
 
 export default function TicketsTable({ result, setPreview, setTicketData }) {
   const handleRowClick = (ticket) => {
     setTicketData(ticket);
     setPreview(true);
   };
+
+  const { deleteTicketById } = useTickets()
 
   return (
     <>
@@ -43,6 +46,10 @@ export default function TicketsTable({ result, setPreview, setTicketData }) {
               <td><strong>{t.ownerMob}</strong></td>
               <td>{t.hasPaid ? "Paid" : "Not Paid"}</td>
               <td><strong><span className={styles[t.complete ? "complete" : "not-complete"]}>{t.complete ? "Collected" : "Not Collected"}</span></strong></td>
+              <div className={styles['buttons']}>
+                <button type='button' onClick={(e) => {e.stopPropagation(); deleteTicketById(t.id)}}>Delete</button>
+                <button type='button' onClick={(e) => {e.stopPropagation();}}>Edit</button>
+              </div>
             </tr>
           ))
         ) : (

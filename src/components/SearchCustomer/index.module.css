@@ -81,6 +81,7 @@
   flex-direction: column;
   gap: 25px;
   max-height: calc(100vh - 50px);
+  overflow-y: scroll;
 }
 
 .customer-list tr {
