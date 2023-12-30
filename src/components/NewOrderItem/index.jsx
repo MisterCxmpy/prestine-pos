@@ -22,7 +22,7 @@ export default function NewOrderItem({ itemData }) {
     <li className={styles['receipt-item']}>
       <div className={styles['receipt']}>
         <div className={styles['receipt-row']}>
-          <p>{itemData.name}</p>
+          <p className={styles['name']}>{itemData.name}</p>
           <p>£{itemData.price.toFixed(2)}</p>
         </div>
         <p>{itemData.additional}</p>

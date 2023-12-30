@@ -45,7 +45,7 @@ export default function Discount({ item }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const calculatedDiscountedPrice = calculateDiscountedPrice();
-    updateTotal(calculatedDiscountedPrice)
+    // updateTotal(calculatedDiscountedPrice)
     openCloseDiscountForm(false);
   };
 

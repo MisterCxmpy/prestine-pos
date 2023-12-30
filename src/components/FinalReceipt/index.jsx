@@ -296,7 +296,7 @@ const MainReceipt = ({
           <li className={styles["ticket-item"]}>
             <div className={styles["ticket-item-name"]}>
               <p>{hasPaid ? "PAID" : "TO PAY"}</p>
-              <p>{total > 0 ? total.toFixed(2) : 0}</p>
+              <p>{total.toFixed(2)}</p>
             </div>
           </li>
           <li className={styles["total-pieces"]}>

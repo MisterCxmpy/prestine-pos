@@ -5,6 +5,52 @@ const path = require('path');
 const fs = require('fs');
 const { autoUpdater, AppUpdater } = require("electron-updater")
 
+function getUserDataPath() {
+  return isDev
+    ? path.join(app.getAppPath(), 'userdata/')
+    : path.join(process.resourcesPath, 'userdata/');
+}
+
+function backupUserData() {
+  const userDataPath = getUserDataPath();
+  const backupPath = path.join(userDataPath, 'backup');
+
+  fs.mkdirSync(backupPath, { recursive: true });
+
+  const filesToBackup = ['persistentFile'];
+
+  filesToBackup.forEach((file) => {
+    fs.copyFileSync(path.join(userDataPath, file), path.join(backupPath, `${file}_backup`));
+  });
+}
+
+// Function to restore user data after update
+function restoreUserData() {
+  const userDataPath = getUserDataPath();
+  const backupPath = path.join(userDataPath, 'backup');
+
+  const filesToRestore = ['persistentFile']; // Add more files if needed
+
+  filesToRestore.forEach((file) => {
+    const backupFilePath = path.join(backupPath, `${file}_backup`);
+    const targetFilePath = path.join(userDataPath, file);
+
+    // Check if the backup file exists before attempting to restore
+    if (fs.existsSync(backupFilePath)) {
+      fs.copyFileSync(backupFilePath, targetFilePath);
+    } else {
+      console.error(`Backup file ${backupFilePath} not found. Skipping restore.`);
+    }
+  });
+
+  // Optionally, remove the backup directory after restoring data
+  if (fs.existsSync(backupPath)) {
+    fs.rmSync(backupPath, { recursive: true });
+  }
+}
+
+
+
 const usersDbPath = isDev ? path.join(__dirname, "../db/users.db") : path.join(process.resourcesPath, "/db/users.db");
 const usersDb = new sqlite3.Database(usersDbPath, sqlite3.OPEN_READWRITE);
 
@@ -59,6 +105,7 @@ app.setPath(
 );
 
 app.whenReady().then(() => {
+  restoreUserData()
   createWindow();
 });
 
@@ -94,9 +141,13 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
     message: process.platform === 'win32' ? releaseNotes : releaseName,
     detail: 'A new version has been downloaded. Restart the application to apply the updates.'
   };
+
   dialog.showMessageBox(dialogOpts).then((returnValue) => {
-    if (returnValue.response === 0) autoUpdater.quitAndInstall()
-  })
+    if (returnValue.response === 0) {
+      backupUserData();
+      autoUpdater.quitAndInstall();
+    }
+  });
 });
 
 autoUpdater.on('checking-for-update', () => {

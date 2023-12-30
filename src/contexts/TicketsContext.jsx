@@ -16,19 +16,23 @@ export const TicketsProvider = ({ children }) => {
 
   useEffect(() => {
     setTicketNumber(lastTicketNumber)
+    if (lastTicketNumber == 0) {
+      getTicketNumber()
+      return
+    }
   }, [lastTicketNumber])
 
-  useEffect(() => {
-    async function getTicketNumber() {
-      try {
-        await generateTicketNumber();
-      } catch (error) {
-        console.error("Error generating ticket number:", error);
-      }
-    }
+  useEffect(() => { 
     getTicketNumber();
   }, []);
   
+  async function getTicketNumber() {
+    try {
+      await generateTicketNumber();
+    } catch (error) {
+      console.error("Error generating ticket number:", error);
+    }
+  }
 
   const updateTicketsData = async () => {
     try {
@@ -114,7 +118,7 @@ export const TicketsProvider = ({ children }) => {
   try {
     const response = await window.api.deleteTicketById(ticketId);
     if (response.success) {
-      console.log(response.message);
+      await setLastTicketNumber(0)
       getTickets()
     } else {
       console.error(response.message);

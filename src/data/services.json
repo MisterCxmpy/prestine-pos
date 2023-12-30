@@ -163,16 +163,16 @@
         "tag": "cleaning"
       },
       {
-        "id": 86,
-        "name": "short",
-        "price": "213",
+        "id": 87,
+        "name": "Track Suit",
+        "price": "10.5",
         "additional": "cleaning",
         "tag": "cleaning"
       },
       {
-        "id": 87,
-        "name": "Track Suit",
-        "price": "10.5",
+        "id": 88,
+        "name": "pants",
+        "price": "",
         "additional": "cleaning",
         "tag": "cleaning"
       }
