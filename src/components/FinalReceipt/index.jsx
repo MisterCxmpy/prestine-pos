@@ -24,6 +24,8 @@ export default function FinalReceipt() {
     customerDetails,
     discountValue,
     discountType,
+    discount,
+    completeCheckout
   } = useCheckout();
   const { insertTicket, generateTicketNumber, ticketNumber } = useTickets();
   const { updatePerformance } = usePerformance();
@@ -72,10 +74,12 @@ export default function FinalReceipt() {
       hasPaid: hasPaid,
       totalPrice: total,
       complete: false,
+      discount: discount,
     };
     insertTicket(ticket);
     insertUser({ ...customerDetails, tickets: [ticket] });
     updatePerformance(totalPieces, paidAmount);
+    completeCheckout()
   };
 
   const [currentDateTime, setCurrentDateTime] = useState("");
@@ -137,6 +141,7 @@ export default function FinalReceipt() {
           phoneNum={customerDetails.ownerMob}
           discountValue={discountValue}
           discountType={discountType}
+          discount={discount}
         />
       </div>
       <div className={styles["form-buttons"]}>
@@ -161,6 +166,7 @@ const FullReceipt = forwardRef(
       phoneNum,
       discountValue,
       discountType,
+      discount
     },
     ref
   ) => {
@@ -180,6 +186,7 @@ const FullReceipt = forwardRef(
           phoneNum={phoneNum}
           discountValue={discountValue}
           discountType={discountType}
+          discount={discount}
         />
         <PageBreak>&nbsp;</PageBreak>
         {checkout.map((c, i) => {
@@ -224,6 +231,7 @@ const FullReceipt = forwardRef(
           phoneNum={phoneNum}
           discountValue={discountValue}
           discountType={discountType}
+          discount={discount}
         />
       </div>
     );
@@ -242,6 +250,7 @@ const MainReceipt = ({
   phoneNum,
   discountValue,
   discountType,
+  discount
 }) => {
   return (
     <>
@@ -288,7 +297,7 @@ const MainReceipt = ({
                 <p>DISCOUNT</p>
                 <p>
                   {parseFloat(discountValue).toFixed(2)}{" "}
-                  {discountType == "%" ? "%" : null}
+                  {discountType == "%" ? "%" : null}{` (${total > 0 ? total.toFixed(2) : 0})`}
                 </p>
               </div>
             </li>
@@ -296,7 +305,7 @@ const MainReceipt = ({
           <li className={styles["ticket-item"]}>
             <div className={styles["ticket-item-name"]}>
               <p>{hasPaid ? "PAID" : "TO PAY"}</p>
-              <p>{total.toFixed(2)}</p>
+              <p>{discountValue > 0 ? discount.toFixed(2) : total.toFixed(2)}</p>
             </div>
           </li>
           <li className={styles["total-pieces"]}>

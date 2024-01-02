@@ -10,6 +10,10 @@ export const UsersProvider = ({ children }) => {
     const response = window.api.insertUser(userData)
   }
 
+  const updateUser = (updateData) => {
+    const response = window.api.updateUserName(updateData)
+  }
+
   const getUsers = async () => {
     try {
       const response = await window.api.getAllUsers();
@@ -24,7 +28,7 @@ export const UsersProvider = ({ children }) => {
   }, []);
 
   return (
-    <UsersContext.Provider value={{ insertUser, users, getUsers }}>
+    <UsersContext.Provider value={{ insertUser, users, getUsers, updateUser }}>
       {children}
     </UsersContext.Provider>
   );

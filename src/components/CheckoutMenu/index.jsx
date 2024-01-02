@@ -10,7 +10,7 @@ export default function CheckoutMenu() {
 
   const days = ["mon", "tue", "wed", "thurs", "fri", "sat"]
 
-  const { checkout, total, removeAll, openCloseCustomerForm, openCloseDiscountForm, toggleHasPaid, hasPaid, setDay, day, completeCheckout } = useCheckout()
+  const { checkout, total, removeAll, openCloseCustomerForm, openCloseDiscountForm, toggleHasPaid, hasPaid, setDay, day, completeCheckout, discount, discountValue } = useCheckout()
 
   const [receiptLength, setReceiptLength] = useState(0)
   const [paidForm, setPaidForm] = useState(false)
@@ -56,7 +56,7 @@ export default function CheckoutMenu() {
           <div className={styles['receipt-row']}>
             <p>Total</p>
             <button onClick={() => openCloseDiscountForm(true)} disabled={receiptLength <= 0 ? true : false}>Discount</button>
-            <p>£{total.toFixed(2)}</p>
+            <p>£{discountValue > 0 ? discount.toFixed(2) : total.toFixed(2)}</p>
           </div>
           <div className={styles['receipt-grid']}>
             <button onClick={() => handlePrint()} className={styles['receipt-btn']}>Open Till</button>

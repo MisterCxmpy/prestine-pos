@@ -66,6 +66,9 @@
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.table-body input {
+  font-size: 20px;
+}
 
 @media (max-width: 1024px) {
   .customers-section {
@@ -80,4 +83,19 @@
 }
 .spacing::before {
   display: none !important;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin: auto 0;
+  padding-right: 2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  vertical-align: top;
+  gap: 10px;
+  z-index: 99;
+}
+.buttons > button {
+  padding: 5px;
 }/*# sourceMappingURL=index.module.css.map */

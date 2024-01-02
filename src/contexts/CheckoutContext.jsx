@@ -7,10 +7,14 @@ export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
   const [customerDetails, setCustomerDetails] = useState({});
   const [total, setTotal] = useState(0.0);
+  const [discount, setDiscount] = useState(0.0);
   const [paidAmount, setPaidAmount] = useState(0.0);
   const [hasPaid, setHasPaid] = useState(false);
   const [discountValue, setDiscountValue] = useState(0);
   const [discountType, setDiscountType] = useState("%");
+
+  const [customerPhone, setCustomerPhone] = useState("");
+  const [customerName, setCustomerName] = useState("");
 
   const [day, setDay] = useState("mon");
 
@@ -29,6 +33,9 @@ export const CheckoutProvider = ({ children }) => {
     setPaidAmount(0.0)
     setDiscountValue(0);
     setDiscountType("%");
+    setDiscount(0.0)
+    setCustomerPhone("")
+    setCustomerName("")
   }
 
   const addToCheckout = (item) => {
@@ -105,6 +112,15 @@ export const CheckoutProvider = ({ children }) => {
     setTotal(value);
   };
 
+  const updateDiscountTotal = (value) => {
+    setDiscount(value);
+  };
+
+  const resetCustomerForm = () => {
+    setCustomerName("")
+    setCustomerPhone("")
+  }
+
   useEffect(() => {
     const newTotal = checkout.reduce((acc, item) => {
       return acc + item.price * item.quantity;
@@ -146,6 +162,13 @@ export const CheckoutProvider = ({ children }) => {
         discountValue,
         setDiscountType,
         discountType,
+        updateDiscountTotal,
+        discount,
+        setCustomerPhone,
+        setCustomerName,
+        customerPhone,
+        customerName,
+        resetCustomerForm
       }}
     >
       {children}

@@ -183,18 +183,81 @@ process.on('uncaughtException', (error) => {
 
 // Tickets
 
-ipcMain.handle("insert-ticket", (event, args) => {
-  const sql = "INSERT INTO tickets (ticketNo, date, dateOnly, day, items, totalPieces, ownerName, ownerMob, hasPaid, totalPrice, complete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-  return new Promise((resolve, reject) => {
-    ticketsDb.run(sql, [args.ticketNo, args.date, args.dateOnly, args.day, JSON.stringify(args.items), args.totalPieces, args.ownerName, args.ownerMob, args.hasPaid, args.totalPrice, args.complete], function(err) {
-      if (err) {
-        reject(err.message);
-      } else {
-        resolve(`Ticket with ID ${this.lastID} inserted successfully.`);
-      }
+ipcMain.handle("insert-ticket", async (event, args) => {
+  const userExistsQuery = 'SELECT ownerName FROM users WHERE ownerMob = ?';
+  const insertTicketQuery = 'INSERT INTO tickets (ticketNo, date, dateOnly, day, items, totalPieces, ownerName, ownerMob, hasPaid, totalPrice, complete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  const updateUserQuery = 'UPDATE users SET ownerName = ? WHERE ownerMob = ?';
+  const updateTicketsQuery = 'UPDATE tickets SET ownerName = ? WHERE ownerMob = ?';
+
+  try {
+    // Check if the user with ownerMob exists
+    const existingUser = await new Promise((resolve, reject) => {
+      usersDb.get(userExistsQuery, [args.ownerMob], (err, row) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve(row);
+        }
+      });
     });
-  });
+
+    if (existingUser.ownerName) {
+      // User with ownerMob exists, use their ownerName
+      args.ownerName = existingUser.ownerName;
+
+      // Update all associated tickets with the new ownerName
+      await new Promise((resolve, reject) => {
+        ticketsDb.run(updateTicketsQuery, [args.ownerName, args.ownerMob], function (err) {
+          if (err) {
+            reject(err.message);
+          } else {
+            resolve(`All tickets associated with ownerMob ${args.ownerMob} updated with the new ownerName.`);
+          }
+        });
+      });
+    } else if (args.ownerName) {
+      await new Promise((resolve, reject) => {
+        usersDb.run(updateUserQuery, [args.ownerName, args.ownerMob], function (err) {
+          if (err) {
+            reject(err.message);
+          } else {
+            resolve(`User with ownerMob ${args.ownerMob} updated with new ownerName.`);
+          }
+        });
+      });
+    } else {
+      console.log("asdf")
+      const result = await new Promise((resolve, reject) => {
+        ticketsDb.run(insertTicketQuery, [
+          args.ticketNo,
+          args.date,
+          args.dateOnly,
+          args.day,
+          JSON.stringify(args.items),
+          args.totalPieces,
+          args.ownerName,
+          args.ownerMob,
+          args.hasPaid,
+          args.totalPrice,
+          args.complete
+        ], function (err) {
+          if (err) {
+            reject(err.message);
+          } else {
+            console.log("Inserted")
+            resolve(`Ticket with ID ${this.lastID} inserted successfully.`);
+          }
+        });
+      });
+  
+      return result;
+    }
+  } catch (error) {
+    return error.message;
+  }
 });
+
+
 
 ipcMain.handle("get-all-tickets", (event) => {
   const sql = "SELECT * FROM tickets ORDER BY ticketNo";
@@ -378,7 +441,7 @@ ipcMain.handle("insert-user", async (event, args) => {
         });
       });
     } else {
-      if (!args.ownerName || !args.ownerMob) {
+      if (!args.ownerMob) {
         return "Missing credientials"
       } else {
         return new Promise((resolve, reject) => {
@@ -441,6 +504,38 @@ ipcMain.handle("get-all-users", (event) => {
     });
   });
 });
+
+ipcMain.handle("update-user-name", async (event, args) => {
+  const updateUserSQL = `UPDATE users SET ownerName = ? WHERE ownerMob = ?`;
+  const updateTicketsOwnerNameSQL = `UPDATE tickets SET ownerName = ? WHERE ownerMob = ?`;
+
+  try {
+    if (!args.ownerMob || !args.ownerName) {
+      return "Missing credentials";
+    }
+
+    return new Promise((resolve, reject) => {
+      // Update ownerName in the users table
+      usersDb.run(updateUserSQL, [args.ownerName, args.ownerMob], function (err) {
+        if (err) {
+          reject(err.message);
+        } else {
+          // Update ownerName in the tickets table
+          ticketsDb.run(updateTicketsOwnerNameSQL, [args.ownerName, args.ownerMob], function (err) {
+            if (err) {
+              reject(err.message);
+            } else {
+              resolve(`User with ownerMob ${args.ownerMob} and associated tickets updated successfully.`);
+            }
+          });
+        }
+      });
+    });
+  } catch (error) {
+    return error.message;
+  }
+});
+
 
 
 // Performance

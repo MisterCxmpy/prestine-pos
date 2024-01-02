@@ -4,11 +4,9 @@ import { useCheckout } from '../../contexts/CheckoutContext';
 import SearchCustomer from '../SearchCustomer';
 
 export default function CustomerForm({ item }) {
-  const [customerPhone, setCustomerPhone] = useState("");
-  const [customerName, setCustomerName] = useState("");
   const [openClose, setOpenClose] = useState(false);
 
-  const { openCloseReceipt, openCloseCustomerForm, setCustomerDetails } = useCheckout();
+  const { openCloseReceipt, openCloseCustomerForm, setCustomerDetails, setCustomerName, setCustomerPhone, customerName, customerPhone } = useCheckout();
 
   const handleCustomerName = (e) => {
     const inputName = e.target.value;

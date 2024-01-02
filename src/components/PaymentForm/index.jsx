@@ -6,7 +6,7 @@ import { useCheckout } from '../../contexts/CheckoutContext';
 
 export default function PaymentForm({ setPreview, data, oldHandleClose }) {
 
-  const { setTicketToComplete } = useTickets()
+  const { setTicketToComplete, getRecentTickets, getTickets } = useTickets()
   const { updatePerformance } = usePerformance()
   const { setPaidAmount } = useCheckout()
 
@@ -42,6 +42,8 @@ export default function PaymentForm({ setPreview, data, oldHandleClose }) {
     handleClose()
     oldHandleClose()
     setPaidAmount(0.0)
+    getRecentTickets()
+    getTickets()
   }
 
   useEffect(() => {

@@ -10,7 +10,7 @@ export default function Discount({ item }) {
     setDiscountType,
     discountValue,
     discountType,
-    updateTotal,
+    updateDiscountTotal
   } = useCheckout();
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Discount({ item }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const calculatedDiscountedPrice = calculateDiscountedPrice();
-    // updateTotal(calculatedDiscountedPrice)
+    updateDiscountTotal(calculatedDiscountedPrice)
     openCloseDiscountForm(false);
   };
 
