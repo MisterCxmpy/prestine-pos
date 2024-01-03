@@ -1,7 +1,7 @@
 {
   "name": "Prestine",
   "private": false,
-  "version": "1.8.2",
+  "version": "1.8.3",
   "author": "Cosgun Hussein",
   "description": "Prestine POS",
   "main": "public/electron.js",
