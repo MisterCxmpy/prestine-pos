@@ -51,6 +51,11 @@ export default function PaidForm({ setPreview, price}) {
     setPaidAmount(0.0)
   }
 
+  const cardPayment = () => {
+    setPaidAmount(totalCost)
+    handleFinish()
+  }
+
   useEffect(() => {
     const entered = parseFloat(inputValue);
     const newChangeAmount = totalCost - entered;
@@ -116,9 +121,10 @@ export default function PaidForm({ setPreview, price}) {
           <div className={styles['bottom']}>
               {totalCost <= 0 ? (
                 <button onClick={() => handleFinish()}>Finish</button>
-              ) : (
+                ) : (
                 <button onClick={handleContinue}>Continue</button>
-              )}
+                )}
+                <button onClick={() => cardPayment()}>Card</button>
             </div>
         </div>
       </div>

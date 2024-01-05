@@ -33,6 +33,11 @@ export default function PaymentForm({ setPreview, data, oldHandleClose }) {
     setInputValue("")
   };
 
+  const cardPayment = (id) => {
+    setPaidAmount(totalCost)
+    handleFinish(id)
+  }
+
   const handleFinish = (id) => {
     updatePerformance(0, data.totalPrice)
     setTicketToComplete(id)
@@ -101,6 +106,7 @@ export default function PaymentForm({ setPreview, data, oldHandleClose }) {
               ) : (
                 <button onClick={handleContinue}>Continue</button>
               )}
+              <button onClick={() => cardPayment(data.id)}>Card</button>
             </div>
         </div>
       </div>
