@@ -139,6 +139,7 @@ export default function FinalReceipt() {
           currentDateTime={currentDateTime}
           ticketNumber={ticketNumber}
           phoneNum={customerDetails.ownerMob}
+          name={customerDetails.ownerName}
           discountValue={discountValue}
           discountType={discountType}
           discount={discount}
@@ -164,6 +165,7 @@ const FullReceipt = forwardRef(
       currentDateTime,
       ticketNumber,
       phoneNum,
+      name,
       discountValue,
       discountType,
       discount
@@ -184,6 +186,7 @@ const FullReceipt = forwardRef(
           currentDateTime={currentDateTime}
           ticketNumber={ticketNumber}
           phoneNum={phoneNum}
+          name={name}
           discountValue={discountValue}
           discountType={discountType}
           discount={discount}
@@ -229,6 +232,7 @@ const FullReceipt = forwardRef(
           currentDateTime={currentDateTime}
           ticketNumber={ticketNumber}
           phoneNum={phoneNum}
+          name={name}
           discountValue={discountValue}
           discountType={discountType}
           discount={discount}
@@ -248,6 +252,7 @@ const MainReceipt = ({
   currentDateTime,
   ticketNumber,
   phoneNum,
+  name,
   discountValue,
   discountType,
   discount
@@ -257,8 +262,9 @@ const MainReceipt = ({
       <div className={styles["heading"]}>
         <p className={`${styles["xl"]} ${styles["title"]}`}>smart n up</p>
         <p className={`${styles["xl"]} ${styles["title"]}`}>Dry Cleaners</p>
-        <p className={styles["info"]}>1 hazelwood court london n13 5ey</p>
-        <p className={styles["info"]}>TEL NO: 020 8886 6385</p>
+        {owner ? "" : <><p className={styles["info"]}>1 hazelwood court london n13 5ey</p>
+        <p className={styles["info"]}>TEL NO: 020 8886 6385</p></>}
+        
       </div>
       <p className={styles["owner"]}>
         {owner ? (
@@ -278,7 +284,11 @@ const MainReceipt = ({
         </p>
         <div className={styles["ticket-no"]}>
           <p>TKT: {ticketNumber.toString().padStart(4, "0")}</p>
-          <p>{owner ? phoneNum : ""}</p>
+          {owner ? <div className={styles['names']}>
+              <p>{name}</p>
+              <p>{phoneNum}</p>
+            </div> : null}
+          
         </div>
         <ul className={styles["ticket-items"]}>
           {checkout.map((c, i) => (
@@ -310,9 +320,6 @@ const MainReceipt = ({
           </li>
           <li className={styles["total-pieces"]}>
             <p>{totalPieces} pieces</p>
-            <p className={styles["note"]}>
-              note: all items left longer than 90 days will be given to charity
-            </p>
           </li>
         </ul>
       </div>
