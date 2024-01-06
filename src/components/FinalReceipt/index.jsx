@@ -320,6 +320,9 @@ const MainReceipt = ({
           </li>
           <li className={styles["total-pieces"]}>
             <p>{totalPieces} pieces</p>
+            {owner ? "" : <p className={styles["note"]}>
+              note: all items left longer than 90 days will be given to charity
+            </p>}
           </li>
         </ul>
       </div>
