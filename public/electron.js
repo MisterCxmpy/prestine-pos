@@ -5,59 +5,20 @@ const path = require('path');
 const fs = require('fs');
 const { autoUpdater, AppUpdater } = require("electron-updater")
 
-function getUserDataPath() {
-  return isDev
-    ? path.join(app.getAppPath(), 'userdata/')
-    : path.join(process.resourcesPath, 'userdata/');
+const userDocumentsPath = app.getPath('documents');
+const prestineFolderPath = path.join(userDocumentsPath, 'Prestine');
+
+if (!isDev && !fs.existsSync(prestineFolderPath)) {
+  fs.mkdirSync(prestineFolderPath);
 }
 
-function backupUserData() {
-  const userDataPath = getUserDataPath();
-  const backupPath = path.join(userDataPath, 'backup');
-
-  fs.mkdirSync(backupPath, { recursive: true });
-
-  const filesToBackup = ['persistentFile'];
-
-  filesToBackup.forEach((file) => {
-    fs.copyFileSync(path.join(userDataPath, file), path.join(backupPath, `${file}_backup`));
-  });
-}
-
-// Function to restore user data after update
-function restoreUserData() {
-  const userDataPath = getUserDataPath();
-  const backupPath = path.join(userDataPath, 'backup');
-
-  const filesToRestore = ['persistentFile']; // Add more files if needed
-
-  filesToRestore.forEach((file) => {
-    const backupFilePath = path.join(backupPath, `${file}_backup`);
-    const targetFilePath = path.join(userDataPath, file);
-
-    // Check if the backup file exists before attempting to restore
-    if (fs.existsSync(backupFilePath)) {
-      fs.copyFileSync(backupFilePath, targetFilePath);
-    } else {
-      console.error(`Backup file ${backupFilePath} not found. Skipping restore.`);
-    }
-  });
-
-  // Optionally, remove the backup directory after restoring data
-  if (fs.existsSync(backupPath)) {
-    fs.rmSync(backupPath, { recursive: true });
-  }
-}
-
-
-
-const usersDbPath = isDev ? path.join(__dirname, "../db/users.db") : path.join(process.resourcesPath, "/db/users.db");
+const usersDbPath = isDev ? path.join(__dirname, "../db/users.db") : path.join(prestineFolderPath, "/db/users.db");
 const usersDb = new sqlite3.Database(usersDbPath, sqlite3.OPEN_READWRITE);
 
-const ticketsDbPath = isDev ? path.join(__dirname, "../db/tickets.db") : path.join(process.resourcesPath, "/db/tickets.db");
+const ticketsDbPath = isDev ? path.join(__dirname, "../db/tickets.db") : path.join(prestineFolderPath, "/db/tickets.db");
 const ticketsDb = new sqlite3.Database(ticketsDbPath, sqlite3.OPEN_READWRITE);
 
-const performanceDbPath = isDev ? path.join(__dirname, "../db/performance.db") : path.join(process.resourcesPath, "/db/performance.db");
+const performanceDbPath = isDev ? path.join(__dirname, "../db/performance.db") : path.join(prestineFolderPath, "/db/performance.db");
 const performanceDb = new sqlite3.Database(performanceDbPath, sqlite3.OPEN_READWRITE);
 
 let mainWindow;
@@ -105,7 +66,6 @@ app.setPath(
 );
 
 app.whenReady().then(() => {
-  restoreUserData()
   createWindow();
 });
 
@@ -144,7 +104,6 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
 
   dialog.showMessageBox(dialogOpts).then((returnValue) => {
     if (returnValue.response === 0) {
-      backupUserData();
       autoUpdater.quitAndInstall();
     }
   });
@@ -573,14 +532,14 @@ ipcMain.handle("create-new-day", async (event, args) => {
 // Services
 
 ipcMain.handle('get-all-services', (event, args) => {
-  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(process.resourcesPath, "services.json");
+  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(prestineFolderPath, "services.json");
   const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
 
   return services.services;
 });
 
 ipcMain.handle('add-item', (event, args) => {
-  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(process.resourcesPath, "services.json");
+  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(prestineFolderPath, "services.json");
   const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
 
   services.services[args.category] = [...services.services[args.category], args.item];
@@ -591,7 +550,7 @@ ipcMain.handle('add-item', (event, args) => {
 });
 
 ipcMain.handle('delete-item', (event, args) => {
-  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(process.resourcesPath, "services.json");
+  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(prestineFolderPath, "services.json");
   const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
 
   const itemId = args.itemId;

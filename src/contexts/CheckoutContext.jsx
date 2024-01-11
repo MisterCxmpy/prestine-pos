@@ -39,27 +39,27 @@ export const CheckoutProvider = ({ children }) => {
   }
 
   const addToCheckout = (item) => {
-    const existingItem = checkout.find(
-      (existingItem) => existingItem.id === item.id
+    const existingItemIndex = checkout.findIndex(
+      (existingItem) => existingItem.id === item.id && existingItem.price === item.price
     );
-
-    if (existingItem) {
-      const updatedCheckout = checkout.map((existingItem) =>
-        existingItem.id === item.id
-          ? { ...existingItem, quantity: existingItem.quantity + 1 }
-          : existingItem
-      );
+  
+    if (existingItemIndex !== -1) {
+      const updatedCheckout = [...checkout];
+      updatedCheckout[existingItemIndex] = {
+        ...updatedCheckout[existingItemIndex],
+        quantity: updatedCheckout[existingItemIndex].quantity + 1,
+      };
       setCheckout(updatedCheckout);
     } else {
-      setCheckout([...checkout, { ...item }]);
+      setCheckout([...checkout, { ...item, quantity: 1 }]);
     }
   };
-
+  
   const removeFromCheckout = (item) => {
     const existingItemIndex = checkout.findIndex(
-      (existingItem) => existingItem.id === item.id
+      (existingItem) => existingItem.id === item.id && existingItem.price === item.price
     );
-
+  
     if (existingItemIndex !== -1) {
       const updatedCheckout = [...checkout];
       if (updatedCheckout[existingItemIndex].quantity > 1) {
@@ -73,11 +73,15 @@ export const CheckoutProvider = ({ children }) => {
       setCheckout(updatedCheckout);
     }
   };
+  
 
-  const removeAllOfType = (itemId) => {
-    const updatedCheckout = checkout.filter((item) => item.id !== itemId);
+  const removeAllOfType = (itemId, itemPrice) => {
+    const updatedCheckout = checkout.filter(
+      (item) => !(item.id === itemId && item.price === itemPrice)
+    );
     setCheckout(updatedCheckout);
   };
+  
 
   const removeAll = () => {
     setCheckout([]);

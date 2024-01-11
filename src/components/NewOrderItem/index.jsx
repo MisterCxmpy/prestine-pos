@@ -15,7 +15,7 @@ export default function NewOrderItem({ itemData }) {
   };
 
   const handleRemoval = () => {
-    removeAllOfType(itemData.id)
+    removeAllOfType(itemData.id, itemData.price)
   }
   
   return (
