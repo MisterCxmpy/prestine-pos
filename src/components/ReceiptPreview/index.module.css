@@ -174,4 +174,12 @@
 .info {
   font-size: 14.5px !important;
   letter-spacing: 2px;
+}
+
+.names {
+  margin: 5px 0;
+}
+.names p {
+  text-align: right;
+  font-size: 20px;
 }/*# sourceMappingURL=index.module.css.map */

@@ -6,7 +6,7 @@ import { useTickets } from "../../contexts/TicketsContext";
 import { ReceiptPreview, TicketsTable } from "../../components";
 
 export default function Customers() {
-  const { users, getUsers, updateUser } = useUsers();
+  const { users, getUsers, updateUser, deleteUserById } = useUsers();
   const { getTicketForCustomer, customerTickets, setCustomerTickers } =
     useTickets();
   const { setQuery, result } = useSearch(users, "customer");
@@ -130,6 +130,7 @@ export default function Customers() {
                       Save
                     </button>
                   ) : null}
+                  <button type='button' onClick={(e) => {e.stopPropagation(); deleteUserById(u.userID)}}>Delete</button>
                 </div>
               </tr>
             ))

@@ -434,7 +434,22 @@ ipcMain.handle("update-user-name", async (event, args) => {
   }
 });
 
-
+ipcMain.handle("delete-user-by-id", (event, args) => {
+  const sql = "DELETE FROM users WHERE id = ?";
+  return new Promise((resolve, reject) => {
+    usersDb.run(sql, [args], function (err) {
+      if (err) {
+        reject(err.message);
+      } else {
+        if (this.changes > 0) {
+          resolve({ success: true, message: "User deleted successfully" });
+        } else {
+          resolve({ success: false, message: "User not found" });
+        }
+      }
+    });
+  });
+});
 
 // Performance
 

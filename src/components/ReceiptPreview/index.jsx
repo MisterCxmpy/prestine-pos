@@ -70,15 +70,16 @@ const Receipt = forwardRef(({ data }, ref) => {
       <div className={styles['heading']}>
         <p className={`${styles['xl']} ${styles["title"]}`}>smart n up</p>
         <p className={`${styles['xl']} ${styles["title"]}`}>Dry Cleaners</p>
-        <p className={styles['info']}>1 hazelwood court london n13 5ey</p>
-        <p className={styles['info']}>TEL NO: 020 8886 6385</p>
       </div>
       <p className={styles['owner']}>SHOP COPY</p>
       <div className={styles['receipt-info']}>
         <p className={styles['ticket-date']}>reg<b>{data.day}</b>{data.date}</p>
         <div className={styles['ticket-no']}>
           <p>TKT: {data.ticketNo}</p>
-          <p>{data.ownerMob}</p>
+          <div className={styles['names']}>
+              <p>{data.ownerName}</p>
+              <p>{data.ownerMob}</p>
+            </div>
         </div>
         <ul className={styles['ticket-items']}>
           {data.items.map((i, x) => (
@@ -97,7 +98,6 @@ const Receipt = forwardRef(({ data }, ref) => {
           </li>
           <li className={styles['total-pieces']}>
             <p>{data.totalPieces} pieces</p>
-            <p className={styles['note']}>note: all items left longer than 90 days will be given to charity</p>
           </li>
         </ul>
       </div>

@@ -15,6 +15,7 @@ contextBridge.exposeInMainWorld('api', {
   updateUserTickets: (args) => ipcRenderer.invoke('update-user-tickets', args),
   getAllUsers: (args) => ipcRenderer.invoke('get-all-users', args),
   updateUserName: (args) => ipcRenderer.invoke('update-user-name', args),
+  deleteUserById: (args) => ipcRenderer.invoke("delete-user-by-id", args),
 
   getTodaysPerformance: (args) => ipcRenderer.invoke('get-performance-today', args),
   getAllPerformance: (args) => ipcRenderer.invoke('get-all-performance', args),
