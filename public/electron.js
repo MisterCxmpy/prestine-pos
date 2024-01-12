@@ -403,23 +403,23 @@ ipcMain.handle("get-all-users", (event) => {
   });
 });
 
-ipcMain.handle("update-user-name", async (event, args) => {
-  const updateUserSQL = `UPDATE users SET ownerName = ? WHERE ownerMob = ?`;
-  const updateTicketsOwnerNameSQL = `UPDATE tickets SET ownerName = ? WHERE ownerMob = ?`;
+ipcMain.handle("update-user", async (event, args) => {
+  const updateUserSQL = `UPDATE users SET ownerName = ?, ownerMob = ? WHERE ownerMob = ?`;
+  const updateTicketsOwnerSQL = `UPDATE tickets SET ownerName = ?, ownerMob = ? WHERE ownerMob = ?`;
 
   try {
-    if (!args.ownerMob || !args.ownerName) {
+    if (!args.ownerMob || !args.ownerName || !args.newOwnerMob) {
       return "Missing credentials";
     }
 
     return new Promise((resolve, reject) => {
-      // Update ownerName in the users table
-      usersDb.run(updateUserSQL, [args.ownerName, args.ownerMob], function (err) {
+      // Update ownerName and ownerMob in the users table
+      usersDb.run(updateUserSQL, [args.ownerName, args.newOwnerMob, args.ownerMob], function (err) {
         if (err) {
           reject(err.message);
         } else {
-          // Update ownerName in the tickets table
-          ticketsDb.run(updateTicketsOwnerNameSQL, [args.ownerName, args.ownerMob], function (err) {
+          // Update ownerName and ownerMob in the tickets table
+          ticketsDb.run(updateTicketsOwnerSQL, [args.ownerName, args.newOwnerMob, args.ownerMob], function (err) {
             if (err) {
               reject(err.message);
             } else {
@@ -433,6 +433,7 @@ ipcMain.handle("update-user-name", async (event, args) => {
     return error.message;
   }
 });
+
 
 ipcMain.handle("delete-user-by-id", (event, args) => {
   const sql = "DELETE FROM users WHERE id = ?";

@@ -33,11 +33,12 @@ export default function Customers() {
     setEditedOwnerMob(u.ownerMob || "");
   };
 
-  const handleSaveClick = (e) => {
+  const handleSaveClick = (e, u) => {
     e.stopPropagation();
     updateUser({
       ownerName: editedOwnerName,
-      ownerMob: editedOwnerMob,
+      newOwnerMob: editedOwnerMob,
+      ownerMob: u.ownerMob,
     });
     setEditMode(false);
     getUsers();
@@ -126,7 +127,7 @@ export default function Customers() {
                     Edit
                   </button>
                   {editMode && selectedUser.userID === u.userID ? (
-                    <button type="button" onClick={(e) => {handleSaveClick(e)}}>
+                    <button type="button" onClick={(e) => {handleSaveClick(e, u)}}>
                       Save
                     </button>
                   ) : null}

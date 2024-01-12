@@ -11,7 +11,7 @@ export const UsersProvider = ({ children }) => {
   }
 
   const updateUser = (updateData) => {
-    const response = window.api.updateUserName(updateData)
+    const response = window.api.updateUser(updateData)
   }
 
   const getUsers = async () => {
