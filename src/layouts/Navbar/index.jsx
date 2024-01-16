@@ -9,6 +9,7 @@ import { MdOutlineRecentActors } from "react-icons/md"
 import { IoIosStats } from "react-icons/io"
 import { useNavbar } from "../../contexts/NavbarContext";
 import { useItem } from "../../contexts/ItemContext";
+import packageJson from '../../../package.json';
 
 export default function Navbar() {
 
@@ -46,6 +47,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+        <p className={styles['version']}>v{packageJson.version}</p>
       </nav>
       <Outlet />
     </>

@@ -9,6 +9,8 @@
   top: 0;
   left: 0;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .sidebar::before {
   top: 2.5%;
@@ -122,4 +124,8 @@
   pointer-events: auto;
   transition: var(--transition);
   padding: 10px 5px;
+}
+
+.version {
+  margin-top: auto;
 }/*# sourceMappingURL=index.module.css.map */
