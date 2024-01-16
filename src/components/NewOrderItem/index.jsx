@@ -30,7 +30,7 @@ export default function NewOrderItem({ itemData }) {
           <BiSolidMinusSquare onClick={() => handleDecrement()} />
           <p>{itemData.quantity}</p>
           <BiSolidPlusSquare onClick={() => handleIncrement()} />
-          <BiSolidTrash onClick={() => handleRemoval()} />
+          <BiSolidTrash className={styles['trash-btn']} onClick={() => handleRemoval()} />
         </div>
       </div>
     </li>
