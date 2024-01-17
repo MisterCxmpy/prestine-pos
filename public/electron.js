@@ -94,43 +94,7 @@ autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {
 })
 
 autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
-  const dialogOpts = {
-    type: 'info',
-    buttons: ['Restart', 'Later'],
-    title: 'Application Update',
-    message: process.platform === 'win32' ? releaseNotes : releaseName,
-    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-  };
-
-  dialog.showMessageBox(dialogOpts).then((returnValue) => {
-    if (returnValue.response === 0) {
-      autoUpdater.quitAndInstall();
-    }
-  });
-});
-
-autoUpdater.on('checking-for-update', () => {
-  console.log('Checking for update...');
-});
-
-autoUpdater.on('update-available', (info) => {
-  console.log('Update available:', info);
-});
-
-autoUpdater.on('update-not-available', () => {
-  console.log('Update not available.');
-});
-
-autoUpdater.on('error', (err) => {
-  console.error('Update error:', err);
-});
-
-autoUpdater.on('download-progress', (progressObj) => {
-  console.log('Download progress:', progressObj);
-});
-
-autoUpdater.on('update-downloaded', (info) => {
-  console.log('Update downloaded:', info);
+  autoUpdater.quitAndInstall();
 });
 
 process.on('uncaughtException', (error) => {
