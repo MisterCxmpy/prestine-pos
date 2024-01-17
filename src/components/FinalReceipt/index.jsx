@@ -336,13 +336,14 @@ const ItemReceipt = forwardRef(
     ref
   ) => {
     return (
-      <div ref={ref} className={styles["receipt-info"]}>
+      <div ref={ref} className={`${styles["receipt-info"]} ${styles["item-receipt"]}`}>
         <p className={styles["ticket-date"]}>
           reg<b>{day}</b>
           {currentDateTime}
         </p>
         <div className={styles["ticket-no"]}>
           <p>TKT: {ticketNumber.toString().padStart(4, "0")}</p>
+          <p>{ticketNumber.toString().padStart(4, "0")}</p>
         </div>
         <ul className={styles["ticket-items"]}>
           <li className={styles["ticket-item"]}>

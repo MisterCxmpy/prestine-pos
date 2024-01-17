@@ -78,14 +78,15 @@
   flex-direction: column;
   align-items: center;
   max-width: 280px;
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: "Lucida Console", Monaco, monospace;
 }
 .receipt p {
   color: black;
   text-transform: uppercase;
   font-weight: 600;
   text-align: center;
-  font-size: 15.6px;
+  font-size: 16px;
+  transform: scaleY(1.4);
 }
 
 .heading {
@@ -97,6 +98,10 @@
   margin-top: 20px;
   margin-bottom: 20px;
   width: 100%;
+}
+
+.item-receipt {
+  margin-top: 0 !important;
 }
 
 .ticket-items {
@@ -128,8 +133,9 @@
 }
 
 .note {
-  font-size: 13.5px !important;
-  margin: 5px 0;
+  font-size: 14px !important;
+  margin-top: 15px;
+  line-height: 1.4;
 }
 
 .names {
@@ -162,6 +168,8 @@
 }
 .ticket-no > P {
   font-size: 20px !important;
+  height: 100%;
+  margin: 5px 0;
 }
 
 @media print {
@@ -183,6 +191,7 @@
 }
 
 .info {
-  font-size: 14.5px !important;
+  font-size: 15px !important;
   letter-spacing: 2px;
+  margin-top: 15px;
 }/*# sourceMappingURL=index.module.css.map */
