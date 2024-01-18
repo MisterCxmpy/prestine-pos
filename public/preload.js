@@ -19,6 +19,8 @@ contextBridge.exposeInMainWorld('api', {
 
   getTodaysPerformance: (args) => ipcRenderer.invoke('get-performance-today', args),
   getAllPerformance: (args) => ipcRenderer.invoke('get-all-performance', args),
+  getAllWeeklyPerformance: (args) => ipcRenderer.invoke('get-all-week-performance', args),
+  getMonthlyEarnings: (args) => ipcRenderer.invoke('get-monthly-earnings', args),
   updatePerformance: (args) => ipcRenderer.invoke('update-performance', args),
   createNewDay: (args) => ipcRenderer.invoke('create-new-day', args),
 

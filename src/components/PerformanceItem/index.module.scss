@@ -10,8 +10,12 @@
   border-radius: var(--border-radius);
 }
 
+.active {
+  border: 6px solid #FF5733;
+}
+
 .item-heading {
-  font-size: 32px;
+  font-size: 24px;
   margin: 12px 0;
 }
 

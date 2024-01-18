@@ -3,6 +3,26 @@
   display: grid;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25px;
+}
+.header > button {
+  padding: 10px;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+}
+.header > button > svg {
+  float: right;
+}
+
 .performance {
   height: 100%;
   padding: 10px;
@@ -10,7 +30,6 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
-  max-height: calc(100vh - 50px);
 }
 
 .performance-list {

@@ -288,7 +288,6 @@ const MainReceipt = ({
               <p>{name}</p>
               <p>{phoneNum}</p>
             </div> : null}
-          
         </div>
         <ul className={styles["ticket-items"]}>
           {checkout.map((c, i) => (

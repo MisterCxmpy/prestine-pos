@@ -14,8 +14,6 @@ dist-ssr
 releases
 userdata
 userdata/*
-db
-db/*
 src/data/*
 
 # Editor directories and files
