@@ -134,7 +134,7 @@
 
 .note {
   font-size: 14px !important;
-  margin-top: 15px;
+  margin: 15px -25px;
   line-height: 1.4;
 }
 
@@ -194,4 +194,15 @@
   font-size: 15px !important;
   letter-spacing: 2px;
   margin-top: 15px;
+}
+
+.item-receipt .total-pieces {
+  margin: 0 !important;
+  margin-top: 10px !important;
+}
+.item-receipt .ticket-no {
+  margin-bottom: 0 !important;
+}
+.item-receipt .ticket-items {
+  padding: 0 25px !important;
 }/*# sourceMappingURL=index.module.css.map */

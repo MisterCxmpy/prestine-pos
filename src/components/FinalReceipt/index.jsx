@@ -271,9 +271,7 @@ const MainReceipt = ({
           "SHOP COPY"
         ) : (
           <>
-            CUSTOMER
-            <br />
-            RECEIPT
+            CUSTOMER RECEIPT
           </>
         )}
       </p>
