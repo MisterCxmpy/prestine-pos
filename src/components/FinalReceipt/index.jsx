@@ -350,6 +350,7 @@ const ItemReceipt = forwardRef(
               <p>
                 {quantity} {name}
               </p>
+              <p>reg <b>{day}</b></p>
             </div>
           </li>
           <li className={styles["total-pieces"]}>

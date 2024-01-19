@@ -1,7 +1,7 @@
 {
   "name": "Prestine",
   "private": false,
-  "version": "1.8.12",
+  "version": "1.9.0",
   "author": "Cosgun Hussein",
   "description": "Prestine POS",
   "main": "public/electron.js",
@@ -22,7 +22,7 @@
     "pack-app": "npm run start-build && electron-builder --win -p always",
     "pack-build": "electron-builder --dir",
     "build": "npm run start-build && electron-builder",
-    "clear": "concurrently \"node db/users.js\" \"node db/tickets.js\" \"node db/performance.js\""
+    "clear": "concurrently \"node db/users.js\" \"node db/tickets.js\" \"node db/performance.js\" \"node db/weeklyEarnings.js\""
   },
   "build": {
     "appId": "com.prestine.app",
