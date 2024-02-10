@@ -44,6 +44,7 @@ export default function SearchCustomer({ onSelectCustomer, openClose, setOpenClo
       <div className={styles['customers-section']}>
         <div className={styles['customers']}>
           <input
+            autoFocus
             className={styles['search-bar']}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for Customer"

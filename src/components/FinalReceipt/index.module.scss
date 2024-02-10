@@ -80,27 +80,30 @@
   flex-direction: column;
   align-items: center;
   max-width: 280px;
-  // font-family: 'Helvetica', 'Arial', sans-serif;
-  font-family: "Lucida Console", Monaco, monospace;
+  font-family: 'Helvetica', 'Arial', sans-serif;
 
   p {
     color: black;
     text-transform: uppercase;
-    font-weight: 600;
     text-align: center;
-    font-size: 16px;
-    transform: scaleY(1.4);
+    font-size: 18px;
+    // letter-spacing: 2px;
+    // transform: scaleY(1.4);
   }
 }
 
+
+
 .heading {
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
 }
 
 .receipt-info {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
@@ -138,7 +141,7 @@
 }
 
 .note {
-  font-size: 14px !important;
+  font-size: 12px !important;
   margin: 15px -25px;
   line-height: 1.4;
 }
@@ -148,7 +151,7 @@
 
   p {
     text-align: right;
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -163,7 +166,7 @@
 
   > b {
     margin-right: auto;
-    margin-left: 20px;
+    margin-left: 6px;
   }
 }
 
@@ -174,9 +177,10 @@
   margin-bottom: 10px;
   
   > P {
-    font-size: 20px !important;
+    font-size: 22px !important;
     height: 100%;
     margin: 5px 0;
+    text-align: left;
   }
 }
 
@@ -188,11 +192,12 @@
 }
 
 .xl {
-  font-size: 18px !important;
+  font-size: 20px !important;
 }
 
 .title {
   word-spacing: 10px;
+  font-size: 16px !important;
 }
 
 .owner {
@@ -201,9 +206,13 @@
 }
 
 .info {
-  font-size: 15px !important;
+  font-size: 16px !important;
   letter-spacing: 2px;
-  margin-top: 15px;
+  // margin-top: 10px;
+}
+
+.num {
+  font-size: 17px !important;
 }
 
 .item-receipt {

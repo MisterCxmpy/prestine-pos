@@ -20,7 +20,7 @@ export default function Tickets() {
     <>
       <section className={styles['tickets-section']}>
         <div className={styles['tickets']}>
-          <input className={styles['search-bar']} onChange={(e) => setQuery(e.target.value)} placeholder='Search for Ticket' type="text" />
+          <input autoFocus className={styles['search-bar']} onChange={(e) => setQuery(e.target.value)} placeholder='Search for Ticket' type="text" />
           <table className={styles['tickets-list']}>
             <TicketsTable result={result} setPreview={setPreview} setTicketData={setTicketData} />
           </table>

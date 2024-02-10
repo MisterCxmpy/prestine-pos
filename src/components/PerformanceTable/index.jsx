@@ -16,7 +16,7 @@ export default function PerformanceTable({ performanceData }) {
           <tr key={index}>
             <td>{performance.date}</td>
             <td>{performance.takenIn}</td>
-            <td>{"£" + Math.abs(performance.earnings * 0.25).toFixed(2)}</td>
+            <td>{"£" + Math.abs(performance.earnings * 0.80).toFixed(2)}</td>
           </tr>
         ))}
       </tbody>

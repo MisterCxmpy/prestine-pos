@@ -18,17 +18,19 @@ function useSearch(searches, type) {
               searches.filter((search) => {
                 const mobile = search.ownerMob?.toLowerCase();
                 const name = search.ownerName?.toLowerCase();
-                return mobile.includes(queryLower) || name.includes(queryLower);
-              }))
+                return mobile.includes(queryLower) || name.startsWith(queryLower);
+              })
+            );
             break;
           case "ticket":
             setResult(
               searches.filter((search) => {
                 const ticket = search.ticketNo?.toLowerCase();
                 const mobile = search.ownerMob?.toLowerCase();
-                const name = search.ownerName.toLowerCase();
-                return mobile.includes(queryLower) || name.includes(queryLower) || ticket.includes(queryLower);
-              }))
+                const name = search.ownerName?.toLowerCase();
+                return mobile.includes(queryLower) || name.startsWith(queryLower) || ticket.startsWith(queryLower);
+              })
+            );
             break;
           case "service":
             setResult(
@@ -43,12 +45,11 @@ function useSearch(searches, type) {
         }
       }
     }
-    
-  
+
     if (query !== "") {
       setSearching(true);
     }
-  
+
     return () => {
       setSearching(false);
     };

@@ -25,7 +25,7 @@ export default function FinalReceipt() {
     discountValue,
     discountType,
     discount,
-    completeCheckout
+    completeCheckout,
   } = useCheckout();
   const { insertTicket, generateTicketNumber, ticketNumber } = useTickets();
   const { updatePerformance } = usePerformance();
@@ -37,10 +37,10 @@ export default function FinalReceipt() {
       const itemNameLowercase = item.name.toLowerCase();
       const quantityMultiplier = itemMultiplierConfig[itemNameLowercase] || 1;
       const quantityToAdd = item.quantity * quantityMultiplier;
-  
+
       return acc + quantityToAdd;
     }, 0);
-  
+
     setTotalPieces(totalPiecesCount);
   }, [checkout]);
 
@@ -79,7 +79,7 @@ export default function FinalReceipt() {
     insertTicket(ticket);
     insertUser({ ...customerDetails, tickets: [ticket] });
     updatePerformance(totalPieces, paidAmount);
-    completeCheckout()
+    completeCheckout();
   };
 
   const [currentDateTime, setCurrentDateTime] = useState("");
@@ -168,7 +168,7 @@ const FullReceipt = forwardRef(
       name,
       discountValue,
       discountType,
-      discount
+      discount,
     },
     ref
   ) => {
@@ -196,7 +196,8 @@ const FullReceipt = forwardRef(
           const items = [];
 
           const itemNameLowercase = c.name.toLowerCase();
-          const quantityMultiplier = itemMultiplierConfig[itemNameLowercase] || 1;
+          const quantityMultiplier =
+            itemMultiplierConfig[itemNameLowercase] || 1;
           const quantity = c.quantity * quantityMultiplier;
 
           for (let index = 0; index < quantity; index++) {
@@ -255,25 +256,28 @@ const MainReceipt = ({
   name,
   discountValue,
   discountType,
-  discount
+  discount,
 }) => {
   return (
     <>
       <div className={styles["heading"]}>
-        <p className={`${styles["xl"]} ${styles["title"]}`}>smart n up</p>
-        <p className={`${styles["xl"]} ${styles["title"]}`}>Dry Cleaners</p>
-        {owner ? "" : <><p className={styles["info"]}>1 hazelwood court london n13 5ey</p>
-        <p className={styles["info"]}>TEL NO: 020 8886 6385</p></>}
-        
-      </div>
-      <p className={styles["owner"]}>
+        <div>
+          <p className={`${styles["xl"]} ${styles["title"]}`}>smart n up</p>
+          <p className={`${styles["xl"]} ${styles["title"]}`}>Dry Cleaners</p>
+        </div>
         {owner ? (
-          "SHOP COPY"
+          ""
         ) : (
           <>
-            CUSTOMER RECEIPT
+            <p className={styles["info"]}>1 hazelwood court london n13 5ey</p>
+            <p className={`${styles["info"]} ${styles["num"]}`}>
+              TEL NO: 020 8886 6385
+            </p>
           </>
         )}
+      </div>
+      <p className={styles["owner"]}>
+        {owner ? "SHOP COPY" : <>CUSTOMER RECEIPT</>}
       </p>
       <div className={styles["receipt-info"]}>
         <p className={styles["ticket-date"]}>
@@ -282,10 +286,12 @@ const MainReceipt = ({
         </p>
         <div className={styles["ticket-no"]}>
           <p>TKT: {ticketNumber.toString().padStart(4, "0")}</p>
-          {owner ? <div className={styles['names']}>
+          {owner ? (
+            <div className={styles["names"]}>
               <p>{name}</p>
               <p>{phoneNum}</p>
-            </div> : null}
+            </div>
+          ) : null}
         </div>
         <ul className={styles["ticket-items"]}>
           {checkout.map((c, i) => (
@@ -304,7 +310,8 @@ const MainReceipt = ({
                 <p>DISCOUNT</p>
                 <p>
                   {parseFloat(discountValue).toFixed(2)}{" "}
-                  {discountType == "%" ? "%" : null}{` (${total > 0 ? total.toFixed(2) : 0})`}
+                  {discountType == "%" ? "%" : null}
+                  {` (${total > 0 ? total.toFixed(2) : 0})`}
                 </p>
               </div>
             </li>
@@ -312,14 +319,21 @@ const MainReceipt = ({
           <li className={styles["ticket-item"]}>
             <div className={styles["ticket-item-name"]}>
               <p>{hasPaid ? "PAID" : "TO PAY"}</p>
-              <p>{discountValue > 0 ? discount.toFixed(2) : total.toFixed(2)}</p>
+              <p>
+                {discountValue > 0 ? discount.toFixed(2) : total.toFixed(2)}
+              </p>
             </div>
           </li>
           <li className={styles["total-pieces"]}>
             <p>{totalPieces} pieces</p>
-            {owner ? "" : <p className={styles["note"]}>
-              note: all items left longer than 90 days will be given to charity
-            </p>}
+            {owner ? (
+              ""
+            ) : (
+              <p className={styles["note"]}>
+                note: all items left longer than 90 days will be given to
+                charity
+              </p>
+            )}
           </li>
         </ul>
       </div>
@@ -333,7 +347,10 @@ const ItemReceipt = forwardRef(
     ref
   ) => {
     return (
-      <div ref={ref} className={`${styles["receipt-info"]} ${styles["item-receipt"]}`}>
+      <div
+        ref={ref}
+        className={`${styles["receipt-info"]} ${styles["item-receipt"]}`}
+      >
         <p className={styles["ticket-date"]}>
           reg<b>{day}</b>
           {currentDateTime}
@@ -348,7 +365,9 @@ const ItemReceipt = forwardRef(
               <p>
                 {quantity} {name}
               </p>
-              <p>reg <b>{day}</b></p>
+              <p>
+                reg <b>{day}</b>
+              </p>
             </div>
           </li>
           <li className={styles["total-pieces"]}>

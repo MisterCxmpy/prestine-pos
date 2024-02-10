@@ -151,6 +151,7 @@ export default function Customers() {
         <div className={styles["customers"]}>
           {customerTickets.length === 0 ? (
             <input
+              autoFocus
               className={styles["search-bar"]}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search for Customer"

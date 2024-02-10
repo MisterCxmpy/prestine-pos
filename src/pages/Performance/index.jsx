@@ -24,7 +24,7 @@ export default function Performance() {
         <h1>Performance Stats</h1>
         <ul className={styles['performance-list']}>
           <PerformanceItem heading={'Taken In*'} value={todaysPerformance[0]?.takenIn} desc={'The amount of items brought into the shop today.'} />
-          <PerformanceItem heading={'Earnings*'} value={`£${(Math.abs(todaysPerformance[0]?.earnings * 0.25)).toFixed(2)}`} desc={'The amount of money earned today.'} />
+          <PerformanceItem heading={'Earnings*'} value={`£${(Math.abs(todaysPerformance[0]?.earnings * 0.80)).toFixed(2)}`} desc={'The amount of money earned today.'} />
         </ul>
       </div>
       <div className={styles['performance']}>
@@ -40,7 +40,7 @@ export default function Performance() {
               <PerformanceItem
                 key={index}
                 heading={`Week ${index + 1}`}
-                value={`£${(weekData.earnings * 0.25).toFixed(2)}`}
+                value={`£${(weekData.earnings * 0.80).toFixed(2)}`}
                 desc={`Earnings for Week ${index + 1}`}
                 active={currentWeek === index + 1}
               />
@@ -61,7 +61,7 @@ export default function Performance() {
               <PerformanceItem
                 key={index}
                 heading={`Month ${index + 1}`}
-                value={`£${(monthData.totalEarnings * 0.25).toFixed(2)}`}
+                value={`£${(monthData.totalEarnings * 0.80).toFixed(2)}`}
                 desc={`Earnings for Month ${index + 1}`}
               />
             ))}
