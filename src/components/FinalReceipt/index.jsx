@@ -281,7 +281,7 @@ const MainReceipt = ({
       </p>
       <div className={styles["receipt-info"]}>
         <p className={styles["ticket-date"]}>
-          reg<b>{day}</b>
+          reg<span>{day}</span>
           {currentDateTime}
         </p>
         <div className={styles["ticket-no"]}>
