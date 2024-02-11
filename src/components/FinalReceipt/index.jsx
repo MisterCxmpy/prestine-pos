@@ -352,7 +352,7 @@ const ItemReceipt = forwardRef(
         className={`${styles["receipt-info"]} ${styles["item-receipt"]}`}
       >
         <p className={styles["ticket-date"]}>
-          reg<b>{day}</b>
+          reg<span>{day}</span>
           {currentDateTime}
         </p>
         <div className={styles["ticket-no"]}>
@@ -366,7 +366,7 @@ const ItemReceipt = forwardRef(
                 {quantity} {name}
               </p>
               <p>
-                reg <b>{day}</b>
+                reg {day}
               </p>
             </div>
           </li>
