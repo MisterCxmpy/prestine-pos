@@ -28,7 +28,7 @@ function useSearch(searches, type) {
                 const ticket = search.ticketNo?.toLowerCase();
                 const mobile = search.ownerMob?.toLowerCase();
                 const name = search.ownerName?.toLowerCase();
-                return mobile.includes(queryLower) || name.startsWith(queryLower) || ticket.startsWith(queryLower);
+                return mobile.includes(queryLower) || name.startsWith(queryLower) || ticket.includes(queryLower);
               })
             );
             break;

@@ -107,7 +107,6 @@
   padding: 10px 25px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
 }
 
 .ticket-item {
@@ -156,7 +155,6 @@
 }
 .ticket-date > span {
   margin-right: auto;
-  margin-left: 6px;
 }
 
 .ticket-no {
@@ -200,7 +198,7 @@
 
 .item-receipt .total-pieces {
   margin: 0 !important;
-  margin-top: 10px !important;
+  margin-top: 6px !important;
 }
 .item-receipt .ticket-no {
   margin-bottom: 0 !important;
