@@ -2,20 +2,27 @@ import React, { useState, useEffect } from 'react';
 import styles from './index.module.css';
 import { useCheckout } from '../../contexts/CheckoutContext';
 import SearchCustomer from '../SearchCustomer';
+import { useUsers } from '../../contexts/UsersContext';
+import useSearch from '../../hooks/useSearch';
 
 export default function CustomerForm({ item }) {
   const [openClose, setOpenClose] = useState(false);
+
+  const { users, getUsers } = useUsers();
+  const { setQuery, result } = useSearch(users, 'customer');
 
   const { openCloseReceipt, openCloseCustomerForm, setCustomerDetails, setCustomerName, setCustomerPhone, customerName, customerPhone } = useCheckout();
 
   const handleCustomerName = (e) => {
     const inputName = e.target.value;
     setCustomerName(inputName);
+    setQuery(inputName);
   };
 
   const handleCustomerPhone = (e) => {
     const inputPhone = e.target.value;
     setCustomerPhone(inputPhone);
+    setQuery(inputPhone);
   };
 
   const handleSubmit = (e) => {
@@ -39,6 +46,8 @@ export default function CustomerForm({ item }) {
   };
 
   useEffect(() => {
+    getUsers();
+
     const handleKeyPressEvent = (event) => {
       if (event.key === 'Escape') {
         closeCheck();
@@ -55,6 +64,7 @@ export default function CustomerForm({ item }) {
 
   return (
     <div className={styles['overlay']}>
+      <SearchCustomer onSelectCustomer={handleSelectCustomer} result={result} />
       <div className={styles['outer']}>
         <button onClick={closeCheck} className={styles['close-btn']}>&times;</button>
         <form onSubmit={handleSubmit} className={styles['form']}>
@@ -77,9 +87,7 @@ export default function CustomerForm({ item }) {
             <button type="submit">Confirm</button>
           </div>
         </form>
-        <button onClick={() => setOpenClose(true)}>Search Customer</button>
       </div>
-      <SearchCustomer onSelectCustomer={handleSelectCustomer} openClose={openClose} setOpenClose={setOpenClose} />
     </div>
   );
 }

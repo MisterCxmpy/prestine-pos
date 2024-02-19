@@ -14,7 +14,7 @@ export default function RecentTickest() {
 
   useEffect(() => {
     getRecentTickets()
-  }, [])
+  }, [recentTickets])
 
   return (
     <>

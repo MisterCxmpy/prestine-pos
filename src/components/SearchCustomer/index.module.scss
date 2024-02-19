@@ -1,3 +1,13 @@
+.outer {
+  width: 500px;
+  background: var(--secondary);
+  border-radius: var(--border-radius);
+  border: 5px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
 .form-input {
   width: 100%;
   padding: 0 40px;

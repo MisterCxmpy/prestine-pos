@@ -48,12 +48,11 @@ export default function Customers() {
     getUsers();
     setCustomerTickers([]);
     setSelectedUser({});
-    setEditMode(false); // Reset edit mode when component mounts
+    setEditMode(false);
   }, []);
 
   const renderTableRows = () => {
     if (customerTickets.length > 0) {
-      // Render table rows with editable fields in edit mode
       return (
         <React.Fragment>
           <tbody className={styles["table-body"]}>

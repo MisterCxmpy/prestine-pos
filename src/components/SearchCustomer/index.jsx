@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
-import Modal from '../Modal';
-import { useUsers } from '../../contexts/UsersContext';
-import useSearch from '../../hooks/useSearch';
 import styles from './index.module.css';
 
-export default function SearchCustomer({ onSelectCustomer, openClose, setOpenClose }) {
-  const { users, getUsers } = useUsers();
-  const { setQuery, result } = useSearch(users, 'customer');
+export default function SearchCustomer({ onSelectCustomer, result }) {
 
   const handleSelectCustomer = (selectedUser) => {
     onSelectCustomer({
@@ -15,10 +10,6 @@ export default function SearchCustomer({ onSelectCustomer, openClose, setOpenClo
     });
   };
 
-  useEffect(() => {
-    getUsers()
-  }, [])
-
   const renderTableRows = () => {
     return (
       <tbody className={styles['table-body']}>
@@ -26,8 +17,12 @@ export default function SearchCustomer({ onSelectCustomer, openClose, setOpenClo
           result.map((u, i) => (
             <tr key={i} onClick={() => handleSelectCustomer(u)}>
               <td className={styles['userID']}>{u.userID}</td>
-              <td className={styles['ownerName']}><b>{u.ownerName}</b></td>
-              <td className={styles['ownerMob']}><b>{u.ownerMob}</b></td>
+              <td className={styles['ownerName']}>
+                <b>{u.ownerName}</b>
+              </td>
+              <td className={styles['ownerMob']}>
+                <b>{u.ownerMob}</b>
+              </td>
             </tr>
           ))
         ) : (
@@ -40,16 +35,9 @@ export default function SearchCustomer({ onSelectCustomer, openClose, setOpenClo
   };
 
   return (
-    <Modal openClose={openClose} setOpenClose={setOpenClose} >
+    <div className={styles['outer']}>
       <div className={styles['customers-section']}>
         <div className={styles['customers']}>
-          <input
-            autoFocus
-            className={styles['search-bar']}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for Customer"
-            type="text"
-          />
           <table className={styles['customer-list']}>
             <thead className={styles['table-heading']}>
               <tr>
@@ -62,6 +50,6 @@ export default function SearchCustomer({ onSelectCustomer, openClose, setOpenClo
           </table>
         </div>
       </div>
-    </Modal>
+    </div>
   );
 }
