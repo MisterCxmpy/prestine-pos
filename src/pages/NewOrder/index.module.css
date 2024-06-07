@@ -23,7 +23,6 @@
 }
 
 .service-items-list {
-  margin-top: 25px;
   position: relative;
   overflow: auto;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -40,6 +39,7 @@
   border: none;
   border-radius: var(--border-radius);
   margin-bottom: -25px;
+  height: 100%;
 }
 
 @media (max-width: 1624px) {
@@ -63,4 +63,22 @@
   .receipt-list {
     flex: 1 0 600px;
   }
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+.controls .receipt-btn {
+  padding: 14px 20px;
+  background: var(--primary);
+  font-size: 20px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  margin-left: auto;
+}
+.controls .receipt-btn:disabled {
+  background: #070f15;
+  cursor: no-drop;
 }/*# sourceMappingURL=index.module.css.map */

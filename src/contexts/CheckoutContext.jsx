@@ -125,6 +125,13 @@ export const CheckoutProvider = ({ children }) => {
     setCustomerPhone("")
   }
 
+  const getTotalQuantity = () => {
+    const totalQuantity = checkout.reduce((acc, item) => {
+      return acc + item.quantity;
+    }, 0);
+    return totalQuantity;
+  };
+
   useEffect(() => {
     const newTotal = checkout.reduce((acc, item) => {
       return acc + item.price * item.quantity;
@@ -172,7 +179,8 @@ export const CheckoutProvider = ({ children }) => {
         setCustomerName,
         customerPhone,
         customerName,
-        resetCustomerForm
+        resetCustomerForm,
+        getTotalQuantity
       }}
     >
       {children}
