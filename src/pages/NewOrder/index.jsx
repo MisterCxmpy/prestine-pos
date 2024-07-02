@@ -9,7 +9,7 @@ import { useReactToPrint } from 'react-to-print'
 export default function NewOrder() {
 
   const { checkItemActive, checkReceiptActive, customerFormActive, discountFormActive, checkItem, checkout } = useCheckout()
-  const { allServices, service, setService } = useService()
+  const { allServices, setService } = useService()
   const { setQuery, result } = useSearch(allServices, "service");
 
   const [activeService, setActiveService] = useState(null);
@@ -19,7 +19,7 @@ export default function NewOrder() {
 
   const handleServiceTypeClick = (serviceId) => {
     setActiveService(serviceId);
-    setQuery("")
+    setQuery("");
   };
 
   const handlePrint = useReactToPrint({
@@ -28,9 +28,9 @@ export default function NewOrder() {
   })
 
   useEffect(() => {
-    setActiveService(null)
-    setService([])
-    setQuery("")
+    setActiveService(null);
+    setService([]);
+    setQuery("");
   }, [])
 
   return (
@@ -49,15 +49,27 @@ export default function NewOrder() {
             }
           </ul>
           <div className={styles['controls']}>
-            {!service.length ? <input className={styles['search-bar']} onChange={(e) => setQuery(e.target.value)} placeholder='Search for Item' type="text" /> : null}
+            <input 
+              className={styles['search-bar']} 
+              onChange={(e) => {
+                setQuery(e.target.value)
+              }} 
+              placeholder='Search for Item' 
+              type="text" 
+            />
             <button onClick={() => handlePrint()} className={styles['receipt-btn']}>Open Till</button>
           </div>
           <ul className={styles['service-items-list']}>
-            {service.length ? 
-            (service?.map((s, i) => <NewOrderServiceItem id={s.id} serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
-            : 
-            (result?.map((s, i) => <NewOrderServiceItem id={s.id} serviceName={s.name} servicePrice={s.price} additional={s.additional} tag={s.tag} key={i} />) )
-            }
+            {result.map((s, i) => (
+              <NewOrderServiceItem 
+                id={s.id} 
+                serviceName={s.name} 
+                servicePrice={s.price} 
+                additional={s.additional} 
+                tag={s.tag} 
+                key={i} 
+              />
+            ))}
           </ul>
         </div>
         <CheckoutMenu />
@@ -71,10 +83,8 @@ export default function NewOrder() {
   )
 }
 
-const Empty = forwardRef(({ }, ref) => {
+const Empty = forwardRef((_, ref) => {
   return (
-    <div style={{width: "0", height: "-1px", overflow: "hidden"}} ref={ref}>
-
-    </div>
+    <div style={{ width: "0", height: "-1px", overflow: "hidden" }} ref={ref}></div>
   )
 })
