@@ -38,7 +38,6 @@ export default function PaidForm({ setPreview, price}) {
     setTotalCost(newTotalCost < 0 ? 0 : newTotalCost);
     setInputValue("")
 
-    // updateTotal(newTotalCost)
     updatePerformance(0, newPaidAmount)
   };
 

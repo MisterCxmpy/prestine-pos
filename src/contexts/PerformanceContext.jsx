@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
 
-const PerformanceContext  = createContext();
+const PerformanceContext = createContext();
 
 export const PerformanceProvider = ({ children }) => {
   const [todaysPerformance, setTodaysPerformance] = useState([]);
@@ -8,60 +8,80 @@ export const PerformanceProvider = ({ children }) => {
   const [weeklyPerformance, setWeeklyPerformance] = useState([]);
   const [monthlyPerformance, setMonthlyPerformance] = useState([]);
 
-  const [currentWeek, setCurrentWeek] = useState()
-  
+  const [currentWeek, setCurrentWeek] = useState();
+  const [currentMonth, setCurrentMonth] = useState();
+
   const setTodaysPerformanceData = async () => {
-    const response = await window.api.getTodaysPerformance()
-    setTodaysPerformance(response)
-  }
+    const response = await window.api.getTodaysPerformance();
+    setTodaysPerformance(response);
+  };
 
   const setPerformanceData = async () => {
-    const response = await window.api.getAllPerformance()
-    setPerformance(response)
-  }
+    const response = await window.api.getAllPerformance();
+    setPerformance(response);
+  };
 
   const setWeeklyPerformanceData = async () => {
-    const response = await window.api.getAllWeeklyPerformance()
-    setWeeklyPerformance(response)
-  }
+    const response = await window.api.getAllWeeklyPerformance();
+    setWeeklyPerformance(response);
+  };
 
   const setMonthlyPerformanceData = async () => {
-    const response = await window.api.getMonthlyEarnings()
-    setMonthlyPerformance(response)
-  }
+    const response = await window.api.getMonthlyEarnings();
+    setMonthlyPerformance(response);
+  };
 
   const updatePerformance = async (take, price) => {
-    const response = await window.api.updatePerformance({takenIn: take, earnings: price})
+    const response = await window.api.updatePerformance({ takenIn: take, earnings: price });
     // setPerformance(response)
-  }
+  };
 
   const insertNewPerformance = async () => {
-    await window.api.createNewDay()
-  }
+    await window.api.createNewDay();
+  };
 
   function getWeekNumber() {
     const currentDate = new Date();
     const oneJan = new Date(currentDate.getFullYear(), 0, 1);
     const differenceInTime = currentDate - oneJan;
-    const weekNumber = Math.ceil((differenceInTime / (7 * 24 * 60 * 60 * 1000)) + oneJan.getDay() / 7);
+    const weekNumber = Math.ceil(
+      differenceInTime / (7 * 24 * 60 * 60 * 1000) + oneJan.getDay() / 7
+    );
     return weekNumber;
-}
+  }
 
-
-  useEffect(() => {
-    insertNewPerformance()
-    setCurrentWeek(getWeekNumber)
-    setMonthlyPerformanceData()
-  }, [])
+  function getMonthNumber() {
+    const currentDate = new Date();
+    return currentDate.getMonth() + 1;
+  }
 
   useEffect(() => {
-    setTodaysPerformanceData()
-    setWeeklyPerformanceData()
-    setPerformanceData()
-  }, [todaysPerformance, performance])
+    insertNewPerformance();
+    setCurrentWeek(getWeekNumber());
+    setCurrentMonth(getMonthNumber());
+    setMonthlyPerformanceData();
+  }, []);
+
+  useEffect(() => {
+    setTodaysPerformanceData();
+    setWeeklyPerformanceData();
+    setMonthlyPerformanceData();
+    setPerformanceData();
+  }, [todaysPerformance, performance]);
 
   return (
-    <PerformanceContext.Provider value={{ performance, todaysPerformance, updatePerformance, setTodaysPerformanceData, weeklyPerformance, monthlyPerformance, currentWeek }}>
+    <PerformanceContext.Provider
+      value={{
+        performance,
+        todaysPerformance,
+        updatePerformance,
+        setTodaysPerformanceData,
+        weeklyPerformance,
+        monthlyPerformance,
+        currentWeek,
+        currentMonth,
+      }}
+    >
       {children}
     </PerformanceContext.Provider>
   );

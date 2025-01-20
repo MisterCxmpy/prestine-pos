@@ -54,9 +54,11 @@ const createWindow = () => {
     mainWindow.loadFile(path.join(app.getAppPath(), "dist/index.html"));
   }
   
+  
+  
   if (isDev) {
+    mainWindow.webContents.openDevTools({ mode: 'detach' });
     mainWindow.webContents.on('did-frame-finish-load', () => {
-      mainWindow.webContents.openDevTools({ mode: 'detach' });
     });
   }
 };
@@ -123,31 +125,39 @@ ipcMain.handle("insert-ticket", (event, args) => {
 });
 
 ipcMain.handle("get-all-tickets", (event) => {
-  const sql = "SELECT * FROM tickets ORDER BY ticketNo";
+  const sql = "SELECT * FROM tickets ORDER BY id";
   return new Promise((resolve, reject) => {
-    ticketsDb.all(sql, [], (err, rows) => {
+    ticketsDb.all("PRAGMA query_only = false;", [], (err) => {
       if (err) {
         reject(err.message);
-      } else {
-        const tickets = rows.map(row => ({
-          id: row.ID,
-          ticketNo: row.ticketNo,
-          date: row.date,
-          dateOnly: row.dateOnly,
-          day: row.day,
-          items: JSON.parse(row.items),
-          totalPieces: row.totalPieces,
-          ownerName: row.ownerName,
-          ownerMob: row.ownerMob,
-          hasPaid: row.hasPaid,
-          totalPrice: row.totalPrice,
-          complete: row.complete
-        }));
-        resolve(tickets);
+        return;
       }
+
+      ticketsDb.all(sql, [], (err, rows) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          const tickets = rows.map(row => ({
+            id: row.ID,
+            ticketNo: row.ticketNo,
+            date: row.date,
+            dateOnly: row.dateOnly,
+            day: row.day,
+            items: JSON.parse(row.items),
+            totalPieces: row.totalPieces,
+            ownerName: row.ownerName,
+            ownerMob: row.ownerMob,
+            hasPaid: row.hasPaid,
+            totalPrice: row.totalPrice,
+            complete: row.complete
+          }));
+          resolve(tickets);
+        }
+      });
     });
   });
 });
+
 
 ipcMain.handle("check-ticket-number-exists", (event, args) => {
   const query = 'SELECT * FROM tickets WHERE ticketNo = ?';
@@ -419,6 +429,8 @@ ipcMain.handle("delete-user-by-id", (event, args) => {
 
 // Performance
 
+const currentYear = new Date().getFullYear();
+
 ipcMain.handle("get-performance-today", (event, args) => {
   const currentDate = new Date().toLocaleDateString('en-GB');
   const selectQuery = `SELECT * FROM performance WHERE date = ?`;
@@ -480,12 +492,11 @@ ipcMain.handle("update-performance", (event, args) => {
       const updatedTakenIn = row ? row.takenIn + args.takenIn : args.takenIn;
       const updatedEarnings = row ? row.earnings + args.earnings : args.earnings;
 
-      performanceDb.run(updateQuery, [updatedTakenIn, updatedEarnings, currentDateString], (updateErr) => {
+      performanceDb.run(updateQuery, [updatedTakenIn, updatedEarnings, currentDateString], async (updateErr) => {
         if (updateErr) {
           reject(updateErr.message);
         } else {
-          updateWeeklyEarnings(currentWeek, args.earnings);
-
+          updateWeeklyEarnings(currentWeek, args.earnings);          
           resolve(`Performance for date ${currentDateString} updated successfully.`);
         }
       });
@@ -539,51 +550,38 @@ ipcMain.handle("get-monthly-earnings", async (event, args) => {
 });
 
 async function calculateMonthlyEarnings() {
-  return new Promise(async (resolve, reject) => {
-    const monthlyEarnings = [];
+  return new Promise((resolve, reject) => {
+    const weekToMonth = [
+      [1, 4], [5, 8], [9, 13], [14, 17], [18, 21],
+      [22, 26], [27, 30], [31, 35], [36, 39], [40, 43], [44, 48], [49, 52]
+    ];
 
-    // Create an array to store all the promises
-    const promises = [];
+    const query = `SELECT week, earnings FROM weekly_earnings`;
 
-    // Iterate through each month
-    for (let month = 1; month <= 12; month++) {
-      // Calculate the start and end week for the current month
-      const startOfWeek = Math.ceil((month - 1) * 4.333) + 1;
-      const endOfWeek = Math.floor(month * 4.333);
+    weeklyEarningsDb.all(query, [], (err, rows) => {
+      if (err) {
+        return reject(err);
+      }
 
-      const query = `
-        SELECT SUM(earnings) as totalEarnings
-        FROM weekly_earnings
-        WHERE week >= ? AND week <= ?;
-      `;
+      const monthlyEarnings = Array.from({ length: 12 }, (_, index) => ({
+        month: index + 1,
+        totalEarnings: 0,
+      }));
 
-      // Create a promise for each query and push it to the array
-      const promise = new Promise((innerResolve, innerReject) => {
-        weeklyEarningsDb.get(query, [startOfWeek, endOfWeek], (err, row) => {
-          if (err) {
-            innerReject(err);
-          } else {
-            monthlyEarnings.push({
-              month,
-              totalEarnings: row ? row.totalEarnings : 0,
-            });
-            innerResolve();
+      rows.forEach(row => {
+        weekToMonth.forEach(([start, end], monthIndex) => {
+          if (row.week >= start && row.week <= end) {
+            monthlyEarnings[monthIndex].totalEarnings += row.earnings || 0;
           }
         });
       });
 
-      promises.push(promise);
-    }
-
-    // Wait for all promises to resolve before resolving the main promise
-    try {
-      await Promise.all(promises);
       resolve(monthlyEarnings);
-    } catch (error) {
-      reject(error);
-    }
+    });
   });
 }
+
+
 
 
 ipcMain.handle("create-new-day", async (event, args) => {

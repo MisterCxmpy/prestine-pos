@@ -28,6 +28,9 @@ export default function PaymentForm({ setPreview, data, oldHandleClose }) {
 
   const handleContinue = () => {
     const entered = parseFloat(inputValue);
+
+    if (!entered || entered <= 0) return;
+
     const newTotalCost = totalCost - entered;
     setTotalCost(newTotalCost < 0 ? 0 : newTotalCost);
     setInputValue("")

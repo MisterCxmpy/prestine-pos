@@ -25,7 +25,7 @@ export default function Tickets() {
 
   useEffect(() => {
     getTickets();
-  }, [getTickets]);
+  }, []);
 
   const lastIndex = currentPage * ITEMS_PER_PAGE;
   const firstIndex = lastIndex - ITEMS_PER_PAGE;

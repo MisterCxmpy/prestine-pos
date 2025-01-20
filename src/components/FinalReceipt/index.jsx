@@ -64,7 +64,7 @@ export default function FinalReceipt() {
       .replace(/\//g, "-");
 
     const ticket = {
-      ticketNo: ticketNumber.toString().padStart(4, "0"),
+      ticketNo: ticketNumber < 10000 ? ticketNumber.toString().padStart(4, "0") : ticketNumber,
       date: currentDateTime,
       dateOnly: date,
       day: day,
@@ -76,6 +76,7 @@ export default function FinalReceipt() {
       complete: false,
       discount: discount,
     };
+
     insertTicket(ticket);
     insertUser({ ...customerDetails, tickets: [ticket] });
     updatePerformance(totalPieces, paidAmount);

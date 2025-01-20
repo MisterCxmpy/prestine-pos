@@ -44,6 +44,8 @@ export const TicketsProvider = ({ children }) => {
   };
 
   const generateTicketNumber = async () => {
+
+    
     let newTicketNumber = lastTicketNumber + 1;
     try {
       while (await checkTicketNumberExists(newTicketNumber.toString().padStart(4, '0'))) {
@@ -78,6 +80,7 @@ export const TicketsProvider = ({ children }) => {
   const getTickets = async () => {
     try {
       const response = await window.api.getAllTickets();
+      console.log(response)
       setTickets(response)
     } catch (error) {
       console.error('Error fetching tickets:', error);

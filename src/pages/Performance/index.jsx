@@ -5,7 +5,7 @@ import { usePerformance } from '../../contexts/PerformanceContext';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 
 export default function Performance() {
-  const { performance, todaysPerformance, weeklyPerformance, monthlyPerformance, currentWeek } = usePerformance();
+  const { performance, todaysPerformance, weeklyPerformance, monthlyPerformance, currentWeek, currentMonth } = usePerformance();
 
   const [weeklyDropdown, setWeeklyDropdown] = useState(false);
   const [monthlyDropdown, setMonthlyDropdown] = useState(false);
@@ -55,7 +55,6 @@ export default function Performance() {
           </button>
         </div>
         <ul className={styles['performance-list']}>
-          {console.log(monthlyPerformance.length)}
           {monthlyDropdown &&
             monthlyPerformance.map((monthData, index) => (
               <PerformanceItem
@@ -63,6 +62,7 @@ export default function Performance() {
                 heading={`Month ${index + 1}`}
                 value={`£${(monthData.totalEarnings * 0.80).toFixed(2)}`}
                 desc={`Earnings for Month ${index + 1}`}
+                active={currentMonth === index + 1}
               />
             ))}
         </ul>
