@@ -585,13 +585,44 @@ async function calculateMonthlyEarnings() {
 
 
 ipcMain.handle("create-new-day", async (event, args) => {
-  const currentDate = new Date().toLocaleDateString('en-GB');
+  const currentDate = new Date();
+  const currentDateString = currentDate.toLocaleDateString("en-GB");
+  const currentYear = currentDate.getFullYear();
+
   const checkQuery = `SELECT * FROM performance WHERE date = ?`;
   const insertQuery = `INSERT INTO performance (date, takenIn, earnings) VALUES (?, 0, 0)`;
 
   try {
+    const lastYearEntry = await new Promise((resolve, reject) => {
+      performanceDb.get(`SELECT * FROM performance WHERE SUBSTR(date, 7, 4) = '2024';`, (err, row) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve(row);
+        }
+      });
+    });
+
+    if (lastYearEntry) {
+      await new Promise((resolve, reject) => {
+        performanceDb.run(`DELETE FROM performance`, [], (err) => {
+          if (err) reject(err.message);
+          else resolve();
+        });
+      });
+
+      await new Promise((resolve, reject) => {
+        weeklyEarningsDb.run(`DELETE FROM weekly_earnings`, [], (err) => {
+          if (err) reject(err.message);
+          else resolve();
+        });
+      });
+
+      populateWeeklyEarningsTable(weeklyEarningsDb);
+    }
+
     const existingEntry = await new Promise((resolve, reject) => {
-      performanceDb.get(checkQuery, [currentDate], (err, row) => {
+      performanceDb.get(checkQuery, [currentDateString], (err, row) => {
         if (err) {
           reject(err.message);
         } else {
@@ -602,23 +633,38 @@ ipcMain.handle("create-new-day", async (event, args) => {
 
     if (!existingEntry) {
       await new Promise((resolve, reject) => {
-        performanceDb.run(insertQuery, [currentDate], function (err) {
+        performanceDb.run(insertQuery, [currentDateString], function (err) {
           if (err) {
             reject(err.message);
           } else {
-            resolve(`New day entry for date ${currentDate} created successfully.`);
+            resolve(`New day entry for date ${currentDateString} created successfully.`);
           }
         });
       });
 
-      return `New day entry for date ${currentDate} created successfully.`;
+      return `New day entry for date ${currentDateString} created successfully.`;
     } else {
-      return `Entry for date ${currentDate} already exists.`;
+      return `Entry for date ${currentDateString} already exists.`;
     }
   } catch (error) {
     return `Error creating new day entry: ${error}`;
   }
 });
+
+
+function populateWeeklyEarningsTable(database) {
+  const insertWeeklyQuery = `INSERT INTO weekly_earnings (ID, week, earnings) VALUES (?, ?, ?)`;
+  const numberOfWeeksInYear = 52;
+
+  for (let week = 1; week <= numberOfWeeksInYear; week++) {
+    database.run(insertWeeklyQuery, [week, week, 0], (insertErr) => {
+      if (insertErr) {
+        console.error("Error inserting data into WeeklyEarnings table: ", insertErr);
+      }
+    });
+  }
+}
+
 
 // Services
 

@@ -286,6 +286,7 @@ const MainReceipt = ({
           {currentDateTime}
         </p>
         <div className={styles["ticket-no"]}>
+          {console.log(ticketNumber)}
           <p>TKT: {ticketNumber.toString().padStart(4, "0")}</p>
           {owner ? (
             <div className={styles["names"]}>
