@@ -3,6 +3,7 @@ import styles from './index.module.css'
 import { useTickets } from '../../contexts/TicketsContext';
 import { usePerformance } from '../../contexts/PerformanceContext';
 import { useCheckout } from '../../contexts/CheckoutContext';
+import Overlay from '../Overlay';
 
 export default function PaymentForm({ setPreview, data, oldHandleClose }) {
 
@@ -61,7 +62,7 @@ export default function PaymentForm({ setPreview, data, oldHandleClose }) {
   }, [inputValue, totalCost]);
 
   return (
-    <div className={styles['overlay']}>
+    <Overlay onClick={() => handleClose()}>
       <div className={styles['outer']}>
         <button onClick={() => handleClose()} className={styles['close-btn']}>&times;</button>
         <div className={styles['form']}>
@@ -113,6 +114,6 @@ export default function PaymentForm({ setPreview, data, oldHandleClose }) {
             </div>
         </div>
       </div>
-    </div>
+    </Overlay>
   )
 }

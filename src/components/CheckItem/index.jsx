@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './index.module.css';
 import { useCheckout } from '../../contexts/CheckoutContext';
 import { useEffect } from 'react';
+import Overlay from '../Overlay';
 
 export default function CheckItem({ item }) {
   const [price, setPrice] = useState(item.price);
@@ -63,7 +64,8 @@ export default function CheckItem({ item }) {
   }, []);
 
   return (
-    <div className={styles['overlay']}>
+    <Overlay onClose={closeCheck}>
+
       <div className={styles['outer']}>
         <button onClick={closeCheck} className={styles['close-btn']}>&times;</button>
         <form onSubmit={handleSubmit} className={styles['form']}>
@@ -105,6 +107,6 @@ export default function CheckItem({ item }) {
           </div>
         </form>
       </div>
-    </div>
+    </Overlay>
   );
 }

@@ -3,11 +3,12 @@ import styles from './index.module.css'
 import { useItem } from '../../contexts/ItemContext';
 import { useService } from '../../contexts/ServiceContext';
 import useShortcut from '../../hooks/useShortcut';
+import Overlay from '../Overlay';
 
 const UpdateItemModal = () => {
 
   useShortcut([
-    { keyCombo: { key: "Escape" }, action: () => {setOpenClose(false)} },
+    { keyCombo: { key: "Escape" }, action: () => {setOpenCloseUpdate(false)} },
   ]);
 
   const { setOpenCloseUpdate, updateItem, selectedItem, setSelectedItem } = useItem()
@@ -24,7 +25,7 @@ const UpdateItemModal = () => {
 
 
   return (
-    <div className={styles['overlay']}>
+    <Overlay onClose={() => setOpenCloseUpdate(false)}>
       <div className={styles['outer']}>
         <div className={styles['form']}>
           <span className={styles['close-btn']} onClick={() => setOpenCloseUpdate(false)}>
@@ -53,7 +54,7 @@ const UpdateItemModal = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Overlay>
   );
 };
 

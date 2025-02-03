@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './index.module.css';
 import { useCheckout } from '../../contexts/CheckoutContext';
+import Overlay from '../Overlay';
 
 export default function Discount({ item }) {
   const {
@@ -65,7 +66,7 @@ export default function Discount({ item }) {
   }, []);
 
   return (
-    <div className={styles['overlay']}>
+    <Overlay onClose={() => openCloseDiscountForm(false)}>
       <div className={styles['outer']}>
         <button onClick={() => openCloseDiscountForm(false)} className={styles['close-btn']}>
           &times;
@@ -113,6 +114,6 @@ export default function Discount({ item }) {
           </div>
         </form>
       </div>
-    </div>
+    </Overlay>
   );
 }

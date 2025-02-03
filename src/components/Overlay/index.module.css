@@ -1,0 +1,21 @@
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4666666667);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  gap: 20px;
+}
+.overlay.row {
+  flex-direction: row;
+}
+.overlay.column {
+  flex-direction: column;
+}/*# sourceMappingURL=index.module.css.map */

@@ -6,6 +6,7 @@ import { useTickets } from "../../contexts/TicketsContext";
 import { useUsers } from "../../contexts/UsersContext";
 import { usePerformance } from "../../contexts/PerformanceContext";
 import { useService } from "../../contexts/ServiceContext";
+import Overlay from "../Overlay";
 
 const itemMultiplierConfig = {
   "2 pcs suit": 2,
@@ -64,7 +65,10 @@ export default function FinalReceipt() {
       .replace(/\//g, "-");
 
     const ticket = {
-      ticketNo: ticketNumber < 10000 ? ticketNumber.toString().padStart(4, "0") : ticketNumber,
+      ticketNo:
+        ticketNumber < 10000
+          ? ticketNumber.toString().padStart(4, "0")
+          : ticketNumber,
       date: currentDateTime,
       dateOnly: date,
       day: day,
@@ -122,7 +126,7 @@ export default function FinalReceipt() {
   }, []);
 
   return (
-    <div className={styles["overlay"]}>
+    <Overlay onClose={() => openCloseReceipt(false)} >
       <div className={styles["outer"]}>
         <button
           onClick={() => openCloseReceipt(false)}
@@ -152,7 +156,7 @@ export default function FinalReceipt() {
         </button>
         <button onClick={() => finishReceipt()}>Print Receipt</button>
       </div>
-    </div>
+    </Overlay>
   );
 }
 const FullReceipt = forwardRef(
@@ -366,9 +370,7 @@ const ItemReceipt = forwardRef(
               <p>
                 {quantity} {name}
               </p>
-              <p>
-                {day}
-              </p>
+              <p>{day}</p>
             </div>
           </li>
           <li className={styles["total-pieces"]}>

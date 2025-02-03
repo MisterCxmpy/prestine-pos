@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './index.module.css'
 import { useCheckout } from '../../contexts/CheckoutContext';
+import Overlay from '../Overlay';
 
 export default function PaidForm({ setPreview, price}) {
 
@@ -75,7 +76,7 @@ export default function PaidForm({ setPreview, price}) {
   }, []);
 
   return (
-    <div className={styles['overlay']}>
+    <Overlay onClick={() => handleClose()}>
       <div className={styles['outer']}>
         <button onClick={() => handleClose()} className={styles['close-btn']}>&times;</button>
         <div className={styles['form']}>
@@ -127,6 +128,6 @@ export default function PaidForm({ setPreview, price}) {
             </div>
         </div>
       </div>
-    </div>
+    </Overlay>
   )
 }

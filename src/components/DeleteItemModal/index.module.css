@@ -1,14 +1,3 @@
-.overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7137254902);
-  left: 0;
-  top: 0;
-  z-index: 1000;
-  overflow: hidden;
-}
-
 .outer {
   position: absolute;
   left: 50%;

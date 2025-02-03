@@ -3,6 +3,7 @@ import styles from './index.module.css'
 import { useReactToPrint } from 'react-to-print';
 import PaymentForm from '../PaymentForm';
 import { useTickets } from '../../contexts/TicketsContext';
+import Overlay from '../Overlay';
 
 export default function ReceiptPreview({ data, setPreview, setTicketData }) {
 
@@ -46,7 +47,7 @@ export default function ReceiptPreview({ data, setPreview, setTicketData }) {
   }
 
   return (
-    <div className={styles['overlay']}>
+    <Overlay onClose={() => handleClose()}>
       <div className={styles['outer']}>
         <button onClick={() => handleClose()} className={styles['close-btn']}>&times;</button>
         <Receipt ref={receiptRef} data={data}/>
@@ -60,7 +61,7 @@ export default function ReceiptPreview({ data, setPreview, setTicketData }) {
         {data.complete ? null : <button onClick={() => setNewPreview(true)} style={{gridColumn: "span 2", background: "var(--danger)"}}>Complete Ticket</button>}
       </div>
       {newPreview ? content : null}
-    </div>
+    </Overlay>
   )
 }
 
