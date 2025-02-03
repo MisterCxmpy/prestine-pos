@@ -9,6 +9,7 @@ contextBridge.exposeInMainWorld('api', {
   setTicketToComplete: (args) => ipcRenderer.invoke("set-ticket-to-complete", args),
   getTodaysData: (args) => ipcRenderer.invoke("get-todays-data", args),
   deleteTicketById: (args) => ipcRenderer.invoke("delete-ticket-by-id", args),
+  getLastTicketNo: (args) => ipcRenderer.invoke("get-last-ticketNo", args),
 
   insertUser: (args) => ipcRenderer.invoke('insert-user', args),
   getUserByPhone: (args) => ipcRenderer.invoke('get-user-by-phone', args),
@@ -26,5 +27,7 @@ contextBridge.exposeInMainWorld('api', {
 
   addItem: (args) => ipcRenderer.invoke('add-item', args),
   deleteItem: (args) => ipcRenderer.invoke('delete-item', args),
-  getAllServices: (args) => ipcRenderer.invoke('get-all-services', args)
+  updateItem: (args) => ipcRenderer.invoke('update-item', args),
+  getAllServices: (args) => ipcRenderer.invoke('get-all-services', args),
+  updateService: (args) => ipcRenderer.invoke('update-service', args)
 });

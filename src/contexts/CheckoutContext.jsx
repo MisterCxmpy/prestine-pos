@@ -21,6 +21,9 @@ export const CheckoutProvider = ({ children }) => {
   const [checkItemActive, setCheckItemActive] = useState(false);
   const [checkItem, setCheckItem] = useState([]);
 
+  const [checkDeleteItemActive, setCheckDeleteItemActive] = useState(false);
+  const [checkDeleteItem, setCheckDeleteItem] = useState([]);
+
   const [checkReceiptActive, setCheckReceiptActive] = useState(false);
   const [customerFormActive, setCustomerFormActive] = useState(false);
   const [discountFormActive, setDiscountFormActive] = useState(false);
@@ -108,6 +111,15 @@ export const CheckoutProvider = ({ children }) => {
     setCheckItemActive(false);
   };
 
+  const openDeleteCheck = (item) => {
+    setCheckDeleteItemActive(true);
+    setCheckDeleteItem(item);
+  };
+
+  const closeDeleteCheck = () => {
+    setCheckDeleteItemActive(false);
+  };
+
   const toggleHasPaid = () => {
     setHasPaid(!hasPaid);
   };
@@ -180,7 +192,11 @@ export const CheckoutProvider = ({ children }) => {
         customerPhone,
         customerName,
         resetCustomerForm,
-        getTotalQuantity
+        getTotalQuantity,
+        openDeleteCheck,
+        closeDeleteCheck,
+        checkDeleteItem,
+        checkDeleteItemActive
       }}
     >
       {children}

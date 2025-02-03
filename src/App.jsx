@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
-import { AddItem, MainWrapper } from './components'
+import { AddItemModal, MainWrapper, UpdateItemModal } from './components'
 import { Navbar } from './layouts'
 import { Customers, NewOrder, Performance, RecentOrders, Tickets } from './pages'
 import { useItem } from './contexts/ItemContext';
@@ -8,7 +8,7 @@ import { useItem } from './contexts/ItemContext';
 
 function App() {
 
-  const { openClose } = useItem()
+  const { openClose, openCloseUpdate } = useItem()
 
   return (
     <>
@@ -24,7 +24,8 @@ function App() {
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {openClose ? <AddItem /> : null}
+      {openClose ? <AddItemModal /> : null}
+      {openCloseUpdate ? <UpdateItemModal /> : null}
     </>
   )
 }

@@ -172,6 +172,19 @@ ipcMain.handle("check-ticket-number-exists", (event, args) => {
   });
 });
 
+ipcMain.handle('get-last-ticketNo', (event) => {
+  const query = 'SELECT CAST(ticketNo AS INTEGER) AS ticketNo FROM tickets ORDER BY ticketNo DESC LIMIT 1';
+  return new Promise((resolve, reject) => {
+    ticketsDb.get(query, (err, row) => {
+      if (err) {
+        reject(err.message);
+      } else {
+        resolve(row ? row.ticketNo : null);
+      }
+    });
+  });
+});
+
 ipcMain.handle("get-ticket-by-phone", (event, args) => {
   const query = 'SELECT * FROM tickets WHERE ownerMob = ?';
   return new Promise((resolve, reject) => {
@@ -669,42 +682,89 @@ function populateWeeklyEarningsTable(database) {
 // Services
 
 ipcMain.handle('get-all-services', (event, args) => {
-  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(prestineFolderPath, "services.json");
-  const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
+  const servicesPath = isDev
+    ? path.join(__dirname, '../src/data', 'services.json')
+    : path.join(prestineFolderPath, "services.json");
 
-  return services.services;
+  let servicesData = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
+
+  servicesData.forEach((service, index) => service.id = index);
+
+  fs.writeFileSync(servicesPath, JSON.stringify(servicesData, null, 2));
+
+  return servicesData;
 });
 
 ipcMain.handle('add-item', (event, args) => {
-  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(prestineFolderPath, "services.json");
-  const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
+  const servicesPath = isDev
+    ? path.join(__dirname, '../src/data', 'services.json')
+    : path.join(prestineFolderPath, "services.json");
 
-  services.services[args.category] = [...services.services[args.category], args.item];
+  let services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
+
+  const categoryItems = services.filter(item => item.category === args.item.category);
+  const highestId = categoryItems.length > 0 ? Math.max(...categoryItems.map(item => item.id)) : 0;
+
+  args.item.id = highestId + 1;
+
+  const lastIndex = services.lastIndexOf(categoryItems.at(-1));
+  const insertIndex = lastIndex !== -1 ? lastIndex + 1 : services.length;
+
+  services.splice(insertIndex, 0, args.item);
 
   fs.writeFileSync(servicesPath, JSON.stringify(services, null, 2));
 
   return { success: true };
 });
 
-ipcMain.handle('delete-item', (event, args) => {
-  const servicesPath = isDev ? path.join(__dirname, '../src/data', 'services.json') : path.join(prestineFolderPath, "services.json");
-  const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
+ipcMain.handle('update-item', (event, args) => {
+  const servicesPath = isDev
+    ? path.join(__dirname, '../src/data', 'services.json')
+    : path.join(prestineFolderPath, "services.json");
 
-  const itemId = args.itemId;
+  let services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
 
-  for (const category in services.services) {
-    const categoryItems = services.services[category];
-    
-    const itemIndex = categoryItems.findIndex(item => item.id === itemId);
+  const itemIndex = services.findIndex(item => item.id === args.item.id);
 
-    if (itemIndex !== -1) {
-      categoryItems.splice(itemIndex, 1);
-      fs.writeFileSync(servicesPath, JSON.stringify(services, null, 2));
-      return { success: true };
-    }
+  if (itemIndex !== -1) {
+    services[itemIndex] = { ...services[itemIndex], ...args.item };
+    fs.writeFileSync(servicesPath, JSON.stringify(services, null, 2));
+    return { success: true };
   }
 
   return { success: false, error: 'Item not found' };
 });
+
+
+
+ipcMain.handle('delete-item', (event, args) => {
+  const servicesPath = isDev
+    ? path.join(__dirname, '../src/data', 'services.json')
+    : path.join(prestineFolderPath, "services.json");
+
+  let services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
+
+  const itemId = args.itemId;
+  const itemIndex = services.findIndex(item => item.id === itemId);
+
+  if (itemIndex !== -1) {
+    services.splice(itemIndex, 1);
+    fs.writeFileSync(servicesPath, JSON.stringify(services, null, 2));
+    return { success: true };
+  }
+
+  return { success: false, error: 'Item not found' };
+});
+
+ipcMain.handle('update-service', (event, args) => {
+  const servicesPath = isDev
+    ? path.join(__dirname, '../src/data', 'services.json')
+    : path.join(prestineFolderPath, "services.json");
+
+  fs.writeFileSync(servicesPath, JSON.stringify(args, null, 2));
+
+  return { success: true };
+});
+
 
 

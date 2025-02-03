@@ -5,6 +5,9 @@ const ItemContext  = createContext();
 
 export const ItemProvider = ({ children }) => {
   const [openClose, setOpenClose] = useState(false);
+  const [openCloseUpdate, setOpenCloseUpdate] = useState(false);
+
+  const [selectedItem, setSelectedItem] = useState({})
 
   const { fetchAllServices } = useService();
 
@@ -29,10 +32,24 @@ export const ItemProvider = ({ children }) => {
       console.error(error);
     }
   };
+
+  const updateItem = async (item) => {
+    try {
+      const response = await window.api.updateItem({ item });
+      if (response.success) {
+        console.log('Item updated successfully');
+        fetchAllServices()
+      } else {
+        console.error('Error updating item:', response.error);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
 
   return (
-    <ItemContext.Provider value={{ openClose, setOpenClose, addItem, deleteItem }}>
+    <ItemContext.Provider value={{ openClose, setOpenClose, setOpenCloseUpdate, openCloseUpdate, addItem, deleteItem, updateItem, setSelectedItem, selectedItem }}>
       {children}
     </ItemContext.Provider>
   );

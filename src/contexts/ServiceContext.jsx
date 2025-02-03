@@ -7,31 +7,52 @@ const ServiceContext = createContext();
 export const ServiceProvider = ({ children }) => {
   const [service, setService] = useState([]);
   const [serviceType, setServiceType] = useState("");
-  const [allServices, setAllServices] = useState([]);
+  const [services, setServices] = useState([]);
 
   const changeService = async (type) => {
-    const _service = await window.api.getAllServices()
-    setService(_service[type]);
+    const allServicesObject = await window.api.getAllServices()
+
+    const allOfTypeService = allServicesObject.filter((s) => s.category === type)
+
+    setService(allOfTypeService);
     setServiceType(type);
   };
 
   const fetchAllServices = async () => {
     const allServicesObject = await window.api.getAllServices();
     if (allServicesObject) {
-      const allServicesArray = Object.values(allServicesObject).reduce((accumulator, currentValue) => {
-        return accumulator.concat(currentValue);
-      }, []);
-      setAllServices(allServicesArray);
+      setServices(allServicesObject);
     }
   };
 
   useEffect(() => {
-
     fetchAllServices();
   }, [service]);
 
+  const moveService = async (fromIndex, toIndex) => {
+    if (fromIndex === toIndex || toIndex < 0 || toIndex >= services.length) return;
+  
+    const updatedServiceList = [...services];
+    const [movedItem] = updatedServiceList.splice(fromIndex, 1);
+    updatedServiceList.splice(toIndex, 0, movedItem);
+  
+    setServices(updatedServiceList);
+  
+    await updateService(updatedServiceList);
+  };
+  
+  
+  const updateService = async (updatedServices) => {
+    try {
+      await window.api.updateService(updatedServices);
+    } catch (error) {
+      console.error("Failed to update services:", error);
+    }
+  };
+  
+
   return (
-    <ServiceContext.Provider value={{ allServices, service, serviceType, changeService, setService, fetchAllServices }}>
+    <ServiceContext.Provider value={{ services, service, serviceType, changeService, setService, fetchAllServices, moveService }}>
       {children}
     </ServiceContext.Provider>
   );

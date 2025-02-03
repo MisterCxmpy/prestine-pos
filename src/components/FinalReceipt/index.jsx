@@ -5,6 +5,7 @@ import { useReactToPrint } from "react-to-print";
 import { useTickets } from "../../contexts/TicketsContext";
 import { useUsers } from "../../contexts/UsersContext";
 import { usePerformance } from "../../contexts/PerformanceContext";
+import { useService } from "../../contexts/ServiceContext";
 
 const itemMultiplierConfig = {
   "2 pcs suit": 2,
@@ -27,7 +28,7 @@ export default function FinalReceipt() {
     discount,
     completeCheckout,
   } = useCheckout();
-  const { insertTicket, generateTicketNumber, ticketNumber } = useTickets();
+  const { insertTicket, ticketNumber } = useTickets();
   const { updatePerformance } = usePerformance();
   const { insertUser } = useUsers();
   const receiptRef = useRef([]);
@@ -53,7 +54,6 @@ export default function FinalReceipt() {
   const finishReceipt = async () => {
     handlePrint();
     openCloseReceipt(false);
-    await generateTicketNumber();
 
     const date = new Date()
       .toLocaleDateString("en-GB", {
@@ -286,7 +286,6 @@ const MainReceipt = ({
           {currentDateTime}
         </p>
         <div className={styles["ticket-no"]}>
-          {console.log(ticketNumber)}
           <p>TKT: {ticketNumber.toString().padStart(4, "0")}</p>
           {owner ? (
             <div className={styles["names"]}>
