@@ -88,7 +88,9 @@ export default function NewOrder() {
               Open Till
             </button>
           </div>
-          <ul className={styles["service-items-list"]}>
+          <ul
+            className={styles["service-items-list"]}
+          >
             {result.map((s, i) => (
               <NewOrderServiceItem
                 id={s.id}
@@ -105,7 +107,9 @@ export default function NewOrder() {
         </div>
         <CheckoutMenu />
         {checkItemActive ? <CheckItem item={checkItem} /> : null}
-        {checkDeleteItemActive ? <DeleteItemModal item={checkDeleteItem} /> : null}
+        {checkDeleteItemActive ? (
+          <DeleteItemModal item={checkDeleteItem} />
+        ) : null}
         {checkReceiptActive ? <FinalReceipt /> : null}
         {customerFormActive ? <CustomerForm item={checkout} /> : null}
         {discountFormActive ? <Discount item={checkout} /> : null}

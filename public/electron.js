@@ -688,12 +688,18 @@ ipcMain.handle('get-all-services', (event, args) => {
 
   let servicesData = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
 
-  servicesData.forEach((service, index) => service.id = index);
+  servicesData.forEach((service, index) => {
+    if (!service.hasOwnProperty('category')) {
+      service.category = service.tag;
+    }
+    service.id = index;
+  });
 
   fs.writeFileSync(servicesPath, JSON.stringify(servicesData, null, 2));
 
   return servicesData;
 });
+
 
 ipcMain.handle('add-item', (event, args) => {
   const servicesPath = isDev
