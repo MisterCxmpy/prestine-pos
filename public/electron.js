@@ -692,6 +692,7 @@ ipcMain.handle('get-all-services', (event, args) => {
     if (!service.hasOwnProperty('category')) {
       service.category = service.tag;
     }
+    service.category = service.category.replace(/\s+/g, '-');
     service.id = index;
   });
 

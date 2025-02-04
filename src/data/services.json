@@ -16,7 +16,7 @@
     "category": "cleaning"
   },
   {
-    "id": 3,
+    "id": 2,
     "name": "Top",
     "price": "3.5",
     "additional": "Cleaning",
@@ -24,7 +24,7 @@
     "category": "cleaning"
   },
   {
-    "id": 2,
+    "id": 3,
     "name": "Kilt",
     "price": "15",
     "additional": "Cleaning",
