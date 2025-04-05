@@ -9,8 +9,6 @@
   align-items: center;
   justify-content: center;
   z-index: 999;
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
   gap: 20px;
 }
 .overlay.row {
